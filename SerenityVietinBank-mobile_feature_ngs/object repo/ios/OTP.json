@@ -1,0 +1,4 @@
+{
+  "BTN_HOAN_THANH": "//XCUIElementTypeButton[@name=\"Hoàn thành\"]",
+  "BTN_NUMBER": "//XCUIElementTypeKey[@name=\"{param}\"]"
+}
