@@ -1,4 +1,4 @@
-package utils.keywords;
+package base;
 
 public enum ScrollDirection {
   UP, DOWN, LEFT, RIGHT

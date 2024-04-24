@@ -1,31 +1,39 @@
 package screens.mobile;
 
 import base.BaseScreen;
-import utils.keywords.MobileUI;
+import io.appium.java_client.pagefactory.iOSXCUITFindBy;
+import net.serenitybdd.core.pages.WebElementFacade;
+import org.openqa.selenium.WebElement;
 
 public class Login extends BaseScreen {
 
-  public Login(MobileUI mobileUI) {
-    super(mobileUI);
-    setRepoName(Login.class.getSimpleName());
+  @iOSXCUITFindBy(xpath = "//XCUIElementTypeTextField[@value=\"Tên đăng nhập\"]")
+  private WebElementFacade txtUsername;
+  @iOSXCUITFindBy(xpath = "//XCUIElementTypeSecureTextField[@value=\"Mật khẩu\"]")
+  private WebElementFacade txtPassword;
+  @iOSXCUITFindBy(xpath = "//XCUIElementTypeButton[@name=\"Đăng nhập\"]")
+  private WebElementFacade btnLogin;
+
+  public Login() {
+    super();
   }
 
   private void inputUserName(String userName) {
-    mobileUI.sendKeys(getXpathOfElement("TXT_TEN_DANG_NHAP"), userName);
+    sendKeys(txtUsername, userName);
   }
 
   private void inputPassword(String password) {
-    mobileUI.sendKeys(getXpathOfElement("TXT_MAT_KHAU"), password);
+    sendKeys(txtPassword, password);
   }
 
-  private void click_dang_nhap_button() {
-    mobileUI.click(getXpathOfElement("BTN_DANG_NHAP"));
+  private void clickLoginButton() {
+    click(btnLogin);
   }
 
   public OTP login_with(String userName, String password) {
     inputUserName(userName);
     inputPassword(password);
-    click_dang_nhap_button();
-    return new OTP(mobileUI);
+    clickLoginButton();
+    return new OTP();
   }
 }

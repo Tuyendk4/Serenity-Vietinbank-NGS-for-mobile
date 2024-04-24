@@ -1,18 +1,27 @@
 package screens.mobile;
 
 import base.BaseScreen;
-import utils.keywords.MobileUI;
+import io.appium.java_client.pagefactory.iOSXCUITFindBy;
+import net.serenitybdd.annotations.Step;
+import net.serenitybdd.core.pages.WebElementFacade;
 
 public class Launcher extends BaseScreen {
 
-  public Launcher(MobileUI mobileUI) {
-    super(mobileUI);
-    setRepoName(Launcher.class.getSimpleName());
+  @iOSXCUITFindBy(xpath = "//XCUIElementTypeButton[@name=\"Không cho phép dán\"]")
+  public WebElementFacade btnKhongChoPhepDan;
+
+  public Launcher() {
+    super();
   }
 
+  @Step("Click Không cho phép dán")
   public Signup click_khong_cho_phep_dan() {
-    mobileUI.click(getXpathOfElement("BTN_KHONG_CHO_PHEP_DAN"));
-    return new Signup(mobileUI);
+    logger.info("Element {}", btnKhongChoPhepDan);
+    if (btnKhongChoPhepDan != null) {
+      btnKhongChoPhepDan.click();
+    }
+//    click(btnKhongChoPhepDan);
+    return new Signup();
   }
 
 }

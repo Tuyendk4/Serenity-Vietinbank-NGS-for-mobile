@@ -1,3 +1,0 @@
-{
-  "BTN_DANG_NHAP_OR_DANG_KY": "//XCUIElementTypeButton[@name=\"Đăng nhập/Đăng ký\" or @name=\"Đăng nhập\"]"
-}

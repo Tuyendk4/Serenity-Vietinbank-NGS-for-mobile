@@ -1,5 +1,0 @@
-{
-  "TXT_TEN_DANG_NHAP": "//XCUIElementTypeTextField[@value=\"Tên đăng nhập\"]",
-  "TXT_MAT_KHAU": "//XCUIElementTypeSecureTextField[@value=\"Mật khẩu\"]",
-  "BTN_DANG_NHAP": "//XCUIElementTypeButton[@name=\"Đăng nhập\"]"
-}

@@ -1,21 +1,25 @@
 package screens.mobile;
 
 import base.BaseScreen;
+import io.appium.java_client.pagefactory.iOSXCUITFindBy;
+import net.serenitybdd.core.pages.WebElementFacade;
+import org.openqa.selenium.WebElement;
 import screens.mobile.sections.NavigationBar;
-import utils.keywords.MobileUI;
 
 public class LoanAndCreditService extends BaseScreen {
 
-  public LoanAndCreditService(MobileUI mobileUI) {
-    super(mobileUI);
-    setRepoName(LoanAndCreditService.class.getSimpleName());
+  @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[@name=\"Vay tiêu dùng cá nhân\"]/preceding-sibling::XCUIElementTypeButton")
+  public WebElementFacade btnVayTieuDungCaNhan;
+
+  public LoanAndCreditService() {
+    super();
   }
 
   public void click_vay_tieu_dung_ca_nhan() {
-    mobileUI.click(getXpathOfElement("BTN_VAY_TIEU_DUNG_CA_NHAN"));
+    click(btnVayTieuDungCaNhan);
   }
 
   public NavigationBar navigationBar() {
-    return new NavigationBar(mobileUI);
+    return new NavigationBar();
   }
 }
