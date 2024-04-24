@@ -1,3 +1,0 @@
-{
-  "ICON_DICH_VU_VAY_VA_TIN_DUNG": "//XCUIElementTypeStaticText[@name=\"Dịch vụ vay & tín dụng\"]/preceding-sibling::XCUIElementTypeOther/XCUIElementTypeImage"
-}

@@ -3,20 +3,19 @@ package screens.mobile;
 import base.BaseScreen;
 import screens.mobile.sections.AdvertisingPopup;
 import screens.mobile.sections.FavoriteServices;
-import utils.keywords.MobileUI;
 
 public class Home extends BaseScreen {
 
-  public Home(MobileUI mobileUI) {
-    super(mobileUI);
+  public Home() {
+    super();
   }
 
   public FavoriteServices favoriteServices() {
-    return new FavoriteServices(mobileUI);
+    return new FavoriteServices();
   }
 
   public AdvertisingPopup advertisingPopup() {
-    return new AdvertisingPopup(mobileUI);
+    return new AdvertisingPopup();
   }
 
 

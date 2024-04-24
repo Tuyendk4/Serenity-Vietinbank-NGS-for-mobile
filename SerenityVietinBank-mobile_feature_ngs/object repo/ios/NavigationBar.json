@@ -1,7 +1,0 @@
-{
-  "BTN_HOME": "//XCUIElementTypeTabBar[@name=\"Thanh tab\"]/XCUIElementTypeButton[1]",
-  "BTN_NOTIFICATION": "//XCUIElementTypeTabBar[@name=\"Thanh tab\"]/XCUIElementTypeButton[2]",
-  "BTN_STORE": "//XCUIElementTypeTabBar[@name=\"Thanh tab\"]/XCUIElementTypeButton[3]",
-  "BTN_MARKET": "//XCUIElementTypeTabBar[@name=\"Thanh tab\"]/XCUIElementTypeButton[4]",
-  "BTN_USER_PROFILE": "//XCUIElementTypeTabBar[@name=\"Thanh tab\"]/XCUIElementTypeButton[5]"
-}

@@ -1,4 +1,0 @@
-{
-  "BTN_DANG_NHAP": "//XCUIElementTypeButton[@name=\"Đăng nhập\"]",
-  "BTN_DANG_XUAT": "//XCUIElementTypeButton[@name=\"Đăng xuất\"]"
-}

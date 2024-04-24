@@ -1,57 +1,257 @@
 package base;
 
-import com.jayway.jsonpath.JsonPath;
-import java.io.File;
-import java.io.IOException;
-import org.apache.commons.lang3.StringUtils;
-import utils.keywords.MobileUI;
+import com.google.common.collect.ImmutableList;
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.PerformsTouchActions;
+import io.appium.java_client.TouchAction;
+import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.touch.TapOptions;
+import io.appium.java_client.touch.offset.ElementOption;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.text.MessageFormat;
+import java.time.Duration;
+import javax.imageio.ImageIO;
+import net.serenitybdd.core.pages.PageObject;
+import net.thucydides.core.webdriver.WebDriverFacade;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.Point;
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Pause;
+import org.openqa.selenium.interactions.PointerInput;
+import org.openqa.selenium.interactions.PointerInput.Kind;
+import org.openqa.selenium.interactions.PointerInput.MouseButton;
+import org.openqa.selenium.interactions.PointerInput.Origin;
+import org.openqa.selenium.interactions.Sequence;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.slf4j.Logger;
+import utils.helper.LogHelper;
+import utils.helper.MobileDriver;
 
-public class BaseScreen {
+public class BaseScreen extends PageObject {
 
-  private static final String OBJECT_REPO_PATH = System.getProperty("user.dir") + File.separator + "object repo" + File.separator;
+  protected static final Logger logger = LogHelper.getLogger();
+  private static final Duration SCROLL_DUR = Duration.ofMillis(1000);
+  private static final double SCROLL_RATIO = 0.8;
+  private static final int ANDROID_SCROLL_DIVISOR = 3;
+  private static final int defaultTimeOut = 60;
+  protected static MobileDriver mobileDriver;
 
-  private String repoName;
-
-  protected MobileUI mobileUI;
-
-  public BaseScreen(MobileUI mobileUI) {
-    this.mobileUI = mobileUI;
-  }
-
-  private String getRepoName() {
-    return repoName;
-  }
-
-  public void setRepoName(String repoName) {
-    this.repoName = repoName;
-  }
-
-  public String getXpathOfElement(String elementName) {
-    String repoFilePath;
-    if(mobileUI.getPlatformName().toUpperCase().equals("ANDROID")) {
-      repoFilePath = OBJECT_REPO_PATH + File.separator + "android" + File.separator + getRepoName() + ".json";
-    } else {
-      repoFilePath = OBJECT_REPO_PATH + File.separator + "ios" + File.separator + getRepoName() + ".json";
+  public BaseScreen() {
+    if(mobileDriver == null) {
+      mobileDriver = new MobileDriver();
+      setDriver(mobileDriver.newDriver());
+      logger.info("Driver: {}", getDriver());
     }
+  }
+
+  public void closeApplication() {
+    if (null != getDriver()) {
+      getDriver().quit();
+      MobileDriver.stopAppiumServer();
+    }
+  }
+
+  public void delay(int time) {
     try {
-      return JsonPath.read(new File(repoFilePath), "$." + elementName).toString();
-    } catch (IOException e) {
-      throw new RuntimeException(e);
+      Thread.sleep(time);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
     }
   }
 
-  public String getXpathOfElementWithParam(String elementName, String paramName) {
-    String repoFilePath;
-    if(mobileUI.getPlatformName().toUpperCase().equals("ANDROID")) {
-      repoFilePath = OBJECT_REPO_PATH + File.separator + "android" + File.separator + getRepoName() + ".json";
-    } else {
-      repoFilePath = OBJECT_REPO_PATH + File.separator + "ios" + File.separator + getRepoName() + ".json";
-    }
+  public WebElement findElement(String locator) {
+    WebElement element = null;
+    logger.info("Finding mobile element {}", locator);
     try {
-      String xpath = JsonPath.read(new File(repoFilePath), "$." + elementName).toString();
-      return StringUtils.replace(xpath, "{param}", paramName);
-    } catch (IOException e) {
-      throw new RuntimeException(e);
+      WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(defaultTimeOut));
+      element = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(locator)));
+      logger.info("Found 1 mobile element {}", locator);
+    } catch (Exception e) {
+      logger.error("Cannot find mobile element {}. Root cause: {}", locator, e.getMessage());
     }
+    return element;
+  }
+
+  public void click(String locator) {
+    try {
+      logger.info("Tap on mobile element {}", locator);
+      WebElement we = findElement(locator);
+      new TouchAction<>((PerformsTouchActions) ((WebDriverFacade)getDriver()).getProxiedDriver()).tap(
+              TapOptions.tapOptions().withElement(ElementOption.element(we)))
+          .perform();
+      logger.info("Tapped on mobile element located by {} successfully", locator);
+    } catch (Exception e) {
+      logger.error(
+          MessageFormat.format("Cannot tap on mobile element located by ''{0}''. Root cause: {1}",
+              locator, e.getMessage()));
+    }
+  }
+
+  public void click(WebElement we) {
+    try {
+      logger.info("Tapping on mobile element {}", we);
+      logger.info("Driver: {}", getDriver());
+      new TouchAction<>((PerformsTouchActions) ((WebDriverFacade)getDriver()).getProxiedDriver()).tap(
+              TapOptions.tapOptions().withElement(ElementOption.element(we)))
+          .perform();
+      logger.info("Tapped on mobile element {} successfully", we);
+    } catch (Exception e) {
+      logger.error("Cannot tap on mobile element located by ''{}''. Root cause: {}",
+          we, e.getMessage());
+    }
+  }
+
+  public void sendKeys(String locator, String text) {
+    WebElement element = findElement(locator);
+    if (element != null) {
+      try {
+        element.sendKeys(text);
+        logger.info("Enter text {} to mobile element located by {}", text, locator);
+      } catch (Exception e) {
+        logger.error("Cannot enter text {} into mobile element located by {}. Root cause: {}", text, locator,
+            e.getMessage());
+      }
+    }
+  }
+
+  public void sendKeys(WebElement we, String text) {
+    if (we != null) {
+      try {
+        we.sendKeys(text);
+        logger.info("Enter text {} to mobile element {}", text, we);
+      } catch (Exception e) {
+        logger.error("Cannot enter text {} into mobile element {}. Root cause: {}", text, we,
+            e.getMessage());
+      }
+    }
+  }
+
+  private void swipe(Point start, Point end, Duration duration) {
+    boolean isAndroid = getDriver() instanceof AndroidDriver;
+
+    PointerInput input = new PointerInput(Kind.TOUCH, "finger1");
+    Sequence swipe = new Sequence(input, 0);
+    swipe.addAction(input.createPointerMove(Duration.ZERO, Origin.viewport(), start.x, start.y));
+    swipe.addAction(input.createPointerDown(MouseButton.LEFT.asArg()));
+    if (isAndroid) {
+      duration = duration.dividedBy(ANDROID_SCROLL_DIVISOR);
+    } else {
+      swipe.addAction(new Pause(input, duration));
+      duration = Duration.ZERO;
+    }
+    swipe.addAction(input.createPointerMove(duration, Origin.viewport(), end.x, end.y));
+    swipe.addAction(input.createPointerUp(MouseButton.LEFT.asArg()));
+    (((WebDriverFacade) getDriver())).perform(ImmutableList.of(swipe));
+  }
+
+  public void scrollToElement(String locator, ScrollDirection scrollDirection, int numberOfTimes) {
+    boolean found = false;
+    WebElement we;
+    Dimension size = getDriver().manage().window().getSize();
+    Point midPoint = new Point((int) (size.width * 0.5), (int) (size.height * 0.5));
+    int top = midPoint.y - (int) (size.height * 0.5);
+    int bottom = midPoint.y + (int) (size.height * 0.5);
+    int count = 0;
+    do {
+      delay(1000);
+      if (scrollDirection == ScrollDirection.DOWN) {
+        swipe(new Point(midPoint.x, bottom), new Point(midPoint.x, top), SCROLL_DUR);
+      } else if (scrollDirection == ScrollDirection.UP) {
+        swipe(new Point(midPoint.x, top), new Point(midPoint.x, bottom), SCROLL_DUR);
+      }
+      By by = By.xpath(locator);
+      try {
+        we = getDriver().findElement(by);
+        if (we != null) {
+          found = true;
+          logger.info("Scrolled to mobile element located by {} successfully", locator);
+          break;
+        }
+      } catch (NoSuchElementException e) {
+
+      }
+      count++;
+    } while (count == numberOfTimes);
+    if (!found) {
+      logger.error(
+          "Cannot scroll to mobile element located by {}. Root cause: the web element not fount",
+          locator);
+    }
+  }
+
+  public byte[] takeScreenShot() {
+    byte[] image = null;
+    try {
+      BufferedImage bufferedImage = ImageIO.read(
+          new ByteArrayInputStream(((TakesScreenshot) getDriver()).getScreenshotAs(
+              OutputType.BYTES)));
+      try {
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        ImageIO.write(bufferedImage, "png", bos);
+        image = bos.toByteArray();
+      } catch (Exception e) {
+        logger.error("Cannot mark element on image. Root cause: {}", e.getMessage());
+      }
+    } catch (Exception e) {
+      logger.error("Cannot take screen shot. Root cause: {}", e.getMessage());
+    }
+    return image;
+  }
+
+  public boolean verifyElementText(String locator, String text) {
+    WebElement element = findElement(locator);
+    try {
+      logger.info("Verify text {} into element located by {}", text, locator);
+      String actualText = element.getText();
+      if (actualText.equals(text)) {
+        logger.info("Text of element located by {} is {}", locator, text);
+        return true;
+      }
+    } catch (Exception e) {
+      logger.error("Cannot verify text of element located by {}. Root cause: {}", locator,
+          e.getMessage());
+    }
+    return false;
+  }
+
+  public boolean waitForElementVisible(String locator, int timeOut) {
+    try {
+      logger.info("Waiting for mobile element {} to be visible", locator);
+      WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(timeOut));
+      WebElement we = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(locator)));
+      if (we != null) {
+        logger.info("Mobile element located by {} is visible", locator);
+        return true;
+      }
+    } catch (Exception e) {
+      logger.error(
+          "Cannot wait for mobile element located by {} to be visible within {} second(s). Root cause: {}",
+          locator, timeOut, e.getMessage());
+    }
+    return false;
+  }
+
+  public boolean waitForElementVisible(WebElement we, int timeOut) {
+    try {
+      logger.info("Waiting for element {} to be visible", we);
+      WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(timeOut));
+      WebElement foundWe = wait.until(ExpectedConditions.visibilityOf(we));
+      if (foundWe != null) {
+        logger.info("Element {} is visible", we);
+        return true;
+      }
+    } catch (Exception e) {
+      logger.error("Cannot wait for element {} to be visible within {} second(s). Root cause: {}",
+          we, timeOut, e.getMessage());
+    }
+    return false;
   }
 }

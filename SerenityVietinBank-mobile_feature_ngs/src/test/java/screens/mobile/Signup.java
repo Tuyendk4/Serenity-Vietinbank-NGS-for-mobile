@@ -1,17 +1,21 @@
 package screens.mobile;
 
 import base.BaseScreen;
-import utils.keywords.MobileUI;
+import io.appium.java_client.pagefactory.iOSXCUITFindBy;
+import net.serenitybdd.core.pages.WebElementFacade;
+import org.openqa.selenium.WebElement;
 
 public class Signup extends BaseScreen {
 
-  public Signup(MobileUI mobileUI) {
-    super(mobileUI);
-    setRepoName(Signup.class.getSimpleName());
+  @iOSXCUITFindBy(xpath = "//XCUIElementTypeButton[@name=\"Đăng nhập/Đăng ký\" or @name=\"Đăng nhập\"]")
+  private WebElementFacade btnDangNhap;
+
+  public Signup() {
+    super();
   }
 
   public Login click_dang_nhap_or_dang_ky_button() {
-    mobileUI.click(getXpathOfElement("BTN_DANG_NHAP_OR_DANG_KY"));
-    return new Login(mobileUI);
+    click(btnDangNhap);
+    return new Login();
   }
 }

@@ -1,3 +1,0 @@
-{
-  "BTN_VAY_TIEU_DUNG_CA_NHAN": "//XCUIElementTypeStaticText[@name=\"Vay tiêu dùng cá nhân\"]/preceding-sibling::XCUIElementTypeButton"
-}

@@ -1,4 +1,0 @@
-{
-  "BTN_CO": "//XCUIElementTypeButton[@name=\"Có\"]",
-  "BTN_KHONG": "//XCUIElementTypeButton[@name=\"Không\"]"
-}
