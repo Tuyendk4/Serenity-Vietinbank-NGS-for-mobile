@@ -1,20 +1,25 @@
 package base;
 
+import static org.junit.Assert.fail;
+
 import com.google.common.collect.ImmutableList;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.PerformsTouchActions;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.pagefactory.AppiumFieldDecorator;
+import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.touch.TapOptions;
 import io.appium.java_client.touch.offset.ElementOption;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.text.MessageFormat;
 import java.time.Duration;
 import javax.imageio.ImageIO;
-import net.serenitybdd.core.pages.PageObject;
-import net.thucydides.core.webdriver.WebDriverFacade;
+import net.thucydides.model.environment.SystemEnvironmentVariables;
+import net.thucydides.model.util.EnvironmentVariables;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.NoSuchElementException;
@@ -29,34 +34,25 @@ import org.openqa.selenium.interactions.PointerInput.Kind;
 import org.openqa.selenium.interactions.PointerInput.MouseButton;
 import org.openqa.selenium.interactions.PointerInput.Origin;
 import org.openqa.selenium.interactions.Sequence;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
 import utils.helper.LogHelper;
-import utils.helper.MobileDriver;
 
-public class BaseScreen extends PageObject {
+public class BaseScreen {
 
   protected static final Logger logger = LogHelper.getLogger();
   private static final Duration SCROLL_DUR = Duration.ofMillis(1000);
   private static final double SCROLL_RATIO = 0.8;
   private static final int ANDROID_SCROLL_DIVISOR = 3;
   private static final int defaultTimeOut = 60;
-  protected static MobileDriver mobileDriver;
+  public static EnvironmentVariables env = SystemEnvironmentVariables.createEnvironmentVariables();
+  protected AppiumDriver appiumDriver;
 
-  public BaseScreen() {
-    if(mobileDriver == null) {
-      mobileDriver = new MobileDriver();
-      setDriver(mobileDriver.newDriver());
-      logger.info("Driver: {}", getDriver());
-    }
-  }
-
-  public void closeApplication() {
-    if (null != getDriver()) {
-      getDriver().quit();
-      MobileDriver.stopAppiumServer();
-    }
+  public BaseScreen(AppiumDriver appiumDriver) {
+    this.appiumDriver = appiumDriver;
+    PageFactory.initElements(new AppiumFieldDecorator(appiumDriver, Duration.ofSeconds(30)), this);
   }
 
   public void delay(int time) {
@@ -71,7 +67,7 @@ public class BaseScreen extends PageObject {
     WebElement element = null;
     logger.info("Finding mobile element {}", locator);
     try {
-      WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(defaultTimeOut));
+      WebDriverWait wait = new WebDriverWait(appiumDriver, Duration.ofSeconds(defaultTimeOut));
       element = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(locator)));
       logger.info("Found 1 mobile element {}", locator);
     } catch (Exception e) {
@@ -82,11 +78,9 @@ public class BaseScreen extends PageObject {
 
   public void click(String locator) {
     try {
-      logger.info("Tap on mobile element {}", locator);
+      logger.info("Tap on mobile element located by {}", locator);
       WebElement we = findElement(locator);
-      new TouchAction<>((PerformsTouchActions) ((WebDriverFacade)getDriver()).getProxiedDriver()).tap(
-              TapOptions.tapOptions().withElement(ElementOption.element(we)))
-          .perform();
+      we.click();
       logger.info("Tapped on mobile element located by {} successfully", locator);
     } catch (Exception e) {
       logger.error(
@@ -98,14 +92,13 @@ public class BaseScreen extends PageObject {
   public void click(WebElement we) {
     try {
       logger.info("Tapping on mobile element {}", we);
-      logger.info("Driver: {}", getDriver());
-      new TouchAction<>((PerformsTouchActions) ((WebDriverFacade)getDriver()).getProxiedDriver()).tap(
-              TapOptions.tapOptions().withElement(ElementOption.element(we)))
-          .perform();
+      we.click();
       logger.info("Tapped on mobile element {} successfully", we);
     } catch (Exception e) {
-      logger.error("Cannot tap on mobile element located by ''{}''. Root cause: {}",
+      logger.error("Cannot tap on mobile element ''{}''. Root cause: {}",
           we, e.getMessage());
+      fail(String.format("Cannot tap on mobile element ''%s''. Root cause: %s",
+          we, e.getMessage()));
     }
   }
 
@@ -114,9 +107,10 @@ public class BaseScreen extends PageObject {
     if (element != null) {
       try {
         element.sendKeys(text);
-        logger.info("Enter text {} to mobile element located by {}", text, locator);
+        logger.info("Enter text ''{}'' to mobile element located by ''{}''", text, locator);
       } catch (Exception e) {
-        logger.error("Cannot enter text {} into mobile element located by {}. Root cause: {}", text, locator,
+        logger.error("Cannot enter text {} into mobile element located by {}. Root cause: {}", text,
+            locator,
             e.getMessage());
       }
     }
@@ -126,16 +120,18 @@ public class BaseScreen extends PageObject {
     if (we != null) {
       try {
         we.sendKeys(text);
-        logger.info("Enter text {} to mobile element {}", text, we);
+        logger.info("Enter text ''{}'' to mobile element ''{}''", text, we);
       } catch (Exception e) {
         logger.error("Cannot enter text {} into mobile element {}. Root cause: {}", text, we,
             e.getMessage());
+        fail(String.format("Cannot enter text ''%s'' into mobile element %s. Root cause: %s", text, we,
+            e.getMessage()));
       }
     }
   }
 
   private void swipe(Point start, Point end, Duration duration) {
-    boolean isAndroid = getDriver() instanceof AndroidDriver;
+    boolean isAndroid = appiumDriver instanceof AndroidDriver;
 
     PointerInput input = new PointerInput(Kind.TOUCH, "finger1");
     Sequence swipe = new Sequence(input, 0);
@@ -149,13 +145,13 @@ public class BaseScreen extends PageObject {
     }
     swipe.addAction(input.createPointerMove(duration, Origin.viewport(), end.x, end.y));
     swipe.addAction(input.createPointerUp(MouseButton.LEFT.asArg()));
-    (((WebDriverFacade) getDriver())).perform(ImmutableList.of(swipe));
+    (appiumDriver).perform(ImmutableList.of(swipe));
   }
 
   public void scrollToElement(String locator, ScrollDirection scrollDirection, int numberOfTimes) {
     boolean found = false;
     WebElement we;
-    Dimension size = getDriver().manage().window().getSize();
+    Dimension size = appiumDriver.manage().window().getSize();
     Point midPoint = new Point((int) (size.width * 0.5), (int) (size.height * 0.5));
     int top = midPoint.y - (int) (size.height * 0.5);
     int bottom = midPoint.y + (int) (size.height * 0.5);
@@ -169,13 +165,13 @@ public class BaseScreen extends PageObject {
       }
       By by = By.xpath(locator);
       try {
-        we = getDriver().findElement(by);
+        we = appiumDriver.findElement(by);
         if (we != null) {
           found = true;
           logger.info("Scrolled to mobile element located by {} successfully", locator);
           break;
         }
-      } catch (NoSuchElementException e) {
+      } catch (NoSuchElementException ignored) {
 
       }
       count++;
@@ -191,7 +187,7 @@ public class BaseScreen extends PageObject {
     byte[] image = null;
     try {
       BufferedImage bufferedImage = ImageIO.read(
-          new ByteArrayInputStream(((TakesScreenshot) getDriver()).getScreenshotAs(
+          new ByteArrayInputStream(((TakesScreenshot) appiumDriver).getScreenshotAs(
               OutputType.BYTES)));
       try {
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
@@ -225,7 +221,7 @@ public class BaseScreen extends PageObject {
   public boolean waitForElementVisible(String locator, int timeOut) {
     try {
       logger.info("Waiting for mobile element {} to be visible", locator);
-      WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(timeOut));
+      WebDriverWait wait = new WebDriverWait(appiumDriver, Duration.ofSeconds(timeOut));
       WebElement we = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(locator)));
       if (we != null) {
         logger.info("Mobile element located by {} is visible", locator);
@@ -242,7 +238,7 @@ public class BaseScreen extends PageObject {
   public boolean waitForElementVisible(WebElement we, int timeOut) {
     try {
       logger.info("Waiting for element {} to be visible", we);
-      WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(timeOut));
+      WebDriverWait wait = new WebDriverWait(appiumDriver, Duration.ofSeconds(timeOut));
       WebElement foundWe = wait.until(ExpectedConditions.visibilityOf(we));
       if (foundWe != null) {
         logger.info("Element {} is visible", we);
