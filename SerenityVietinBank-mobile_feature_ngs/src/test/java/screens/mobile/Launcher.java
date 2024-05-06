@@ -1,27 +1,31 @@
 package screens.mobile;
 
 import base.BaseScreen;
+import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import net.serenitybdd.annotations.Step;
-import net.serenitybdd.core.pages.WebElementFacade;
+import net.serenitybdd.core.Serenity;
+import org.openqa.selenium.WebElement;
 
 public class Launcher extends BaseScreen {
 
   @iOSXCUITFindBy(xpath = "//XCUIElementTypeButton[@name=\"Không cho phép dán\"]")
-  public WebElementFacade btnKhongChoPhepDan;
+  public WebElement btnKhongChoPhepDan;
 
-  public Launcher() {
-    super();
+  public Launcher(AppiumDriver appiumDriver) {
+    super(appiumDriver);
   }
 
   @Step("Click Không cho phép dán")
   public Signup click_khong_cho_phep_dan() {
-    logger.info("Element {}", btnKhongChoPhepDan);
-    if (btnKhongChoPhepDan != null) {
-      btnKhongChoPhepDan.click();
-    }
+//    startApplication();
+//    logger.info("Element {}", btnKhongChoPhepDan);
+//    if (btnKhongChoPhepDan != null) {
+//      btnKhongChoPhepDan.click();
+//    }
 //    click(btnKhongChoPhepDan);
-    return new Signup();
+//    setDriver(mobileDriver.newDriver());
+    return new Signup(appiumDriver);
   }
 
 }

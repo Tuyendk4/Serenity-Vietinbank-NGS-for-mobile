@@ -1,26 +1,28 @@
 package steps;
 
+import base.MobileDriver;
 import io.cucumber.java.vi.Cho;
 import io.cucumber.java.vi.Khi;
-import cucumber.CucumberTestSuite;
+import net.serenitybdd.core.Serenity;
+import runner.Runner;
 import screens.mobile.Launcher;
 import screens.mobile.OTP;
 import screens.mobile.Signup;
 
 
-public class LoginStepdefs extends CucumberTestSuite {
+public class LoginStepdefs extends Runner {
 
-  @Cho("^[a-zA-Z].* mở Vietinbank iPay app")
+  @Cho("^Mở Vietinbank iPay app$")
   public void open_Vietinbank_iPay_app() {
-
-    Launcher launcher = new Launcher();
+    mobileDriver = new MobileDriver();
+    Launcher launcher = new Launcher(mobileDriver.newDriver());
     Signup signup = launcher.click_khong_cho_phep_dan();
     login = signup.click_dang_nhap_or_dang_ky_button();
   }
 
-  @Khi("Cô ấy thực hiện đăng nhập với tên người dùng {string} và mật khẩu {string}")
+  @Khi("Thực hiện đăng nhập với tên người dùng {string} và mật khẩu {string}")
   public void login_with(String userName, String password) {
-    OTP otp = login.login_with("maihoa953", "12121212");
+    OTP otp = login.login_with(userName, password);
     home = otp.inputOTP("888888");
     home.advertisingPopup().close();
   }

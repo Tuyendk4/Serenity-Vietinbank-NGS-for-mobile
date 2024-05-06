@@ -1,4 +1,4 @@
-package utils.helper;
+package base;
 
 import com.jayway.jsonpath.JsonPath;
 import io.appium.java_client.AppiumDriver;
@@ -8,14 +8,13 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import net.serenitybdd.model.environment.EnvironmentSpecificConfiguration;
-import net.thucydides.core.webdriver.DriverSource;
 import net.thucydides.model.environment.SystemEnvironmentVariables;
 import net.thucydides.model.util.EnvironmentVariables;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.slf4j.Logger;
+import utils.helper.LogHelper;
 
-public class MobileDriver implements DriverSource {
+public class MobileDriver {
 
   private static final Logger logger = LogHelper.getLogger();
 
@@ -27,6 +26,7 @@ public class MobileDriver implements DriverSource {
   private static AppiumDriverLocalService service;
   private final String node_path;
   private final String appium_path;
+  private AppiumDriver appiumDriver;
 
   public MobileDriver() {
     File appiumConfig = new File(APPIUM_CONFIG_PATH);
@@ -59,10 +59,10 @@ public class MobileDriver implements DriverSource {
     return service.getUrl();
   }
 
-  @Override
-  public WebDriver newDriver() {
+  public AppiumDriver newDriver() {
     startAppiumServer();
-    WebDriver driver = null;
+    logger.info("Starting appium driver");
+    AppiumDriver driver = null;
     try {
       DesiredCapabilities dc = new DesiredCapabilities();
       dc.setCapability("platformName", EnvironmentSpecificConfiguration.from(env)
@@ -85,17 +85,21 @@ public class MobileDriver implements DriverSource {
             .getProperty("ios.bundleId"));
         dc.setCapability("appium:automationName", "XCUITest");
         dc.setCapability("noReset", "true");
+
       }
       driver = new AppiumDriver(getUrl(), dc);
-
+      appiumDriver = driver;
     } catch (Exception e) {
       throw new RuntimeException(e);
     }
+    logger.info("Driver: {}", driver);
     return driver;
   }
 
-  @Override
-  public boolean takesScreenshots() {
-    return false;
+  public void closeApplication() {
+    if (null != appiumDriver) {
+      appiumDriver.quit();
+      MobileDriver.stopAppiumServer();
+    }
   }
 }

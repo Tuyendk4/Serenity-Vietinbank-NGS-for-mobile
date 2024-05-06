@@ -1,18 +1,25 @@
 package screens.mobile.sections;
 
 import base.BaseScreen;
-import io.appium.java_client.pagefactory.AndroidFindBy;
+import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
-import net.serenitybdd.core.pages.WebElementFacade;
+import net.serenitybdd.annotations.Step;
+import org.openqa.selenium.WebElement;
 
 public class AdvertisingPopup extends BaseScreen {
 
   @iOSXCUITFindBy(xpath = "//XCUIElementTypeButton[@name=\"closeWhite\"]")
 //  @AndroidFindBy(xpath = "//XCUIElementTypeButton[@name=\"closeWhite\"]")
-  public WebElementFacade iconClose;
+  private WebElement iconClose;
 
+  public AdvertisingPopup(AppiumDriver appiumDriver) {
+    super(appiumDriver);
+  }
+
+  @Step("Đóng popup Quảng cáo")
   public void close() {
-    iconClose.click();
-//    click(iconClose);
+    if(waitForElementVisible(iconClose, 10)){
+      click(iconClose);
+    }
   }
 }
