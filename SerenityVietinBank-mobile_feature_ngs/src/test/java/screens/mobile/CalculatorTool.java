@@ -3,6 +3,7 @@ package screens.mobile;
 import base.BaseScreen;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 
 public class CalculatorTool extends BaseScreen {
@@ -29,7 +30,7 @@ public class CalculatorTool extends BaseScreen {
   @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[@name=\"Ưu đãi cho cán bộ VietinBank\"]/following-sibling::XCUIElementTypeCollectionView//XCUIElementTypeImage[@name=\"iconChoiceRadioOff\"]")
   private WebElement chkSpecialOffers;
 
-  @iOSXCUITFindBy(xpath = "/XCUIElementTypeApplication[@name=\"VietinBank iPay\"]/XCUIElementTypeWindow[4]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther[1]")
+  @iOSXCUITFindBy(xpath = "//XCUIElementTypeApplication[@name=\"VietinBank iPay\"]/XCUIElementTypeWindow[3]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther[1]")
   private WebElement btnContinue;
 
   @iOSXCUITFindBy(xpath = "//XCUIElementTypeButton[@name=\"Xem lịch trả nợ dự kiến\"]")
@@ -42,13 +43,13 @@ public class CalculatorTool extends BaseScreen {
   private void inputNumberOfMoney(String numberOfMoney) {
     click(txtNumberOfMoney);
     click(btnDeleteMoney);
-    sendKeys(txtNumberOfMoney, numberOfMoney);
+    sendKeys(txtNumberOfMoney, Keys.chord(numberOfMoney, Keys.ENTER));
   }
 
   private void inputNumberOfMonth(String months) {
     click(txtNumberOfMonth);
     click(btnDeleteMonth);
-    sendKeys(txtNumberOfMonth, months);
+    sendKeys(txtNumberOfMonth, Keys.chord(months, Keys.ENTER));
   }
 
   private void slicePercentOfMoney(String percentOfMoney) {
@@ -65,16 +66,20 @@ public class CalculatorTool extends BaseScreen {
     } else if(editType.equals("Slice")) {
       slicePercentOfMoney(numberOfMoney);
     }
+//    click(btnContinue);
   }
 
-  public ReferenceRepaymentSchedule editNumberOfMonth(String editType, String months) {
+  public void editNumberOfMonth(String editType, String months) {
     if(editType.equals("Edit")) {
       inputNumberOfMonth(months);
     } else if(editType.equals("Slice")) {
       slicePercentOfMonth(months);
     }
-    click(btnContinue);
+  }
+
+  public ReferenceRepaymentSchedule clickExpectedPaymentScheduleViewerButton() {
     click(btnExpectedPaymentScheduleViewer);
+    delay(3000);
     return new ReferenceRepaymentSchedule(this.appiumDriver);
   }
 }

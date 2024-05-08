@@ -14,8 +14,8 @@ public class LoginStepdefs extends Runner {
 
   @Cho("^Mở Vietinbank iPay app$")
   public void open_Vietinbank_iPay_app() {
-    mobileDriver = new MobileDriver();
-    Launcher launcher = new Launcher(mobileDriver.newDriver());
+//    mobileDriver = new MobileDriver();
+    Launcher launcher = new Launcher(appiumDriver);
     Signup signup = launcher.click_khong_cho_phep_dan();
     login = signup.click_dang_nhap_or_dang_ky_button();
   }

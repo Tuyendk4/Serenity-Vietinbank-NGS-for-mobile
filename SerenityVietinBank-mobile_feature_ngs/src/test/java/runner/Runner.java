@@ -1,6 +1,8 @@
 package runner;
 
 import base.MobileDriver;
+import io.appium.java_client.AppiumDriver;
+import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
 import io.cucumber.junit.CucumberSerenityRunner;
 import org.junit.jupiter.api.AfterAll;
@@ -21,6 +23,8 @@ public class Runner {
 
 //  @Managed(driver = "provided")
   public static MobileDriver mobileDriver;
+
+  protected static AppiumDriver appiumDriver;
 
   protected static Login login;
 

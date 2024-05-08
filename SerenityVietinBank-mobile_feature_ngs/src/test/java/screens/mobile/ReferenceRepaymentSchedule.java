@@ -43,7 +43,9 @@ public class ReferenceRepaymentSchedule extends BaseScreen {
     return lblPrincipalAndInterestPayableTotal.getText();
   }
 
-  public void clickBorrowNow() {
+  public PersonalInstalmentLoan_Step1 clickBorrowNow() {
     click(btnBorrowNow);
+    delay(3000);
+    return new PersonalInstalmentLoan_Step1(appiumDriver);
   }
 }

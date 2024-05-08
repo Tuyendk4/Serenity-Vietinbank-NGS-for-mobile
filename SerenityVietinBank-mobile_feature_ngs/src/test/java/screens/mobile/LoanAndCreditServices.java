@@ -11,6 +11,12 @@ public class LoanAndCreditServices extends BaseScreen {
   @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[@name=\"Vay tiêu dùng cá nhân\"]/preceding-sibling::XCUIElementTypeButton")
   private WebElement btnVayPersonalInstalmentLoan;
 
+  @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[@name=\"Lịch sử vay\"]/preceding-sibling::XCUIElementTypeButton")
+  private WebElement btnLoanHistory;
+
+  @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[@name=\"Lịch sử vay\"]/following-sibling::XCUIElementTypeOther/XCUIElementTypeStaticText")
+  private WebElement lblNumberOfLoanDocument;
+
   public LoanAndCreditServices(AppiumDriver appiumDriver) {
     super(appiumDriver);
   }
@@ -23,4 +29,15 @@ public class LoanAndCreditServices extends BaseScreen {
   public NavigationBar navigationBar() {
     return new NavigationBar(appiumDriver);
   }
+
+  public String getNumberOfLoanDocument() {
+    return lblNumberOfLoanDocument.getText();
+  }
+
+  public LoanHistory click_loan_history() {
+    click(btnLoanHistory);
+    return new LoanHistory(this.appiumDriver);
+  }
+
+
 }

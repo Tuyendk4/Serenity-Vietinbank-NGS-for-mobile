@@ -3,20 +3,17 @@ package base;
 import static org.junit.Assert.fail;
 
 import com.google.common.collect.ImmutableList;
+import io.appium.java_client.AppiumBy.ByAndroidUIAutomator;
 import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.PerformsTouchActions;
-import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
-import io.appium.java_client.service.local.AppiumDriverLocalService;
-import io.appium.java_client.touch.TapOptions;
-import io.appium.java_client.touch.offset.ElementOption;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.text.MessageFormat;
 import java.time.Duration;
+import java.util.HashMap;
+import java.util.List;
 import javax.imageio.ImageIO;
 import net.thucydides.model.environment.SystemEnvironmentVariables;
 import net.thucydides.model.util.EnvironmentVariables;
@@ -25,8 +22,8 @@ import org.openqa.selenium.Dimension;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.Point;
+import org.openqa.selenium.Rectangle;
 import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Pause;
 import org.openqa.selenium.interactions.PointerInput;
@@ -34,6 +31,7 @@ import org.openqa.selenium.interactions.PointerInput.Kind;
 import org.openqa.selenium.interactions.PointerInput.MouseButton;
 import org.openqa.selenium.interactions.PointerInput.Origin;
 import org.openqa.selenium.interactions.Sequence;
+import org.openqa.selenium.remote.RemoteWebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -52,7 +50,7 @@ public class BaseScreen {
 
   public BaseScreen(AppiumDriver appiumDriver) {
     this.appiumDriver = appiumDriver;
-    PageFactory.initElements(new AppiumFieldDecorator(appiumDriver, Duration.ofSeconds(30)), this);
+    PageFactory.initElements(new AppiumFieldDecorator(appiumDriver, Duration.ofSeconds(35)), this);
   }
 
   public void delay(int time) {
@@ -76,30 +74,68 @@ public class BaseScreen {
     return element;
   }
 
+  public List<WebElement> findElements(String locator) {
+    List<WebElement> elements = List.of();
+    logger.info("Finding mobile elements located by {}", locator);
+    try {
+      WebDriverWait wait = new WebDriverWait(appiumDriver, Duration.ofSeconds(defaultTimeOut));
+      elements = wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath(locator)));
+      logger.info("Found {} mobile element(s) located by {}", elements.size(), locator);
+    } catch (Exception e) {
+      logger.error("Cannot find mobile elements located by {}. Root cause: {}", locator,
+          e.getMessage());
+    }
+    return elements;
+  }
+
   public void click(String locator) {
     try {
-      logger.info("Tap on mobile element located by {}", locator);
+      logger.info("Click on mobile element located by {}", locator);
       WebElement we = findElement(locator);
       we.click();
-      logger.info("Tapped on mobile element located by {} successfully", locator);
+      logger.info("Clicked on mobile element located by {} successfully", locator);
     } catch (Exception e) {
-      logger.error(
-          MessageFormat.format("Cannot tap on mobile element located by ''{0}''. Root cause: {1}",
-              locator, e.getMessage()));
+      logger.error("Cannot click on mobile element located by ''{}''. Root cause: {}",
+          locator, e.getMessage());
     }
   }
 
   public void click(WebElement we) {
     try {
-      logger.info("Tapping on mobile element {}", we);
+      logger.info("Clicking on mobile element {}", we);
       we.click();
+      logger.info("Clicked on mobile element {} successfully", we);
+    } catch (Exception e) {
+      logger.error("Cannot click on mobile element ''{}''. Root cause: {}",
+          we, e.getMessage());
+      fail(String.format("Cannot click on mobile element ''%s''. Root cause: %s",
+          we, e.getMessage()));
+    }
+  }
+
+  public void tap(WebElement we) {
+    try {
+      Rectangle elRect = we.getRect();
+      Point point = new Point(
+          elRect.x + (int) (elRect.getWidth() / 2.0),
+          elRect.y + (int) (elRect.getHeight() / 2.0)
+      );
+      tapAtPoint(point);
       logger.info("Tapped on mobile element {} successfully", we);
     } catch (Exception e) {
       logger.error("Cannot tap on mobile element ''{}''. Root cause: {}",
           we, e.getMessage());
-      fail(String.format("Cannot tap on mobile element ''%s''. Root cause: %s",
-          we, e.getMessage()));
     }
+  }
+
+  private void tapAtPoint(Point point) {
+    PointerInput input = new PointerInput(Kind.TOUCH, "finger1");
+    Sequence tap = new Sequence(input, 0);
+    tap.addAction(input.createPointerMove(Duration.ZERO, Origin.viewport(), point.x, point.y));
+    tap.addAction(input.createPointerDown(MouseButton.LEFT.asArg()));
+    tap.addAction(new Pause(input, Duration.ofMillis(200)));
+    tap.addAction(input.createPointerUp(MouseButton.LEFT.asArg()));
+    appiumDriver.perform(ImmutableList.of(tap));
   }
 
   public void sendKeys(String locator, String text) {
@@ -124,7 +160,8 @@ public class BaseScreen {
       } catch (Exception e) {
         logger.error("Cannot enter text {} into mobile element {}. Root cause: {}", text, we,
             e.getMessage());
-        fail(String.format("Cannot enter text ''%s'' into mobile element %s. Root cause: %s", text, we,
+        fail(String.format("Cannot enter text ''%s'' into mobile element %s. Root cause: %s", text,
+            we,
             e.getMessage()));
       }
     }
@@ -180,6 +217,74 @@ public class BaseScreen {
       logger.error(
           "Cannot scroll to mobile element located by {}. Root cause: the web element not fount",
           locator);
+    }
+  }
+
+  public void scrollToElement(WebElement we, ScrollDirection scrollDirection, int numberOfTimes) {
+    boolean found = false;
+    Dimension size = appiumDriver.manage().window().getSize();
+    Point midPoint = new Point((int) (size.width * 0.5), (int) (size.height * 0.5));
+    int top = midPoint.y - (int) (size.height * 0.5);
+    int bottom = midPoint.y + (int) (size.height * 0.5);
+    int count = 0;
+    do {
+      delay(1000);
+      if (scrollDirection == ScrollDirection.DOWN) {
+        swipe(new Point(midPoint.x, bottom), new Point(midPoint.x, top), SCROLL_DUR);
+      } else if (scrollDirection == ScrollDirection.UP) {
+        swipe(new Point(midPoint.x, top), new Point(midPoint.x, bottom), SCROLL_DUR);
+      }
+      try {
+        if (we.isDisplayed()) {
+          found = true;
+          logger.info("Scrolled to mobile element {} successfully", we);
+          break;
+        }
+      } catch (NoSuchElementException ignored) {
+
+      }
+      count++;
+    } while (count == numberOfTimes);
+    if (!found) {
+      logger.error(
+          "Cannot scroll to mobile element {}. Root cause: the web element not visible",
+          we);
+    }
+  }
+
+  public void scrollTo(String text) {
+    try {
+      delay(500);
+      WebElement element = null;
+      if (appiumDriver instanceof AndroidDriver) {
+        String uiScrollable =
+            "new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains("
+                + text + "))";
+        element = appiumDriver.findElement(new ByAndroidUIAutomator(uiScrollable));
+      } else if (appiumDriver instanceof IOSDriver) {
+        List<WebElement> elements =
+            appiumDriver.findElements(By.xpath(
+                "//*[contains(@label, '" + text + "') or contains(@text, '" + text
+                    + "') or contains(@name, '" + text + "')]"));
+        logger.info("Elements found: {}", elements.size());
+        if (!elements.isEmpty()) {
+          logger.info("Text ''{}'' was found in {} element(s).", text, elements.size());
+          RemoteWebElement remoteElement = (RemoteWebElement) elements.get(0);
+          String parentID = remoteElement.getId();
+          HashMap<String, String> scrollObject = new HashMap<>();
+          scrollObject.put("element", parentID);
+          scrollObject.put("toVisible", text);
+          appiumDriver.executeScript("mobile:scroll", scrollObject);
+          element = remoteElement;
+        }
+      }
+      if (element != null) {
+        logger.info("Scrolled to {} successfully", text);
+      } else {
+        logger.error("Text {} is not found", text);
+      }
+    } catch (Exception e) {
+      logger.error("Cannot scroll to text {}. Root cause: {}", text, e.getMessage());
     }
   }
 
