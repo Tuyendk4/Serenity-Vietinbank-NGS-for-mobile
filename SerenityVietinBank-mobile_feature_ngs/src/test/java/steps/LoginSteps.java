@@ -4,13 +4,13 @@ import base.MobileDriver;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import runner.Runner;
-import screens.mobile.*;
+import screens.mobile.Home;
+import screens.mobile.Launcher;
+import screens.mobile.OTP;
+import screens.mobile.Signup;
 
 
 public class LoginSteps extends Runner {
-
-    private static Login login;
-
     @Given("open Vietinbank app")
     public void openVietinbankApp() {
         mobileDriver = new MobileDriver();

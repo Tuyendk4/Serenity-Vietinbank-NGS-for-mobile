@@ -2,6 +2,8 @@ package base;
 
 import com.jayway.jsonpath.JsonPath;
 import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.service.local.AppiumServiceBuilder;
 import net.serenitybdd.model.environment.EnvironmentSpecificConfiguration;
@@ -16,7 +18,9 @@ import java.io.IOException;
 import java.net.URL;
 
 public class MobileDriver {
+
     private static final Logger logger = LogHelper.getLogger();
+
     private static final String ADDRESS = "127.0.0.1";
     private static final String APPIUM_CONFIG_PATH =
             System.getProperty("user.dir") + File.separator + "src" + File.separator + "test"
@@ -61,7 +65,7 @@ public class MobileDriver {
     public AppiumDriver newDriver() {
         startAppiumServer();
         logger.info("Starting appium driver");
-        AppiumDriver driver;
+        AppiumDriver driver = null;
         try {
             DesiredCapabilities dc = new DesiredCapabilities();
             dc.setCapability("platformName", EnvironmentSpecificConfiguration.from(env)
@@ -79,14 +83,14 @@ public class MobileDriver {
                         .getProperty("android.appPackage"));
                 dc.setCapability("appium:appActivity", EnvironmentSpecificConfiguration.from(env)
                         .getProperty("android.appActivity"));
+                driver = new AndroidDriver(getUrl(), dc);
             } else {
                 dc.setCapability("appium:bundleId", EnvironmentSpecificConfiguration.from(env)
                         .getProperty("ios.bundleId"));
                 dc.setCapability("appium:automationName", "XCUITest");
                 dc.setCapability("noReset", "true");
-
+                driver = new IOSDriver(getUrl(), dc);
             }
-            driver = new AppiumDriver(getUrl(), dc);
             appiumDriver = driver;
         } catch (Exception e) {
             throw new RuntimeException(e);

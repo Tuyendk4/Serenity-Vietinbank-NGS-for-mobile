@@ -3,18 +3,13 @@ package steps;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import runner.Runner;
-import screens.mobile.*;
+import screens.mobile.CalculatorTool;
+import screens.mobile.ReferenceRepaymentSchedule;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
 public class LoanAndCreditServicesSteps extends Runner {
-
-    private static Login login;
-    private static Home home;
-    private static LoanAndCreditServices loanAndCreditServices;
-    private static PersonalInstalmentLoan personalInstalmentLoan;
-
     private ReferenceRepaymentSchedule referenceRepaymentSchedule;
 
     public LoanAndCreditServicesSteps() {
