@@ -7,17 +7,15 @@ import screens.mobile.sections.FavoriteServices;
 
 public class Home extends BaseScreen {
 
-  public Home(AppiumDriver appiumDriver) {
-    super(appiumDriver);
-  }
+    public Home(AppiumDriver appiumDriver) {
+        super(appiumDriver);
+    }
 
-  public FavoriteServices favoriteServices() {
-    return new FavoriteServices(appiumDriver);
-  }
+    public FavoriteServices favoriteServices() {
+        return new FavoriteServices(appiumDriver);
+    }
 
-  public AdvertisingPopup advertisingPopup() {
-    return new AdvertisingPopup(appiumDriver);
-  }
-
-
+    public AdvertisingPopup advertisingPopup() {
+        return new AdvertisingPopup(appiumDriver);
+    }
 }

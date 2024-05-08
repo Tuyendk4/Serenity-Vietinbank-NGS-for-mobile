@@ -3,21 +3,18 @@ package screens.mobile;
 import base.BaseScreen;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
-import net.serenitybdd.annotations.Step;
-import net.serenitybdd.core.Serenity;
 import org.openqa.selenium.WebElement;
 
 public class Launcher extends BaseScreen {
 
-  @iOSXCUITFindBy(xpath = "//XCUIElementTypeButton[@name=\"Không cho phép dán\"]")
-  public WebElement btnKhongChoPhepDan;
+    @iOSXCUITFindBy(xpath = "//XCUIElementTypeButton[@name=\"Không cho phép dán\"]")
+    public WebElement btnKhongChoPhepDan;
 
-  public Launcher(AppiumDriver appiumDriver) {
-    super(appiumDriver);
-  }
+    public Launcher(AppiumDriver appiumDriver) {
+        super(appiumDriver);
+    }
 
-  @Step("Click Không cho phép dán")
-  public Signup click_khong_cho_phep_dan() {
+    public Signup clickDoNotAllowPasting() {
 //    startApplication();
 //    logger.info("Element {}", btnKhongChoPhepDan);
 //    if (btnKhongChoPhepDan != null) {
@@ -25,7 +22,6 @@ public class Launcher extends BaseScreen {
 //    }
 //    click(btnKhongChoPhepDan);
 //    setDriver(mobileDriver.newDriver());
-    return new Signup(appiumDriver);
-  }
-
+        return new Signup(appiumDriver);
+    }
 }
