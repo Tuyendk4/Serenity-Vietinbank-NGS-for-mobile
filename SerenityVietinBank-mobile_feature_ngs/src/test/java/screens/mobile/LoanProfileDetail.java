@@ -2,108 +2,190 @@ package screens.mobile;
 
 import base.BaseScreen;
 import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.pagefactory.AndroidFindBy;
-import io.appium.java_client.pagefactory.iOSXCUITFindBy;
-import org.openqa.selenium.WebElement;
+import io.appium.java_client.android.AndroidDriver;
 
 public class LoanProfileDetail extends BaseScreen {
 
-  @AndroidFindBy(xpath = "//android.view.View[@resource-id=\"com.vietinbank.ipay:id/viewTopPopup\"]")
-  private WebElement viewTopPopup;
+//  @AndroidFindBy(xpath = "//android.view.View[@resource-id=\"com.vietinbank.ipay:id/viewTopPopup\"]")
+//  private WebElement viewTopPopup;
 
-  @AndroidFindBy(xpath = "//android.widget.TextView[@resource-id=\"com.vietinbank.ipay:id/tvLeft\" and @text=\"Số tiền vay\"]/following-sibling::android.widget.TextView")
-  @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[@name=\"Số tiền vay\"]/following-sibling::XCUIElementTypeStaticText")
-  private WebElement lblNumberOfMoney;
+  private final String android_viewTopPopup = "//android.view.View[@resource-id=\"com.vietinbank.ipay:id/viewTopPopup\"]";
+  private final String ios_viewTopPopup = "";
 
-  @AndroidFindBy(xpath = "//android.widget.TextView[@resource-id=\"com.vietinbank.ipay:id/tvLeft\" and @text=\"Thời hạn vay\"]/following-sibling::android.widget.TextView")
-  @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[@name=\"Thời hạn vay\"]/following-sibling::XCUIElementTypeStaticText")
-  private WebElement lblMonths;
+//  @AndroidFindBy(xpath = "//android.widget.TextView[@resource-id=\"com.vietinbank.ipay:id/tvLeft\" and @text=\"Số tiền vay\"]/following-sibling::android.widget.TextView")
+//  @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[@name=\"Số tiền vay\"]/following-sibling::XCUIElementTypeStaticText")
+//  private WebElement lblNumberOfMoney;
 
-  @AndroidFindBy(xpath = "//android.widget.TextView[@resource-id=\"com.vietinbank.ipay:id/tvLeft\" and @text=\"Lãi suất\"]/following-sibling::android.widget.TextView")
-  @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[@name=\"Lãi suất\"]/following-sibling::XCUIElementTypeStaticText")
-  private WebElement lblInterestRate;
+  private final String android_lblNumberOfMoney = "//android.widget.TextView[@resource-id=\"com.vietinbank.ipay:id/tvLeft\" and @text=\"Số tiền vay\"]/following-sibling::android.widget.TextView";
+  private final String ios_lblNumberOfMoney = "//XCUIElementTypeStaticText[@name=\"Số tiền vay\"]/following-sibling::XCUIElementTypeStaticText";
 
-  @AndroidFindBy(xpath = "//android.widget.TextView[@resource-id=\"com.vietinbank.ipay:id/tvLeft\" and @text=\"Ngày trả nợ hàng tháng\"]/following-sibling::android.widget.TextView")
-  @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[@name=\"Ngày trả nợ hàng tháng\"]/following-sibling::XCUIElementTypeStaticText")
-  private WebElement lblRepaymentDate;
+//  @AndroidFindBy(xpath = "//android.widget.TextView[@resource-id=\"com.vietinbank.ipay:id/tvLeft\" and @text=\"Thời hạn vay\"]/following-sibling::android.widget.TextView")
+//  @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[@name=\"Thời hạn vay\"]/following-sibling::XCUIElementTypeStaticText")
+//  private WebElement lblMonths;
 
-  @AndroidFindBy(xpath = "//android.widget.TextView[@resource-id=\"com.vietinbank.ipay:id/tvLeft\" and @text=\"Mục đích vay\"]/following-sibling::android.widget.TextView")
-  @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[@name=\"Mục đích vay\"]/following-sibling::XCUIElementTypeStaticText")
-  private WebElement lblLoanPurpose;
+  private final String android_lblMonths = "//android.widget.TextView[@resource-id=\"com.vietinbank.ipay:id/tvLeft\" and @text=\"Thời hạn vay\"]/following-sibling::android.widget.TextView";
+  private final String ios_lblMonths = "//XCUIElementTypeStaticText[@name=\"Thời hạn vay\"]/following-sibling::XCUIElementTypeStaticText";
 
-  @AndroidFindBy(xpath = "//android.widget.TextView[@resource-id=\"com.vietinbank.ipay:id/tvLeft\" and @text=\"Họ & tên người vay\"]/following-sibling::android.widget.TextView")
-  @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[@name=\"Họ & tên người vay\"]/following-sibling::XCUIElementTypeStaticText")
-  private WebElement lblBorrowName;
+//  @AndroidFindBy(xpath = "//android.widget.TextView[@resource-id=\"com.vietinbank.ipay:id/tvLeft\" and @text=\"Lãi suất\"]/following-sibling::android.widget.TextView")
+//  @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[@name=\"Lãi suất\"]/following-sibling::XCUIElementTypeStaticText")
+//  private WebElement lblInterestRate;
 
-  @AndroidFindBy(xpath = "//android.widget.TextView[@resource-id=\"com.vietinbank.ipay:id/tvLeft\" and @text=\"Email nhận hợp đồng vay\"]/following-sibling::android.widget.TextView")
-  @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[@name=\"Email nhận hợp đồng vay\"]/following-sibling::XCUIElementTypeStaticText")
-  private WebElement lblEmail;
+  private final String android_lblInterestRate = "//android.widget.TextView[@resource-id=\"com.vietinbank.ipay:id/tvLeft\" and @text=\"Lãi suất\"]/following-sibling::android.widget.TextView";
+  private final String ios_lblInterestRate = "//XCUIElementTypeStaticText[@name=\"Lãi suất\"]/following-sibling::XCUIElementTypeStaticText";
 
-  @AndroidFindBy(xpath = "//android.widget.TextView[@resource-id=\"com.vietinbank.ipay:id/tvLeft\" and @text=\"Điện thoại\"]/following-sibling::android.widget.TextView")
-  @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[@name=\"Điện thoại\"]/following-sibling::XCUIElementTypeStaticText")
-  private WebElement lblPhone;
+//  @AndroidFindBy(xpath = "//android.widget.TextView[@resource-id=\"com.vietinbank.ipay:id/tvLeft\" and @text=\"Ngày trả nợ hàng tháng\"]/following-sibling::android.widget.TextView")
+//  @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[@name=\"Ngày trả nợ hàng tháng\"]/following-sibling::XCUIElementTypeStaticText")
+//  private WebElement lblRepaymentDate;
 
-  @AndroidFindBy(xpath = "//android.widget.TextView[@resource-id=\"com.vietinbank.ipay:id/tvLeft\" and @text=\"Số giấy tờ cá nhân\"]/following-sibling::android.widget.TextView")
-  @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[@name=\"Số giấy tờ cá nhân\"]/following-sibling::XCUIElementTypeStaticText")
-  private WebElement lblID;
+  private final String android_lblRepaymentDate = "//android.widget.TextView[@resource-id=\"com.vietinbank.ipay:id/tvLeft\" and @text=\"Ngày trả nợ hàng tháng\"]/following-sibling::android.widget.TextView";
+  private final String ios_lblRepaymentDate = "//XCUIElementTypeStaticText[@name=\"Ngày trả nợ hàng tháng\"]/following-sibling::XCUIElementTypeStaticText";
 
-  @AndroidFindBy(xpath = "//android.widget.TextView[@resource-id=\"com.vietinbank.ipay:id/tvLeft\" and @text=\"Địa chỉ thường trú\"]/following-sibling::android.widget.TextView")
-  @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[@name=\"Địa chỉ thường trú\"]/following-sibling::XCUIElementTypeStaticText")
-  private WebElement lblAddress;
+//  @AndroidFindBy(xpath = "//android.widget.TextView[@resource-id=\"com.vietinbank.ipay:id/tvLeft\" and @text=\"Mục đích vay\"]/following-sibling::android.widget.TextView")
+//  @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[@name=\"Mục đích vay\"]/following-sibling::XCUIElementTypeStaticText")
+//  private WebElement lblLoanPurpose;
 
-  @AndroidFindBy(xpath = "//android.widget.TextView[@resource-id=\"com.vietinbank.ipay:id/tvLeft\" and @text=\"Địa chỉ liên hệ\"]/following-sibling::android.widget.TextView")
-  @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[@name=\"Địa chỉ liên hệ\"]/following-sibling::XCUIElementTypeStaticText")
-  private WebElement lblAddressContact;
+  private final String android_lblLoanPurpose = "//android.widget.TextView[@resource-id=\"com.vietinbank.ipay:id/tvLeft\" and @text=\"Mục đích vay\"]/following-sibling::android.widget.TextView";
+  private final String ios_lblLoanPurpose = "//XCUIElementTypeStaticText[@name=\"Mục đích vay\"]/following-sibling::XCUIElementTypeStaticText";
+
+//  @AndroidFindBy(xpath = "//android.widget.TextView[@resource-id=\"com.vietinbank.ipay:id/tvLeft\" and @text=\"Họ & tên người vay\"]/following-sibling::android.widget.TextView")
+//  @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[@name=\"Họ & tên người vay\"]/following-sibling::XCUIElementTypeStaticText")
+//  private WebElement lblBorrowName;
+
+  private final String android_lblBorrowName = "//android.widget.TextView[@resource-id=\"com.vietinbank.ipay:id/tvLeft\" and @text=\"Họ & tên người vay\"]/following-sibling::android.widget.TextView";
+  private final String ios_lblBorrowName = "//XCUIElementTypeStaticText[@name=\"Họ & tên người vay\"]/following-sibling::XCUIElementTypeStaticText";
+
+//  @AndroidFindBy(xpath = "//android.widget.TextView[@resource-id=\"com.vietinbank.ipay:id/tvLeft\" and @text=\"Email nhận hợp đồng vay\"]/following-sibling::android.widget.TextView")
+//  @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[@name=\"Email nhận hợp đồng vay\"]/following-sibling::XCUIElementTypeStaticText")
+//  private WebElement lblEmail;
+
+  private final String android_lblEmail = "//android.widget.TextView[@resource-id=\"com.vietinbank.ipay:id/tvLeft\" and @text=\"Email nhận hợp đồng vay\"]/following-sibling::android.widget.TextView";
+  private final String ios_lblEmail = "//XCUIElementTypeStaticText[@name=\"Email nhận hợp đồng vay\"]/following-sibling::XCUIElementTypeStaticText";
+
+//  @AndroidFindBy(xpath = "//android.widget.TextView[@resource-id=\"com.vietinbank.ipay:id/tvLeft\" and @text=\"Điện thoại\"]/following-sibling::android.widget.TextView")
+//  @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[@name=\"Điện thoại\"]/following-sibling::XCUIElementTypeStaticText")
+//  private WebElement lblPhone;
+
+  private final String android_lblPhone = "//android.widget.TextView[@resource-id=\"com.vietinbank.ipay:id/tvLeft\" and @text=\"Điện thoại\"]/following-sibling::android.widget.TextView";
+  private final String ios_lblPhone = "//XCUIElementTypeStaticText[@name=\"Điện thoại\"]/following-sibling::XCUIElementTypeStaticText";
+
+//  @AndroidFindBy(xpath = "//android.widget.TextView[@resource-id=\"com.vietinbank.ipay:id/tvLeft\" and @text=\"Số giấy tờ cá nhân\"]/following-sibling::android.widget.TextView")
+//  @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[@name=\"Số giấy tờ cá nhân\"]/following-sibling::XCUIElementTypeStaticText")
+//  private WebElement lblID;
+
+  private final String android_lblID = "//android.widget.TextView[@resource-id=\"com.vietinbank.ipay:id/tvLeft\" and @text=\"Số giấy tờ cá nhân\"]/following-sibling::android.widget.TextView";
+  private final String ios_lblID = "//XCUIElementTypeStaticText[@name=\"Số giấy tờ cá nhân\"]/following-sibling::XCUIElementTypeStaticText";
+
+//  @AndroidFindBy(xpath = "//android.widget.TextView[@resource-id=\"com.vietinbank.ipay:id/tvLeft\" and @text=\"Địa chỉ thường trú\"]/following-sibling::android.widget.TextView")
+//  @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[@name=\"Địa chỉ thường trú\"]/following-sibling::XCUIElementTypeStaticText")
+//  private WebElement lblAddress;
+
+  private final String android_lblAddress = "//android.widget.TextView[@resource-id=\"com.vietinbank.ipay:id/tvLeft\" and @text=\"Địa chỉ thường trú\"]/following-sibling::android.widget.TextView";
+  private final String ios_lblAddress = "//XCUIElementTypeStaticText[@name=\"Địa chỉ thường trú\"]/following-sibling::XCUIElementTypeStaticText";
+
+//  @AndroidFindBy(xpath = "//android.widget.TextView[@resource-id=\"com.vietinbank.ipay:id/tvLeft\" and @text=\"Địa chỉ liên hệ\"]/following-sibling::android.widget.TextView")
+//  @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[@name=\"Địa chỉ liên hệ\"]/following-sibling::XCUIElementTypeStaticText")
+//  private WebElement lblAddressContact;
+
+  private final String android_lblAddressContact = "//android.widget.TextView[@resource-id=\"com.vietinbank.ipay:id/tvLeft\" and @text=\"Địa chỉ liên hệ\"]/following-sibling::android.widget.TextView";
+  private final String ios_lblAddressContact = "//XCUIElementTypeStaticText[@name=\"Địa chỉ liên hệ\"]/following-sibling::XCUIElementTypeStaticText";
 
   public LoanProfileDetail(AppiumDriver appiumDriver) {
     super(appiumDriver);
   }
 
   public String getNumberOfMoney() {
-    return lblNumberOfMoney.getText();
+    if (appiumDriver instanceof AndroidDriver) {
+      return getText(android_lblNumberOfMoney);
+    } else {
+      return getText(ios_lblNumberOfMoney);
+    }
   }
 
   public String getMonths() {
-    return lblMonths.getText();
+    if (appiumDriver instanceof AndroidDriver) {
+      return getText(android_lblMonths);
+    } else {
+      return getText(ios_lblMonths);
+    }
   }
 
   public String getInterestRate() {
-    return lblInterestRate.getText();
+    if (appiumDriver instanceof AndroidDriver) {
+      return getText(android_lblInterestRate);
+    } else {
+      return getText(ios_lblInterestRate);
+    }
   }
 
   public String getRepaymentDate() {
-    return lblRepaymentDate.getText();
+    if (appiumDriver instanceof AndroidDriver) {
+      return getText(android_lblRepaymentDate);
+    } else {
+      return getText(ios_lblRepaymentDate);
+    }
   }
 
   public String getLoanPurpose() {
-    return lblLoanPurpose.getText();
+    if (appiumDriver instanceof AndroidDriver) {
+      return getText(android_lblLoanPurpose);
+    } else {
+      return getText(ios_lblLoanPurpose);
+    }
   }
 
   public String getBorrowName() {
-    return lblBorrowName.getText();
+    if (appiumDriver instanceof AndroidDriver) {
+      return getText(android_lblBorrowName);
+    } else {
+      return getText(ios_lblBorrowName);
+    }
   }
 
   public String getEmail() {
-    return lblEmail.getText();
+    if (appiumDriver instanceof AndroidDriver) {
+      return getText(android_lblEmail);
+    } else {
+      return getText(ios_lblEmail);
+    }
   }
 
   public String getPhone() {
-    return lblPhone.getText();
+    if (appiumDriver instanceof AndroidDriver) {
+      return getText(android_lblPhone);
+    } else {
+      return getText(ios_lblPhone);
+    }
   }
 
   public String getID() {
-    return lblID.getText();
+    if (appiumDriver instanceof AndroidDriver) {
+      return getText(android_lblID);
+    } else {
+      return getText(ios_lblID);
+    }
   }
 
   public String getAddress() {
-    return lblAddress.getText();
+    if (appiumDriver instanceof AndroidDriver) {
+      return getText(android_lblAddress);
+    } else {
+      return getText(ios_lblAddress);
+    }
   }
 
   public String getAddressContact() {
-    return lblAddressContact.getText();
+    if (appiumDriver instanceof AndroidDriver) {
+      return getText(android_lblAddressContact);
+    } else {
+      return getText(ios_lblAddressContact);
+    }
   }
 
   public void closeLoanProfileDetailPopup() {
-    click(viewTopPopup);
+    if (appiumDriver instanceof AndroidDriver) {
+      click(android_viewTopPopup);
+    } else {
+      click(ios_viewTopPopup);
+    }
   }
 }

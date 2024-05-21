@@ -6,6 +6,8 @@ import com.google.common.collect.ImmutableList;
 import io.appium.java_client.AppiumBy.ByAndroidUIAutomator;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.android.nativekey.AndroidKey;
+import io.appium.java_client.android.nativekey.KeyEvent;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import java.awt.image.BufferedImage;
@@ -15,6 +17,7 @@ import java.time.Duration;
 import java.util.HashMap;
 import java.util.List;
 import javax.imageio.ImageIO;
+import net.serenitybdd.core.pages.PageObject;
 import net.thucydides.model.environment.SystemEnvironmentVariables;
 import net.thucydides.model.util.EnvironmentVariables;
 import org.openqa.selenium.By;
@@ -50,14 +53,14 @@ public class BaseScreen {
 
   public BaseScreen(AppiumDriver appiumDriver) {
     this.appiumDriver = appiumDriver;
-    PageFactory.initElements(new AppiumFieldDecorator(appiumDriver, Duration.ofSeconds(30)), this);
+//    PageFactory.initElements(new AppiumFieldDecorator(appiumDriver, Duration.ofSeconds(90)), this);
   }
 
   public void delay(int time) {
     try {
       Thread.sleep(time);
     } catch (InterruptedException e) {
-      e.printStackTrace();
+      logger.error("Cannot delay in {}. Root cause: {}", time, e.getMessage());
     }
   }
 
@@ -66,6 +69,19 @@ public class BaseScreen {
     logger.info("Finding mobile element {}", locator);
     try {
       WebDriverWait wait = new WebDriverWait(appiumDriver, Duration.ofSeconds(defaultTimeOut));
+      element = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(locator)));
+      logger.info("Found 1 mobile element {}", locator);
+    } catch (Exception e) {
+      logger.error("Cannot find mobile element {}. Root cause: {}", locator, e.getMessage());
+    }
+    return element;
+  }
+
+  public WebElement findElement(String locator, int timeOut) {
+    WebElement element = null;
+    logger.info("Finding mobile element {}", locator);
+    try {
+      WebDriverWait wait = new WebDriverWait(appiumDriver, Duration.ofSeconds(timeOut));
       element = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(locator)));
       logger.info("Found 1 mobile element {}", locator);
     } catch (Exception e) {
@@ -100,6 +116,42 @@ public class BaseScreen {
     }
   }
 
+  public void click(String locator, int timeOut) {
+    try {
+      logger.info("Click on mobile element located by {}", locator);
+      WebElement we = findElement(locator, timeOut);
+      we.click();
+      logger.info("Clicked on mobile element located by {} successfully", locator);
+    } catch (Exception e) {
+      logger.error("Cannot click on mobile element located by ''{}''. Root cause: {}",
+          locator, e.getMessage());
+    }
+  }
+
+  public void clear(String locator) {
+    try {
+      logger.info("Clear text on mobile element located by {}", locator);
+      WebElement we = findElement(locator);
+      we.clear();
+      logger.info("Cleared text mobile element located by {} successfully", locator);
+    } catch (Exception e) {
+      logger.error("Cannot clear text mobile element located by ''{}''. Root cause: {}",
+          locator, e.getMessage());
+    }
+  }
+
+  public void clear(String locator, int timeOut) {
+    try {
+      logger.info("Clear text on mobile element located by {}", locator);
+      WebElement we = findElement(locator, timeOut);
+      we.clear();
+      logger.info("Cleared text mobile element located by {} successfully", locator);
+    } catch (Exception e) {
+      logger.error("Cannot clear text mobile element located by ''{}''. Root cause: {}",
+          locator, e.getMessage());
+    }
+  }
+
   public void click(WebElement we) {
     try {
       logger.info("Clicking on mobile element {}", we);
@@ -110,6 +162,22 @@ public class BaseScreen {
           we, e.getMessage());
       fail(String.format("Cannot click on mobile element ''%s''. Root cause: %s",
           we, e.getMessage()));
+    }
+  }
+
+  public void tap(String locator, int timeOut) {
+    WebElement we = findElement(locator, timeOut);
+    try {
+      Rectangle elRect = we.getRect();
+      Point point = new Point(
+          elRect.x + (int) (elRect.getWidth() / 2.0),
+          elRect.y + (int) (elRect.getHeight() / 2.0)
+      );
+      tapAtPoint(point);
+      logger.info("Tapped on mobile element {} successfully", we);
+    } catch (Exception e) {
+      logger.error("Cannot tap on mobile element ''{}''. Root cause: {}",
+          we, e.getMessage());
     }
   }
 
@@ -138,10 +206,17 @@ public class BaseScreen {
     appiumDriver.perform(ImmutableList.of(tap));
   }
 
+  public void tapAt(int x, int y) {
+    Point point = new Point(x, y);
+
+    tapAtPoint(point);
+  }
+
   public void sendKeys(String locator, String text) {
     WebElement element = findElement(locator);
     if (element != null) {
       try {
+        element.clear();
         element.sendKeys(text);
         logger.info("Enter text ''{}'' to mobile element located by ''{}''", text, locator);
       } catch (Exception e) {
@@ -217,6 +292,20 @@ public class BaseScreen {
           "Cannot scroll to mobile element located by {}. Root cause: the web element not fount",
           locator);
     }
+  }
+
+  public String getText(String locator) {
+    WebElement element = findElement(locator);
+    String text = "";
+    if (element != null) {
+      try {
+        text = element.getText();
+      } catch (Exception e) {
+        logger.error("Cannot get text of mobile element located by {}. Root cause: {}", locator,
+            e.getMessage());
+      }
+    }
+    return text;
   }
 
   public void scrollToElement(WebElement we, ScrollDirection scrollDirection, int numberOfTimes) {
@@ -370,6 +459,22 @@ public class BaseScreen {
     return false;
   }
 
+  public boolean verifyElementEnable(String locator, int timeOut) {
+    WebElement we = findElement(locator, timeOut);
+    try {
+      logger.info("Verify for element {} to be enable", we);
+      if (we != null && we.isEnabled()) {
+        logger.info("Element {} is enabled", we);
+        return true;
+      }
+      logger.error("Element {} is not enabled", we);
+    } catch (Exception e) {
+      logger.error("Cannot verify element {} to be enable. Root cause: {}",
+          we, e.getMessage());
+    }
+    return false;
+  }
+
   public boolean verifyElementEnable(WebElement we) {
     try {
       logger.info("Verify for element {} to be enable", we);
@@ -386,7 +491,174 @@ public class BaseScreen {
   }
 
   public void clickBackButton() {
-    String btnBackButton = "//*[@name=\"ic back blue\"]";
-    click(btnBackButton);
+    if(appiumDriver instanceof AndroidDriver) {
+      String btnBack = "//android.widget.RelativeLayout[@resource-id=\"com.vietinbank.ipay:id/header_toolbar\"]/android.widget.ImageButton[@resource-id=\"com.vietinbank.ipay:id/btn_left\"]";
+      click(btnBack, 5);
+    } else {
+      String btnBack = "//*[@name=\"ic back blue\"]";
+      click(btnBack, 5);
+    }
+  }
+
+  public void pressKey(String key) {
+    if(appiumDriver instanceof AndroidDriver) {
+      switch (key) {
+        case "a":
+          ((AndroidDriver) appiumDriver).pressKey(new KeyEvent(AndroidKey.A));
+          break;
+        case "b":
+          ((AndroidDriver) appiumDriver).pressKey(new KeyEvent(AndroidKey.B));
+          break;
+        case "c":
+          ((AndroidDriver) appiumDriver).pressKey(new KeyEvent(AndroidKey.C));
+          break;
+        case "d":
+          ((AndroidDriver) appiumDriver).pressKey(new KeyEvent(AndroidKey.D));
+          break;
+        case "e":
+          ((AndroidDriver) appiumDriver).pressKey(new KeyEvent(AndroidKey.E));
+          break;
+        case "f":
+          ((AndroidDriver) appiumDriver).pressKey(new KeyEvent(AndroidKey.F));
+          break;
+        case "g":
+          ((AndroidDriver) appiumDriver).pressKey(new KeyEvent(AndroidKey.G));
+          break;
+        case "h":
+          ((AndroidDriver) appiumDriver).pressKey(new KeyEvent(AndroidKey.H));
+          break;
+        case "i":
+          ((AndroidDriver) appiumDriver).pressKey(new KeyEvent(AndroidKey.I));
+          break;
+        case "j":
+          ((AndroidDriver) appiumDriver).pressKey(new KeyEvent(AndroidKey.J));
+          break;
+        case "k":
+          ((AndroidDriver) appiumDriver).pressKey(new KeyEvent(AndroidKey.K));
+          break;
+        case "l":
+          ((AndroidDriver) appiumDriver).pressKey(new KeyEvent(AndroidKey.L));
+          break;
+        case "m":
+          ((AndroidDriver) appiumDriver).pressKey(new KeyEvent(AndroidKey.M));
+          break;
+        case "n":
+          ((AndroidDriver) appiumDriver).pressKey(new KeyEvent(AndroidKey.N));
+          break;
+        case "o":
+          ((AndroidDriver) appiumDriver).pressKey(new KeyEvent(AndroidKey.O));
+          break;
+        case "p":
+          ((AndroidDriver) appiumDriver).pressKey(new KeyEvent(AndroidKey.P));
+          break;
+        case "q":
+          ((AndroidDriver) appiumDriver).pressKey(new KeyEvent(AndroidKey.Q));
+          break;
+        case "r":
+          ((AndroidDriver) appiumDriver).pressKey(new KeyEvent(AndroidKey.R));
+          break;
+        case "s":
+          ((AndroidDriver) appiumDriver).pressKey(new KeyEvent(AndroidKey.S));
+          break;
+        case "t":
+          ((AndroidDriver) appiumDriver).pressKey(new KeyEvent(AndroidKey.T));
+          break;
+        case "u":
+          ((AndroidDriver) appiumDriver).pressKey(new KeyEvent(AndroidKey.U));
+          break;
+        case "v":
+          ((AndroidDriver) appiumDriver).pressKey(new KeyEvent(AndroidKey.V));
+          break;
+        case "w":
+          ((AndroidDriver) appiumDriver).pressKey(new KeyEvent(AndroidKey.W));
+          break;
+        case "x":
+          ((AndroidDriver) appiumDriver).pressKey(new KeyEvent(AndroidKey.X));
+          break;
+        case "y":
+          ((AndroidDriver) appiumDriver).pressKey(new KeyEvent(AndroidKey.Y));
+          break;
+        case "z":
+          ((AndroidDriver) appiumDriver).pressKey(new KeyEvent(AndroidKey.Z));
+          break;
+        case "0":
+          ((AndroidDriver) appiumDriver).pressKey(new KeyEvent(AndroidKey.DIGIT_0));
+          break;
+        case "1":
+          ((AndroidDriver) appiumDriver).pressKey(new KeyEvent(AndroidKey.DIGIT_1));
+          break;
+        case "2":
+          ((AndroidDriver) appiumDriver).pressKey(new KeyEvent(AndroidKey.DIGIT_2));
+          break;
+        case "3":
+          ((AndroidDriver) appiumDriver).pressKey(new KeyEvent(AndroidKey.DIGIT_3));
+          break;
+        case "4":
+          ((AndroidDriver) appiumDriver).pressKey(new KeyEvent(AndroidKey.DIGIT_4));
+          break;
+        case "5":
+          ((AndroidDriver) appiumDriver).pressKey(new KeyEvent(AndroidKey.DIGIT_5));
+          break;
+        case "6":
+          ((AndroidDriver) appiumDriver).pressKey(new KeyEvent(AndroidKey.DIGIT_6));
+          break;
+        case "7":
+          ((AndroidDriver) appiumDriver).pressKey(new KeyEvent(AndroidKey.DIGIT_7));
+          break;
+        case "8":
+          ((AndroidDriver) appiumDriver).pressKey(new KeyEvent(AndroidKey.DIGIT_8));
+          break;
+        case "9":
+          ((AndroidDriver) appiumDriver).pressKey(new KeyEvent(AndroidKey.DIGIT_9));
+          break;
+      }
+      delay(300);
+    }
+  }
+
+  public void pressNumberKey(String key) {
+    if(appiumDriver instanceof AndroidDriver) {
+      switch (key) {
+        case "0":
+          ((AndroidDriver) appiumDriver).pressKey(new KeyEvent(AndroidKey.NUMPAD_0));
+          break;
+        case "1":
+          ((AndroidDriver) appiumDriver).pressKey(new KeyEvent(AndroidKey.NUMPAD_1));
+          break;
+        case "2":
+          ((AndroidDriver) appiumDriver).pressKey(new KeyEvent(AndroidKey.NUMPAD_2));
+          break;
+        case "3":
+          ((AndroidDriver) appiumDriver).pressKey(new KeyEvent(AndroidKey.NUMPAD_3));
+          break;
+        case "4":
+          ((AndroidDriver) appiumDriver).pressKey(new KeyEvent(AndroidKey.NUMPAD_4));
+          break;
+        case "5":
+          ((AndroidDriver) appiumDriver).pressKey(new KeyEvent(AndroidKey.NUMPAD_5));
+          break;
+        case "6":
+          ((AndroidDriver) appiumDriver).pressKey(new KeyEvent(AndroidKey.NUMPAD_6));
+          break;
+        case "7":
+          ((AndroidDriver) appiumDriver).pressKey(new KeyEvent(AndroidKey.NUMPAD_7));
+          break;
+        case "8":
+          ((AndroidDriver) appiumDriver).pressKey(new KeyEvent(AndroidKey.NUMPAD_8));
+          break;
+        case "9":
+          ((AndroidDriver) appiumDriver).pressKey(new KeyEvent(AndroidKey.NUMPAD_9));
+          break;
+      }
+      delay(300);
+    }
+  }
+
+  public String getAttribute(String locator, String attributeName) {
+    WebElement we = findElement(locator);
+    if(we != null) {
+      return we.getAttribute(attributeName);
+    }
+    return null;
   }
 }

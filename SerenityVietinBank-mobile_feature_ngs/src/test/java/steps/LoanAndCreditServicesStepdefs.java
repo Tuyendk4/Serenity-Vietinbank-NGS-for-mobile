@@ -12,13 +12,18 @@ import io.cucumber.java.vi.Và;
 import org.apache.commons.lang3.StringUtils;
 import runner.Runner;
 import screens.mobile.CalculatorTool;
+import screens.mobile.LoanContractContent;
+import screens.mobile.InsuranceContractContent;
 import screens.mobile.LoanHistory;
 import screens.mobile.LoanProfile;
 import screens.mobile.LoanProfileDetail;
 import screens.mobile.PersonalInstalmentLoan_Step1;
 import screens.mobile.PersonalInstalmentLoan_Step2;
 import screens.mobile.PersonalInstalmentLoan_Step3;
+import screens.mobile.PersonalInstalmentLoan_SuccessfulApplicationAppraisal;
 import screens.mobile.ReferenceRepaymentSchedule;
+import screens.mobile.TransactionApproval;
+import screens.mobile.TransactionResult;
 
 public class LoanAndCreditServicesStepdefs extends Runner {
 
@@ -30,6 +35,11 @@ public class LoanAndCreditServicesStepdefs extends Runner {
   private LoanHistory loanHistory;
   private LoanProfile loanProfile;
   private LoanProfileDetail loanProfileDetail;
+  private PersonalInstalmentLoan_SuccessfulApplicationAppraisal successfulApplicationAppraisal;
+  private LoanContractContent loanContractContent;
+  private InsuranceContractContent insuranceContractContent;
+  private TransactionApproval transactionApproval;
+  private TransactionResult transactionResult;
 
   public LoanAndCreditServicesStepdefs() {
     super();
@@ -41,15 +51,25 @@ public class LoanAndCreditServicesStepdefs extends Runner {
   }
 
   @Và("Công cụ tính lãi suất - Tính toán ngay")
-  public void côngCụTínhLãiSuấtTínhToánNgay() {
+  public void click_Calculate_Now() {
     calculatorTool = personalInstalmentLoan.clickCalculateNow();
   }
 
-  @Và("Vay {string} VND, thời hạn {string} tháng, {string}")
+  @Và("Vay {string} VND, thời hạn {string} tháng không có ưu đãi đặc biệt, {string}")
   public void makeLoanWith(String numberOfMoneyOrPercent,
       String monthsOrPercent, String editType) {
     calculatorTool.editNumberOfMoney(editType, numberOfMoneyOrPercent);
     calculatorTool.editNumberOfMonth(editType, monthsOrPercent);
+    calculatorTool.uncheckSpecialOffer();
+    referenceRepaymentSchedule = calculatorTool.clickExpectedPaymentScheduleViewerButton();
+  }
+
+  @Và("Vay {string} VND, thời hạn {string} tháng có ưu đãi đặc biệt, {string}")
+  public void makeLoanWithSpecialOfferAnd(String numberOfMoneyOrPercent,
+      String monthsOrPercent, String editType) {
+    calculatorTool.editNumberOfMoney(editType, numberOfMoneyOrPercent);
+    calculatorTool.editNumberOfMonth(editType, monthsOrPercent);
+    calculatorTool.checkSpecialOffer();
     referenceRepaymentSchedule = calculatorTool.clickExpectedPaymentScheduleViewerButton();
   }
 
@@ -58,7 +78,7 @@ public class LoanAndCreditServicesStepdefs extends Runner {
     assertThat(referenceRepaymentSchedule.getInterestRate(), equalTo(interestRate));
   }
 
-  @Và("Lịch trả nợ - Tổng tiền phải trả {string}")
+  @Và("Lịch trả nợ - Số tiền phải trả hàng tháng {string}")
   public void show_monthly_charge_amount_in_Reference_Payment_Schedule_as(
       String monthlyChargeAmount) {
     if(appiumDriver instanceof AndroidDriver) {
@@ -83,7 +103,6 @@ public class LoanAndCreditServicesStepdefs extends Runner {
         equalTo(principalAndInterestPayableTotal));
   }
 
-
   @Khi("MH Vay - Bước 1")
   public void move_to_Personal_Instalment_Loan_Step_1() {
     personalInstalmentLoanStep1 = referenceRepaymentSchedule.clickBorrowNow();
@@ -105,6 +124,12 @@ public class LoanAndCreditServicesStepdefs extends Runner {
           + personalInstalmentLoanStep1.getMonthlyChargeAmount02();
     }
     assertThat(actualMonthlyChargeAmount, equalTo(monthlyChargeAmount));
+  }
+
+  @Khi("MH Vay - Bước 1 - Xác nhận sử dụng bảo hiểm VietinBank")
+  public void check_insurance_agreement_and_check_terms_and_conditions_in_Personal_Instalment_Loan_Step_1() {
+    personalInstalmentLoanStep1.checkInsuranceAgreement();
+    personalInstalmentLoanStep1.checkTermsAndConditions();
   }
 
   @Khi("MH Vay - Bước 2")
@@ -146,6 +171,11 @@ public class LoanAndCreditServicesStepdefs extends Runner {
   @Và("MH Vay - Bước 3 - Lãi suất dự kiến là {string}")
   public void should_show_interest_rate_in_Personal_Instalment_Loan_Step_3(String interestRate) {
     assertThat(personalInstalmentLoanStep3.getInterestRate(), equalTo(interestRate));
+  }
+
+  @Và("MH Vay - Bước 3 - Chương trình ưu đãi là {string}")
+  public void should_show_type_special_offer_in_Personal_Instalment_Loan_Step_3(String type) {
+    assertThat(personalInstalmentLoanStep3.getSpecialOfferType(), equalTo(type));
   }
 
   @Và("MH Vay - Bước 3 - Mục đích vay là {string}")
@@ -203,6 +233,33 @@ public class LoanAndCreditServicesStepdefs extends Runner {
     loanProfile = loanHistory.clickConsumerLoan();
   }
 
+  @Khi("Vào MH Vay tiêu dùng cá nhân của khoản vay {string}")
+  public void move_to_Loan_Profile(String status) {
+    if(loanHistory.getStatusText().equals(status)) {
+      loanProfile = loanHistory.clickConsumerLoan();
+    }
+  }
+
+  @Khi("MH Vay tiêu dùng cá nhân - Hủy khoản vay")
+  public void abort_the_Loan_in_Loan_Profile() {
+    loanProfile.clickAbort();
+  }
+
+  @Thì("MH Vay tiêu dùng cá nhân - Thông báo {string}")
+  public void show_aborting_confirmation_notification_in_Loan_Profile(String message) {
+    assertThat(loanProfile.notificationPopup().getNotificationTitle(), equalTo(message));
+  }
+
+  @Khi("MH Vay tiêu dùng cá nhân - Xác nhận hủy")
+  public void confirm_to_abort_the_Loan_in_Loan_Profile() {
+    loanProfile.notificationPopup().clickConfirmToAbortButton();
+  }
+
+  @Thì("MH Vay tiêu dùng cá nhân - Thông báo thành công: {string}")
+  public void show_aborting_success_notification_in_Loan_Profile(String message) {
+    assertThat(loanProfile.successPopup().getNotification(), equalTo(message));
+    loanProfile.successPopup().clickAgreeButton();
+  }
 
   @Và("Mở Hồ sơ vay tiêu dùng cá nhân")
   public void move_to_Loan_Profile_detail() {
@@ -216,9 +273,8 @@ public class LoanAndCreditServicesStepdefs extends Runner {
 
   @Và("Hồ sơ vay tiêu dùng cá nhân - Thời hạn vay {string}")
   public void should_show_loan_duration_in_Loan_Profile_Detail(String numberOfMonths) {
-    assertThat(loanProfileDetail.getMonths(), equalTo(numberOfMonths));
+    assertThat(loanProfileDetail.getMonths().toLowerCase(), equalTo(numberOfMonths));
   }
-
 
   @Và("Hồ sơ vay tiêu dùng cá nhân - Ngày trả nợ hàng tháng {string}")
   public void should_show_repayment_date_in_Loan_Profile_Detail(String date) {
@@ -239,5 +295,80 @@ public class LoanAndCreditServicesStepdefs extends Runner {
   @Và("Hồ sơ vay tiêu dùng cá nhân - Email nhận hợp đồng {string}")
   public void should_show_email_in_Loan_Profile_Detail(String email) {
     assertThat(loanProfileDetail.getEmail(), equalTo(email));
+  }
+
+  @Thì("Thông báo thành công: {string}")
+  public void should_show_success_popup_on_Personal_Instalment_Loan_Step_3(String message) {
+    assertThat(personalInstalmentLoanStep3.successPopup().getNotification(),
+        containsString(message));
+  }
+
+  @Khi("Nhấn Đồng ý trên Thành công popup")
+  public void click_Agree_button_on_success_popup_on_Personal_Instalment_Loan_Step_3() {
+    successfulApplicationAppraisal = personalInstalmentLoanStep3.successPopup().clickAgreeButton();
+  }
+
+  @Thì("Thẩm định hồ sơ thành công - Số tiền vay {string}")
+  public void should_show_number_of_money_in_Personal_Instalment_Loan_Successful_Application_Appraisal(String money) {
+    assertThat(successfulApplicationAppraisal.getNumberOfMoney(), equalTo(money));
+  }
+
+  @Và("Thẩm định hồ sơ thành công - Lãi suất {string}")
+  public void should_show_loan_duration_in_Personal_Instalment_Loan_Successful_Application_Appraisal(String interestRate) {
+    assertThat(successfulApplicationAppraisal.getInterestRate(), equalTo(interestRate));
+  }
+
+
+  @Và("Thẩm định hồ sơ thành công - Thời hạn vay {string}")
+  public void should_show_repayment_date_in_Personal_Instalment_Loan_Successful_Application_Appraisal(String numberOfMonths) {
+    assertThat(successfulApplicationAppraisal.getMonths(), equalTo(numberOfMonths));
+  }
+
+  @Khi("Thẩm định hồ sơ thành công - lựa chọn tài khoản")
+  public void select_account_in_Personal_Instalment_Loan_Successful_Application_Appraisal() {
+    successfulApplicationAppraisal.selectAccount();
+  }
+
+  @Và("Xem nội dung hợp đồng vay")
+  public void view_content_contract_in_Personal_Instalment_Loan_Successful_Application_Appraisal() {
+    loanContractContent = successfulApplicationAppraisal.viewContract();
+  }
+
+  @Và("MH Hợp động vay - quay trở lại Thẩm định hồ sơ thành công")
+  public void back_to_Personal_Instalment_Loan_Successful_Application_Appraisal_from_Insurance_Contract_Content() {
+    loanContractContent.clickBackButton();
+  }
+
+  @Và("Xem nội dung hợp đồng bảo hiểm")
+  public void view_insurance_content_contract_in_Personal_Instalment_Loan_Successful_Application_Appraisal() {
+    insuranceContractContent = successfulApplicationAppraisal.viewInsuranceContract();
+  }
+
+  @Và("MH Hợp đồng bảo hiểm - quay trở lại Thẩm định hồ sơ thành công")
+  public void back_to_Personal_Instalment_Loan_Successful_Application_Appraisal() {
+    insuranceContractContent.clickBackButton();
+  }
+
+  @Và("Đồng ý vay")
+  public void check_checkbox_and_click_agree_button_in_Personal_Instalment_Loan_Successful_Application_Appraisal() {
+    successfulApplicationAppraisal.check_Contract_Agreement_checkbox();
+    transactionApproval = successfulApplicationAppraisal.clickAgree();
+  }
+
+  @Và("Đồng ý vay và mua bảo hiểm")
+  public void check_checkbox_and_click_agree_and_buy_insurance_button_in_Personal_Instalment_Loan_Successful_Application_Appraisal() {
+    successfulApplicationAppraisal.check_Contract_Agreement_checkbox();
+    successfulApplicationAppraisal.check_Insurance_Contract_Agreement_checkbox();
+    transactionApproval = successfulApplicationAppraisal.clickAgree();
+  }
+
+  @Và("Xác nhận hợp đồng - Nhập OTP {string}")
+  public void input_OTP_in_Transaction_Approval(String otp) {
+    transactionResult = transactionApproval.inputOTP(otp);
+  }
+
+  @Thì("Kết quả giao dịch - hiển thị {string}")
+  public void show_notification_in_Transaction_Result(String message) {
+    assertThat(transactionResult.getNotificationContent(), equalTo(message));
   }
 }

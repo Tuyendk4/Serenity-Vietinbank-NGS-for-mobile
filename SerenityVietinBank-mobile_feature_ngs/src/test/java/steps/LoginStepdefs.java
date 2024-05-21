@@ -16,21 +16,17 @@ public class LoginStepdefs extends Runner {
   public void open_Vietinbank_iPay_app() {
 //    mobileDriver = new MobileDriver();
     Launcher launcher = new Launcher(appiumDriver);
-    if(appiumDriver instanceof IOSDriver) {
-      Signup signup = launcher.click_khong_cho_phep_dan();
+//    if(appiumDriver instanceof IOSDriver) {
+      Signup signup = launcher.click_Skip();
       login = signup.click_dang_nhap_or_dang_ky_button();
-    }
+//    }
 
   }
 
   @Khi("Đăng nhập user {string}, password {string}")
   public void login_with(String userName, String password) {
     OTP otp;
-    if(appiumDriver instanceof IOSDriver) {
-      otp = login.login_with(userName, password);
-    } else {
-      otp = new OTP(appiumDriver);
-    }
+    otp = login.login_with(userName, password);
     home = otp.inputOTP("888888");
     home.advertisingPopup().close();
   }

@@ -30,7 +30,7 @@ public class MobileDriver {
   private static AppiumDriverLocalService service;
   private final String node_path;
   private final String appium_path;
-  private AppiumDriver appiumDriver;
+  private static AppiumDriver appiumDriver;
 
   public MobileDriver() {
     File appiumConfig = new File(APPIUM_CONFIG_PATH);
@@ -64,7 +64,10 @@ public class MobileDriver {
   }
 
   public AppiumDriver newDriver() {
-    startAppiumServer();
+    if(EnvironmentSpecificConfiguration.from(env)
+        .getProperty("appium_server").equals("auto")) {
+      startAppiumServer();
+    }
     logger.info("Starting appium driver");
     AppiumDriver driver = null;
     try {
@@ -84,45 +87,23 @@ public class MobileDriver {
             .getProperty("android.appPackage"));
         dc.setCapability("appium:appActivity", EnvironmentSpecificConfiguration.from(env)
             .getProperty("android.appActivity"));
-        driver = new AndroidDriver(getUrl(), dc);
+        if(EnvironmentSpecificConfiguration.from(env)
+            .getProperty("appium_server").equals("auto")) {
+          driver = new AndroidDriver(getUrl(), dc);
+        } else {
+          driver = new AndroidDriver(new URL("http://127.0.0.1:4723/"), dc);
+        }
       } else {
         dc.setCapability("appium:bundleId", EnvironmentSpecificConfiguration.from(env)
             .getProperty("ios.bundleId"));
         dc.setCapability("appium:automationName", "XCUITest");
         dc.setCapability("noReset", "true");
-        driver = new IOSDriver(getUrl(), dc);
-      }
-      appiumDriver = driver;
-    } catch (Exception e) {
-      throw new RuntimeException(e);
-    }
-    logger.info("Driver: {}", driver);
-    return driver;
-  }
-
-  public AppiumDriver newDriver(String app) {
-    startAppiumServer();
-    logger.info("Starting appium driver");
-    AppiumDriver driver = null;
-    try {
-      DesiredCapabilities dc = new DesiredCapabilities();
-      dc.setCapability("platformName", EnvironmentSpecificConfiguration.from(env)
-          .getProperty("platformName"));
-      dc.setCapability("appium:platformVersion", EnvironmentSpecificConfiguration.from(env)
-          .getProperty("platformVersion"));
-      dc.setCapability("appium:udid", EnvironmentSpecificConfiguration.from(env)
-          .getProperty("udid"));
-      dc.setCapability("appium:deviceName", EnvironmentSpecificConfiguration.from(env)
-          .getProperty("deviceName"));
-      dc.setCapability("appium:app", APP_PATH + app);
-      if (EnvironmentSpecificConfiguration.from(env)
-          .getProperty("platformName").equalsIgnoreCase("ANDROID")) {
-        dc.setCapability("appium:automationName", "UiAutomator2");
-        driver = new AndroidDriver(getUrl(), dc);
-      } else {
-        dc.setCapability("appium:automationName", "XCUITest");
-        dc.setCapability("noReset", "true");
-        driver = new IOSDriver(getUrl(), dc);
+        if(EnvironmentSpecificConfiguration.from(env)
+            .getProperty("appium_server").equals("auto")) {
+          driver = new IOSDriver(getUrl(), dc);
+        }  else {
+          driver = new IOSDriver(new URL("http://127.0.0.1:4723/"), dc);
+        }
       }
       appiumDriver = driver;
     } catch (Exception e) {
@@ -146,7 +127,14 @@ public class MobileDriver {
       } catch (Exception e) {
         logger.error(e.getMessage());
       }
-      MobileDriver.stopAppiumServer();
+      if(EnvironmentSpecificConfiguration.from(env)
+          .getProperty("appium_server").equals("auto")) {
+        stopAppiumServer();
+      }
     }
+  }
+
+  public static AppiumDriver getAppiumDriver() {
+    return appiumDriver;
   }
 }

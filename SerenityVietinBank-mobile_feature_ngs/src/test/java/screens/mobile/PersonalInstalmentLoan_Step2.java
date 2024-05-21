@@ -10,38 +10,69 @@ import io.appium.java_client.pagefactory.iOSXCUITBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBys;
 import java.util.List;
+import net.serenitybdd.screenplay.actions.Click;
 import org.openqa.selenium.WebElement;
 
 public class PersonalInstalmentLoan_Step2 extends BaseScreen {
 
-  @AndroidFindBy(xpath = "//android.widget.TextView[@text=\"THÔNG TIN NGƯỜI VAY\"]/following-sibling::android.widget.LinearLayout[@resource-id=\"com.vietinbank.ipay:id/wDatePayWidget\"]//android.widget.TextView[@resource-id=\"com.vietinbank.ipay:id/edtContent\" and @text=\"Ngày trả nợ hàng tháng\"]/following-sibling::android.widget.ImageView")
-  @iOSXCUITFindBy(xpath = "//XCUIElementTypeButton[@name=\"iconLineCalendarRound\"]")
-  private WebElement iconCalendar;
+//  @AndroidFindBy(xpath = "//android.widget.TextView[@text=\"THÔNG TIN NGƯỜI VAY\"]/following-sibling::android.widget.LinearLayout[@resource-id=\"com.vietinbank.ipay:id/wDatePayWidget\"]//android.widget.TextView[@resource-id=\"com.vietinbank.ipay:id/edtContent\" and @text=\"Ngày trả nợ hàng tháng\"]/following-sibling::android.widget.ImageView")
+//  @iOSXCUITFindBy(xpath = "//XCUIElementTypeButton[@name=\"iconLineCalendarRound\"]")
+//  private WebElement iconCalendar;
 
-  @iOSXCUITFindBy(xpath = "//XCUIElementTypeButton[contains(@name,\"Chọn trả nợ ngày\")]")
-  private WebElement btnChooseARepaymentDate;
+  private final String android_iconCalendar = "//android.widget.TextView[@text=\"THÔNG TIN NGƯỜI VAY\"]/following-sibling::android.widget.LinearLayout[@resource-id=\"com.vietinbank.ipay:id/wDatePayWidget\"]//android.widget.TextView[@resource-id=\"com.vietinbank.ipay:id/edtContent\" and @text=\"Ngày trả nợ hàng tháng\"]/following-sibling::android.widget.ImageView";
+  private final String ios_iconCalendar = "//XCUIElementTypeButton[@name=\"iconLineCalendarRound\"]";
 
-  @AndroidFindBy(xpath = "//android.widget.TextView[@resource-id=\"com.vietinbank.ipay:id/edtContent\" and @text=\"Mục đích vay\"]/parent::android.widget.LinearLayout")
-  @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[@name=\"Mục đích vay\"]/parent::XCUIElementTypeOther/preceding-sibling::XCUIElementTypeButton[@name=\"ic drop down blue\"]")
-  private WebElement btnLoanPurpose;
+//  @iOSXCUITFindBy(xpath = "//XCUIElementTypeButton[contains(@name,\"Chọn trả nợ ngày\")]")
+//  private WebElement btnChooseARepaymentDate;
 
-  @AndroidFindBy(xpath = "//android.widget.EditText[@resource-id=\"com.vietinbank.ipay:id/edtContent\" and @text=\"Email nhận hợp đồng\"]")
-  @iOSXCUITFindBy(xpath = "//XCUIElementTypeTextField[contains(@value,\"Email nhận hợp đồng\") or contains(@value,\"@\")]")
-  private WebElement txtEmail;
+  private final String android_btnChooseARepaymentDate = "";
+  private final String ios_btnChooseARepaymentDate = "//XCUIElementTypeButton[contains(@name,\"Chọn trả nợ ngày\")]";
+
+//  @AndroidFindBy(xpath = "//android.widget.TextView[@resource-id=\"com.vietinbank.ipay:id/edtContent\" and @text=\"Mục đích vay\"]/parent::android.widget.LinearLayout")
+//  @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[@name=\"Mục đích vay\"]/parent::XCUIElementTypeOther/preceding-sibling::XCUIElementTypeButton[@name=\"ic drop down blue\"]")
+//  private WebElement btnLoanPurpose;
+
+  private final String android_btnLoanPurpose = "//android.widget.TextView[@resource-id=\"com.vietinbank.ipay:id/edtContent\" and @text=\"Mục đích vay\"]/parent::android.widget.LinearLayout";
+  private final String ios_btnLoanPurpose = "//XCUIElementTypeStaticText[@name=\"Mục đích vay\"]/parent::XCUIElementTypeOther/preceding-sibling::XCUIElementTypeButton[@name=\"ic drop down blue\"]";
+
+//  @AndroidFindBy(xpath = "//android.widget.EditText[@resource-id=\"com.vietinbank.ipay:id/edtContent\" and @text=\"Email nhận hợp đồng\"]")
+//  @iOSXCUITFindBy(xpath = "//XCUIElementTypeTextField[contains(@value,\"Email nhận hợp đồng\") or contains(@value,\"@\")]")
+//  private WebElement txtEmail;
+
+  private final String android_txtEmail = "//android.widget.EditText[@resource-id=\"com.vietinbank.ipay:id/edtContent\" and (@text=\"Email nhận hợp đồng\" or contains(@text,\"@\")]";
+  private final String ios_txtEmail = "//XCUIElementTypeTextField[contains(@value,\"Email nhận hợp đồng\") or contains(@value,\"@\")]";
+
+//  @iOSXCUITFindBy(xpath = "//XCUIElementTypeButton[@name=\"Xóa văn bản\"]")
+//  private WebElement btnDeleteEmail;
+
+//  private final String android_btnDeleteEmail = "";
+  private final String ios_btnDeleteEmail = "//XCUIElementTypeButton[@name=\"Xóa văn bản\"]";
 
 //  @AndroidFindBy(xpath = "//android.widget.TextView[@resource-id=\"com.vietinbank.ipay:id/edtContent\" and @text=\"Tỉnh/thành phố\"]/parent::android.widget.LinearLayout")
-  @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[@name=\"Tỉnh/thành phố\"]/parent::XCUIElementTypeOther/preceding-sibling::XCUIElementTypeButton")
-  private WebElement btnProvinces;
+//  @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[@name=\"Tỉnh/thành phố\"]/parent::XCUIElementTypeOther/preceding-sibling::XCUIElementTypeButton")
+//  private WebElement btnProvinces;
 
-  @iOSXCUITFindBys(value = {@iOSXCUITBy(xpath = "//XCUIElementTypeStaticText[@name=\"Chọn Tỉnh/Thành phố\"]/parent::XCUIElementTypeOther/following-sibling::XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText")})
-  private List<WebElement> lblProvinces;
+  private final String android_btnProvinces = "//android.widget.TextView[@resource-id=\"com.vietinbank.ipay:id/edtContent\" and @text=\"Tỉnh/thành phố\"]/parent::android.widget.LinearLayout";
+  private final String ios_btnProvinces = "//XCUIElementTypeStaticText[@name=\"Tỉnh/thành phố\"]/parent::XCUIElementTypeOther/preceding-sibling::XCUIElementTypeButton";
 
-  @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[@name=\"Quận/huyện\"]/parent::XCUIElementTypeOther/preceding-sibling::XCUIElementTypeButton")
-  private WebElement btnDistrict;
+//  @iOSXCUITFindBys(value = {@iOSXCUITBy(xpath = "//XCUIElementTypeStaticText[@name=\"Chọn Tỉnh/Thành phố\"]/parent::XCUIElementTypeOther/following-sibling::XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText")})
+//  private List<WebElement> lblProvinces;
 
-  @AndroidFindBy(xpath = "//android.widget.Button[@resource-id=\"com.vietinbank.ipay:id/btnNext\" and @text=\"Tiếp tục\"]")
-  @iOSXCUITFindBy(xpath = "//XCUIElementTypeButton[@name=\"Tiếp tục\"]")
-  private WebElement btnContinue;
+  private final String android_lblProvinces = "";
+  private final String ios_lblProvinces = "//XCUIElementTypeStaticText[@name=\"Chọn Tỉnh/Thành phố\"]/parent::XCUIElementTypeOther/following-sibling::XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText";
+
+//  @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[@name=\"Quận/huyện\"]/parent::XCUIElementTypeOther/preceding-sibling::XCUIElementTypeButton")
+//  private WebElement btnDistrict;
+
+  private final String android_btnDistrict = "//android.widget.TextView[@resource-id=\"com.vietinbank.ipay:id/edtContent\" and @text=\"Quận/huyện\"]/parent::android.widget.LinearLayout";
+  private final String ios_btnDistrict = "//XCUIElementTypeStaticText[@name=\"Quận/huyện\"]/parent::XCUIElementTypeOther/preceding-sibling::XCUIElementTypeButton";
+
+//  @AndroidFindBy(xpath = "//android.widget.Button[@resource-id=\"com.vietinbank.ipay:id/btnNext\" and @text=\"Tiếp tục\"]")
+//  @iOSXCUITFindBy(xpath = "//XCUIElementTypeButton[@name=\"Tiếp tục\"]")
+//  private WebElement btnContinue;
+
+  private final String android_btnContinue = "//android.widget.Button[@resource-id=\"com.vietinbank.ipay:id/btnNext\" and @text=\"Tiếp tục\"]";
+  private final String ios_btnContinue = "//XCUIElementTypeButton[@name=\"Tiếp tục\"]";
 
 
   public PersonalInstalmentLoan_Step2(AppiumDriver appiumDriver) {
@@ -64,10 +95,14 @@ public class PersonalInstalmentLoan_Step2 extends BaseScreen {
   }
 
   public void chooseARepaymentDate(String date) {
-    click(iconCalendar);
+    if(appiumDriver instanceof AndroidDriver) {
+      click(android_iconCalendar);
+    } else {
+      click(ios_iconCalendar);
+    }
     chooseADate(date);
     if(appiumDriver instanceof IOSDriver) {
-      click(btnChooseARepaymentDate);
+      click(ios_btnChooseARepaymentDate);
     }
   }
 
@@ -93,15 +128,26 @@ public class PersonalInstalmentLoan_Step2 extends BaseScreen {
   }
 
   public void chooseLoanPurpose(String loanPurpose) {
-    click(btnLoanPurpose);
+    if(appiumDriver instanceof AndroidDriver) {
+      click(android_btnLoanPurpose);
+    } else {
+      click(ios_btnLoanPurpose);
+    }
     selectALoanPurpose(loanPurpose);
   }
 
   public void inputEmail(String email) {
     if(appiumDriver instanceof AndroidDriver) {
-      txtEmail.clear();
+      click(android_txtEmail);
+      sendKeys(android_txtEmail, email);
+    } else {
+      click(ios_txtEmail);
+      WebElement txtEmail = findElement(ios_txtEmail);
+      if(txtEmail.getAttribute("value").contains("@")) {
+        click(ios_btnDeleteEmail);
+      }
+      sendKeys(ios_txtEmail, email);
     }
-    sendKeys(txtEmail, email);
   }
 
   private void selectProvince(String province) {
@@ -117,12 +163,11 @@ public class PersonalInstalmentLoan_Step2 extends BaseScreen {
 
   public void chooseProvince(String province) {
     if(appiumDriver instanceof AndroidDriver) {
-      String xpathOfBtnProvices = "//android.widget.TextView[@resource-id=\"com.vietinbank.ipay:id/edtContent\" and @text=\"Tỉnh/thành phố\"]/parent::android.widget.LinearLayout";
-      scrollToElement(xpathOfBtnProvices, ScrollDirection.DOWN, 3);
-      click(xpathOfBtnProvices);
+      scrollToElement(android_btnProvinces, ScrollDirection.DOWN, 3);
+      click(android_btnProvinces);
     } else {
-      scrollToElement(btnProvinces, ScrollDirection.DOWN, 3);
-      click(btnProvinces);
+      scrollToElement(ios_btnProvinces, ScrollDirection.DOWN, 3);
+      click(ios_btnProvinces);
     }
     delay(3000);
     selectProvince(province);
@@ -141,19 +186,23 @@ public class PersonalInstalmentLoan_Step2 extends BaseScreen {
 
   public void chooseDistrict(String district) {
     if(appiumDriver instanceof AndroidDriver) {
-      String xpathOfBtnDistrict = "//android.widget.TextView[@resource-id=\"com.vietinbank.ipay:id/edtContent\" and @text=\"Quận/huyện\"]/parent::android.widget.LinearLayout";
-      scrollToElement(xpathOfBtnDistrict, ScrollDirection.DOWN, 3);
-      click(xpathOfBtnDistrict);
+      scrollToElement(android_btnDistrict, ScrollDirection.DOWN, 3);
+      click(android_btnDistrict);
     } else {
-      scrollToElement(btnDistrict, ScrollDirection.DOWN, 3);
-      click(btnDistrict);
+      scrollToElement(ios_btnDistrict, ScrollDirection.DOWN, 3);
+      click(ios_btnDistrict);
     }
     delay(3000);
     selectDistrict(district);
   }
 
   public PersonalInstalmentLoan_Step3 clickContinueButton() {
-    click(btnContinue);
+    if(appiumDriver instanceof AndroidDriver) {
+      click(android_btnContinue);
+    } else {
+      click(ios_btnContinue);
+    }
+    delay(3000);
     return new PersonalInstalmentLoan_Step3(appiumDriver);
   }
 }
