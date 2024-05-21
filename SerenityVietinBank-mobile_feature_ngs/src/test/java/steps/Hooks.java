@@ -1,19 +1,21 @@
 package steps;
 
 import base.MobileDriver;
+import io.cucumber.java.After;
 import io.cucumber.java.AfterAll;
+import io.cucumber.java.Before;
 import io.cucumber.java.BeforeAll;
 import runner.Runner;
 
 public class Hooks extends Runner {
 
-  @BeforeAll
+  @Before
   public static void beforeAll() {
     mobileDriver = new MobileDriver();
     appiumDriver = mobileDriver.newDriver();
   }
 
-  @AfterAll
+  @After
   public static void afterAll() {
     mobileDriver.closeApplication();
   }
