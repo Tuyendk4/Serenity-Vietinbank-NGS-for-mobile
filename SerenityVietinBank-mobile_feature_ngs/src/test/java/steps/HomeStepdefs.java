@@ -9,7 +9,7 @@ public class HomeStepdefs extends Runner {
     super();
   }
 
-  @Và("Di chuyển vào Dịch vụ vay và tín dụng")
+  @Và("Menu Dịch vụ vay và tín dụng")
   public void moveToLoanAndCreditServices() {
     loanAndCreditServices = home.favoriteServices().click_dich_vu_vay_va_tin_dung();
   }
