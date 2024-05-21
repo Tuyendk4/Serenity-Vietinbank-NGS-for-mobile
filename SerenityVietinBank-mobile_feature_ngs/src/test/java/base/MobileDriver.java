@@ -47,7 +47,7 @@ public class MobileDriver {
   private void startAppiumServer() {
     logger.info("Starting appium server");
     try {
-      service = AppiumDriverLocalService.buildService(
+        service = AppiumDriverLocalService.buildService(
           new AppiumServiceBuilder().withIPAddress(ADDRESS).usingAnyFreePort()
               .usingDriverExecutable(new File(node_path)).
               withAppiumJS(new File(appium_path)));

@@ -19,5 +19,4 @@ public class Home extends BaseScreen {
     return new AdvertisingPopup(appiumDriver);
   }
 
-
 }

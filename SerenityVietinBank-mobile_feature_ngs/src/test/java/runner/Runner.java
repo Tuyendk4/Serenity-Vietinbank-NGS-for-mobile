@@ -8,10 +8,7 @@ import io.cucumber.junit.CucumberSerenityRunner;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.runner.RunWith;
-import screens.mobile.Home;
-import screens.mobile.LoanAndCreditServices;
-import screens.mobile.Login;
-import screens.mobile.PersonalInstalmentLoan;
+import screens.mobile.*;
 
 
 @RunWith(CucumberSerenityRunner.class)
@@ -33,5 +30,7 @@ public class Runner {
   protected static LoanAndCreditServices loanAndCreditServices;
 
   protected static PersonalInstalmentLoan personalInstalmentLoan;
+
+  protected static TransferMoneyObroad transferMoneyObroad;
 
 }

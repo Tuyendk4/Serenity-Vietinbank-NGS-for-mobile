@@ -16,6 +16,9 @@ public class Login extends BaseScreen {
   @iOSXCUITFindBy(xpath = "//XCUIElementTypeButton[@name=\"Đăng nhập\"]")
   private WebElement btnLogin;
 
+  @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[@name=\"Chuyển tiền\"]")
+  private WebElement iconTransferMoneyServices;
+
   public Login(AppiumDriver appiumDriver) {
     super(appiumDriver);
   }
@@ -41,5 +44,11 @@ public class Login extends BaseScreen {
     inputPassword(password);
     clickLoginButton();
     return new OTP(appiumDriver);
+  }
+
+  @Step("Đăng nhập hệ thống bằng mật khẩu {0}")
+  public void login_with_pass(String password){
+    inputPassword(password);
+    clickLoginButton();
   }
 }

@@ -26,4 +26,9 @@ public class LoginStepdefs extends Runner {
     home = otp.inputOTP("888888");
     home.advertisingPopup().close();
   }
+
+  @Khi("Thực hiện đăng nhập với khi đã đăng nhập một lần với mật khẩu {string}")
+  public void login_with_password(String password){
+    login.login_with_pass(password);
+  }
 }
