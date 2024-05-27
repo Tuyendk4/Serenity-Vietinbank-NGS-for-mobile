@@ -3,16 +3,8 @@ package screens.mobile;
 import base.BaseScreen;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
-import io.appium.java_client.android.nativekey.AndroidKey;
-import io.appium.java_client.android.nativekey.KeyEvent;
-import io.appium.java_client.pagefactory.AndroidFindBy;
-import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import net.serenitybdd.annotations.Step;
-import net.serenitybdd.core.Serenity;
-import net.serenitybdd.core.pages.WebElementFacade;
-import org.openqa.selenium.WebElement;
 import screens.mobile.sections.ChangeAccountPopup;
-import utils.interactions.Click;
 
 public class Login extends BaseScreen {
 
@@ -113,8 +105,9 @@ public class Login extends BaseScreen {
   }
 
   @Step("Đăng nhập hệ thống bằng mật khẩu {0}")
-  public void login_with_pass(String password){
+  public OTP login_with_pass(String password){
     inputPassword(password);
     clickLoginButton();
+    return new OTP(appiumDriver);
   }
 }

@@ -8,7 +8,7 @@ import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import net.serenitybdd.annotations.Step;
 import org.openqa.selenium.WebElement;
 import screens.mobile.LoanAndCreditServices;
-import screens.mobile.TransferMoneyObroad;
+import screens.mobile.M2S02.TransferAndReceive;
 
 public class FavoriteServices extends BaseScreen {
 
@@ -18,6 +18,7 @@ public class FavoriteServices extends BaseScreen {
 
   private final String android_iconLoanAndCreaditService = "//android.widget.TextView[@resource-id=\"com.vietinbank.ipay:id/tvProvider\" and (@text=\"Sản phẩm vay\" or @text=\"Dịch vụ vay & tín dụng\")]/preceding-sibling::android.widget.FrameLayout/android.widget.ImageView";
   private final String ios_iconLoanAndCreaditService = "//XCUIElementTypeStaticText[@name=\"Dịch vụ vay & tín dụng\" or @name=\"Sản phẩm vay\"]/preceding-sibling::XCUIElementTypeOther/XCUIElementTypeImage";
+  private final String test = "//XCUIElementTypeStaticText[@name=\"Chuyển tiền\"]";
 
   @AndroidFindBy(xpath = "")
   @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[@name=\"Chuyển tiền\"]")
@@ -38,10 +39,13 @@ public class FavoriteServices extends BaseScreen {
   }
 
   @Step("Di chuyển vào Chuyển tiền")
-  public TransferMoneyObroad click_on_transfer_money(){
-    System.out.println("1111111111111");
-//    waitForElementVisible(iconTransferMoneyServices,60);
-//    iconTransferMoneyServices.click();
-    return new TransferMoneyObroad(appiumDriver);
+  public TransferAndReceive click_on_transfer_money(){
+    if(appiumDriver instanceof AndroidDriver){
+
+    } else {
+      click(test);
+    }
+
+    return new TransferAndReceive(appiumDriver);
   }
 }

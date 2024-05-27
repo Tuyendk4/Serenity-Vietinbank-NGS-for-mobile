@@ -2,13 +2,11 @@ package runner;
 
 import base.MobileDriver;
 import io.appium.java_client.AppiumDriver;
-import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
 import io.cucumber.junit.CucumberSerenityRunner;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.runner.RunWith;
 import screens.mobile.*;
+import screens.mobile.M2S02.TransferAndReceive;
 
 
 @RunWith(CucumberSerenityRunner.class)
@@ -31,6 +29,6 @@ public class Runner {
 
   protected static PersonalInstalmentLoan personalInstalmentLoan;
 
-  protected static TransferMoneyObroad transferMoneyObroad;
+  protected static TransferAndReceive transferAndReceive;
 
 }

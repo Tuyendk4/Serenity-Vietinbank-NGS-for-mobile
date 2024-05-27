@@ -33,6 +33,8 @@ public class LoginStepdefs extends Runner {
 
   @Khi("Thực hiện đăng nhập với khi đã đăng nhập một lần với mật khẩu {string}")
   public void login_with_password(String password){
-    login.login_with_pass(password);
+    OTP otp;
+    otp = login.login_with_pass(password);
+    home = otp.inputOTP("");
   }
 }

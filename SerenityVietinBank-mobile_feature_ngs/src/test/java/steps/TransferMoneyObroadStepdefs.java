@@ -15,16 +15,36 @@ public class TransferMoneyObroadStepdefs extends Runner {
 
   @Và("Chọn Mua Chuyển ngoại tệ")
   public void moveToPersonalInstalmentLoan() {
-    transferMoneyObroad = transferMoneyObroad.click_on_transfer_money_obroad();
+    transferAndReceive = transferAndReceive.click_on_transfer_money_obroad();
   }
 
   @Và("Chọn mục đích chuyển tiền là Chuyển tiền trả các loại phí, lệ phí cho nước ngoài")
   public void studyObroadLivingExpenses() {
-    transferMoneyObroad = transferMoneyObroad.purpose_transfer();
+    transferAndReceive = transferAndReceive.purpose_transfer();
   }
 
   @Và("Chon người nhận")
   public void show_interest_rate_in_Reference_Payment_Schedule_as() {
-    transferMoneyObroad = transferMoneyObroad.chooseBeneficiary();
+    transferAndReceive = transferAndReceive.chooseBeneficiary();
+  }
+
+  @Và("Nhập số ngoại tệ cần chuyển đi là {string}")
+  public void enter_payment_amount(String money){
+    transferAndReceive = transferAndReceive.enterPaymentAmount(money);
+  }
+
+  @Và("Chọn hồ sơ cung cấp")
+  public void select_provisioning_profile(){
+    transferAndReceive = transferAndReceive.provisioning_profile();
+  }
+
+  @Thì("Kiểm tra kết quả giao dịch")
+  public void verifyTradingResults(){
+
+  }
+
+  @Thì("Kiểm tra lịch sử chuyển tiền ngoại tệ")
+  public void verifyHistoryTranfers(){
+
   }
 }

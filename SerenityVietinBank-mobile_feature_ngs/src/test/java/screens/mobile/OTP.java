@@ -94,15 +94,17 @@ public class OTP extends BaseScreen {
   }
 
   public Home inputOTP(String otp) {
-    if(appiumDriver instanceof AndroidDriver) {
-      sendKeys(android_txtOTP, otp);
-    } else {
-      String[] characters = otp.split("");
-      for (String character : characters) {
-        inputCharacter(character);
+    if(!otp.isEmpty()) {
+      if(appiumDriver instanceof AndroidDriver) {
+        sendKeys(android_txtOTP, otp);
+      } else {
+        String[] characters = otp.split("");
+        for (String character : characters) {
+          inputCharacter(character);
+        }
       }
+      clickHoanThanh();
     }
-    clickHoanThanh();
     return new Home(appiumDriver);
   }
 
