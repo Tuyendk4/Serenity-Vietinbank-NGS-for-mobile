@@ -11,5 +11,5 @@ Tính năng: M2S02 - Chuyển tiền ngoại tệ
     Và Chon người nhận
     Và Nhập số ngoại tệ cần chuyển đi là "1"
     Và Chọn hồ sơ cung cấp
-    Thì Kiểm tra kết quả giao dịch
-    Thì Kiểm tra lịch sử chuyển tiền ngoại tệ
+    Thì Xác nhận giao dịch
+#    Thì Kiểm tra lịch sử chuyển tiền ngoại tệ

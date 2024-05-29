@@ -53,7 +53,7 @@ public class BaseScreen {
 
   public BaseScreen(AppiumDriver appiumDriver) {
     this.appiumDriver = appiumDriver;
-//    PageFactory.initElements(new AppiumFieldDecorator(appiumDriver, Duration.ofSeconds(30)), this);
+    PageFactory.initElements(new AppiumFieldDecorator(appiumDriver, Duration.ofSeconds(30)), this);
   }
 
   public void delay(int time) {
@@ -153,7 +153,6 @@ public class BaseScreen {
   }
 
   public void click(WebElement we) {
-    System.out.println("aaaaaaaaa: "+we);
     try {
       logger.info("Clicking on mobile element {}", we);
       we.click();
@@ -343,7 +342,7 @@ public class BaseScreen {
 
   public void scrollTo(String text) {
     try {
-      delay(500);
+      delay(50);
       WebElement element = null;
       if (appiumDriver instanceof AndroidDriver) {
         String uiScrollable =

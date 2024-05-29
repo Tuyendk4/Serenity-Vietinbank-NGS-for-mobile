@@ -38,9 +38,9 @@ public class TransferMoneyObroadStepdefs extends Runner {
     transferAndReceive = transferAndReceive.provisioning_profile();
   }
 
-  @Thì("Kiểm tra kết quả giao dịch")
-  public void verifyTradingResults(){
-
+  @Thì("Xác nhận giao dịch")
+  public void verify_transaction_confirmation(){
+    transferAndReceive =transferAndReceive.verifyTransactionConfirmation();
   }
 
   @Thì("Kiểm tra lịch sử chuyển tiền ngoại tệ")
