@@ -6,6 +6,7 @@ import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.pagefactory.iOSXCUITBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindAll;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
+import net.serenitybdd.core.Serenity;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
@@ -94,12 +95,6 @@ public class TransferAndReceive extends BaseScreen {
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[@name=\"Nội dung\"]//following-sibling::XCUIElementTypeStaticText")
     private WebElement content;
 
-
-    String total_transfer;
-    String total_debt_deduction;
-    String get_beneficiary;
-    String get_receiving_bank;
-
     public TransferAndReceive click_on_transfer_money_obroad() {
         click(btnTranferMoneyObroad);
         return new TransferAndReceive(this.appiumDriver);
@@ -115,8 +110,10 @@ public class TransferAndReceive extends BaseScreen {
     public TransferAndReceive chooseBeneficiary() {
         click(iconBeneficiary);
         click(txtBeneficiaryAccount);
-        get_beneficiary = title_beneficiary.getText();
-        get_receiving_bank = receiving_bank.getText();
+        String get_beneficiary = title_beneficiary.getText();
+        String get_receiving_bank = receiving_bank.getText();
+        Serenity.setSessionVariable("get_beneficiary").to(get_beneficiary);
+        Serenity.setSessionVariable("get_receiving_bank").to(get_receiving_bank);
         scrollTo(txt_payment_note);
         tap(txtPaymentNote);
         sendKeys(txtPaymentNote, "Test");
@@ -127,10 +124,12 @@ public class TransferAndReceive extends BaseScreen {
 
     public TransferAndReceive enterPaymentAmount(String money) {
         sendKeys(paymentAmount, money);
+        Serenity.setSessionVariable("total_transfer").to(money);
         click(btn_done);
         waitForElementVisible(btn_continue, 20);
         scrollToElement(txt_total_debt_deduction, ScrollDirection.DOWN, 20);
-        total_debt_deduction = (number_total_debt_deduction).getText();
+        String total_debt_deduction = (number_total_debt_deduction).getText();
+        Serenity.setSessionVariable("total_debt_deduction").to(total_debt_deduction);
         click(btn_continue);
         return new TransferAndReceive(this.appiumDriver);
     }
@@ -149,17 +148,19 @@ public class TransferAndReceive extends BaseScreen {
     public TransferAndReceive verifyTransactionConfirmation() {
         String[] get_number_to_transfer_split = number_to_transfer.getText().split(" ");
         String get_number_to_transfer = get_number_to_transfer_split[0];
-        String get_receiving_bank = receiving_bank.getText();
-        String get_beneficiary = title_beneficiary.getText();
+        String get_receiving_bank_confirm = receiving_bank.getText();
+        String get_beneficiary_confirm = title_beneficiary.getText();
         String[] get_debt_amount_split = debt_amount.getText().split(" ");
         String get_debt_amount = get_debt_amount_split[0];
         String get_content = content.getText();
+        String[] total_debt_deduction_split = Serenity.sessionVariableCalled("total_debt_deduction").toString().split(" ");
+        String total_debt_deduction = total_debt_deduction_split[0];
 
-        System.out.println("get_number_to_transfer: "+ get_number_to_transfer);
-        System.out.println("get_receiving_bank: "+ get_receiving_bank);
-        System.out.println("get_beneficiary: "+ get_beneficiary);
-        System.out.println("get_debt_amount: "+ get_debt_amount);
-        System.out.println("get_content: "+ get_content);
+        assert (get_number_to_transfer.equals(Serenity.sessionVariableCalled("total_transfer")));
+        assert (get_receiving_bank_confirm.equals(Serenity.sessionVariableCalled("get_receiving_bank")));
+        assert (get_beneficiary_confirm.equals(Serenity.sessionVariableCalled("get_beneficiary")));
+        assert (get_debt_amount.equals(total_debt_deduction));
+        assert (get_content.equals("Test"));
 
         return new TransferAndReceive(this.appiumDriver);
     }
