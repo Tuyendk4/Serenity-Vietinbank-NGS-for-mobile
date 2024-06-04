@@ -2,6 +2,7 @@ package screens.mobile.M2S02;
 
 import base.BaseScreen;
 import base.ScrollDirection;
+import dev.failsafe.internal.util.Assert;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.pagefactory.iOSXCUITBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindAll;
@@ -27,6 +28,8 @@ public class TransferAndReceive extends BaseScreen {
 
     @iOSXCUITFindBy(xpath = "(//XCUIElementTypeStaticText[@name=\"Chuyển tiền trả các loại phí, lệ phí cho nước ngoài\"])[2]")
     private static WebElement txtLivingExpenses;
+
+    private String purpose = "(//XCUIElementTypeStaticText[@name=\"%value\"])[2]";
 
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeButton[@name=\"Tạo điện mua/chuyển ngoại tệ\"]")
     private WebElement btnMakeNewPayment;
@@ -89,20 +92,39 @@ public class TransferAndReceive extends BaseScreen {
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[@name=\"Số ngoại tệ cần chuyển\"]//preceding-sibling::XCUIElementTypeStaticText")
     private WebElement number_to_transfer;
 
+    @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[@name=\"Số ngoại tệ cần chuyển\"]//following-sibling::XCUIElementTypeStaticText")
+    private WebElement number_to_transfer_history;
+
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[@name=\"Số tiền trích nợ tạm tính\"]//following-sibling::XCUIElementTypeStaticText")
     private WebElement debt_amount;
 
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[@name=\"Nội dung\"]//following-sibling::XCUIElementTypeStaticText")
     private WebElement content;
 
+    @iOSXCUITFindBy(xpath = "//XCUIElementTypeButton[@name=\"Xem lịch sử điện ngoại tệ\"]")
+    private WebElement txt_view_history;
+
+    String view_history = "Xem lịch sử điện ngoại tệ";
+
+    @iOSXCUITFindBy(xpath = "//XCUIElementTypeTable/XCUIElementTypeCell[43]/XCUIElementTypeOther[1]/XCUIElementTypeOther")
+    private WebElement txt_list_history;
+
+    @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[@name=\"Trạng thái\"]//following-sibling::XCUIElementTypeStaticText")
+    private WebElement txt_status;
+
+    public String replaceXpath(String xpath, String value){
+        return xpath.replace("%value", value);
+    }
+
     public TransferAndReceive click_on_transfer_money_obroad() {
         click(btnTranferMoneyObroad);
         return new TransferAndReceive(this.appiumDriver);
     }
 
-    public TransferAndReceive purpose_transfer() {
+    public TransferAndReceive purpose_transfer(String value) {
         tap(txtPurpose);
-        tap(txtLivingExpenses);
+        tap(replaceXpath(purpose, value),10);
+        Serenity.setSessionVariable("purpose_transfer").to(value);
         click(btnMakeNewPayment);
         return new TransferAndReceive(this.appiumDriver);
     }
@@ -146,7 +168,7 @@ public class TransferAndReceive extends BaseScreen {
     }
 
     public TransferAndReceive verifyTransactionConfirmation() {
-        String[] get_number_to_transfer_split = number_to_transfer.getText().split(" ");
+        String[] get_number_to_transfer_split = number_to_transfer_history.getText().split(" ");
         String get_number_to_transfer = get_number_to_transfer_split[0];
         String get_receiving_bank_confirm = receiving_bank.getText();
         String get_beneficiary_confirm = title_beneficiary.getText();
@@ -166,7 +188,22 @@ public class TransferAndReceive extends BaseScreen {
     }
 
     public TransferAndReceive verifyTransferAndReceive() {
+        scrollTo(view_history);
+        click(txt_view_history);
+        tap (txt_list_history);
+        System.out.println("aaaaaaaaaaa: "+ number_to_transfer_history.getText());
+        String[] number_to_transfer_split = number_to_transfer_history.getText().split(" ");
+        String number_to_transfer = number_to_transfer_split[0];
+        String[] debt_amount_split = debt_amount.getText().split(" ");
+        String debt_amount = debt_amount_split[0];
+        String[] total_debt_deduction_split = Serenity.sessionVariableCalled("total_debt_deduction").toString().split(" ");
+        String total_debt_deduction = total_debt_deduction_split[0];
 
+        assert (txt_status.getText().contains("Chờ ngân hàng xử lý"));
+        assert (purpose_trading_results.getText().equals(Serenity.sessionVariableCalled("purpose_transfer")));
+        assert (title_beneficiary.getText().equals(Serenity.sessionVariableCalled("get_beneficiary")));
+        assert (number_to_transfer.equals(Serenity.sessionVariableCalled("total_transfer")));
+        assert (debt_amount.equals(total_debt_deduction));
         return new TransferAndReceive(this.appiumDriver);
     }
 }

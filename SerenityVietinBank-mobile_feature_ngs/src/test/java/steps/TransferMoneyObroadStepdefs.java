@@ -18,9 +18,9 @@ public class TransferMoneyObroadStepdefs extends Runner {
         transferAndReceive = transferAndReceive.click_on_transfer_money_obroad();
     }
 
-    @Và("Chọn mục đích chuyển tiền là Chuyển tiền trả các loại phí, lệ phí cho nước ngoài")
-    public void studyObroadLivingExpenses() {
-        transferAndReceive = transferAndReceive.purpose_transfer();
+    @Và("Chọn mục đích chuyển tiền là {string}")
+    public void studyObroadLivingExpenses(String purpose) {
+        transferAndReceive = transferAndReceive.purpose_transfer(purpose);
     }
 
     @Và("Chon người nhận")
@@ -39,12 +39,13 @@ public class TransferMoneyObroadStepdefs extends Runner {
     }
 
     @Thì("Xác nhận giao dịch")
+
     public void verify_transaction_confirmation() {
         transferAndReceive = transferAndReceive.verifyTransactionConfirmation();
     }
 
     @Thì("Kiểm tra lịch sử chuyển tiền ngoại tệ")
     public void verifyHistoryTranfers() {
-
+        transferAndReceive = transferAndReceive.verifyTransferAndReceive();
     }
 }

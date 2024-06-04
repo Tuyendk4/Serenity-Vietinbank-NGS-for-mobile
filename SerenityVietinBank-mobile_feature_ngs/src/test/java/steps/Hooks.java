@@ -16,7 +16,7 @@ public class Hooks extends Runner {
   }
 
   @After
-  public static void afterAll() {
+  public static void after() {
     mobileDriver.closeApplication();
   }
 }

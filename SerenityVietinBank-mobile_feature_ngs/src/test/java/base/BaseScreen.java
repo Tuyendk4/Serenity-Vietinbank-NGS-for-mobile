@@ -342,7 +342,6 @@ public class BaseScreen {
 
   public void scrollTo(String text) {
     try {
-      delay(50);
       WebElement element = null;
       if (appiumDriver instanceof AndroidDriver) {
         String uiScrollable =
