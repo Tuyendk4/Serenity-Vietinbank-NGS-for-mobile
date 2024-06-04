@@ -1,0 +1,19 @@
+{
+  "requestId": "20240424220409",
+  "providerId": "INGENICO",
+  "merchantId": "3017163002",
+  "merchantName": "3017163002",
+  "terminalId": "01",
+  "productId": "",
+  "orderId": "885208",
+  "amount": "200000",
+  "payMethod": "QR",
+  "transactionDate": "20240424220409",
+  "currencyCode": "VND",
+  "remark": "20240424220409",
+  "transTime": "20240424220409",
+  "channel": "MOBILE",
+  "version": "1.0",
+  "language": "vi",
+  "signature": "7fe0342fc2d237a38776251948d81fb3c334053300b8c0ed1e41346292c12736"
+}

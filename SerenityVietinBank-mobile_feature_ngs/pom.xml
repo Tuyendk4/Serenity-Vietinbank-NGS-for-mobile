@@ -16,12 +16,15 @@
         <junit-vintage-engine.version>5.10.2</junit-vintage-engine.version>
         <junit-platform-suite.version>1.10.2</junit-platform-suite.version>
         <cucumber-junit-platform-engine.version>7.13.0</cucumber-junit-platform-engine.version>
-        <json-path.version>2.9.0</json-path.version>
         <appium.version>9.0.0</appium.version>
         <selenium-java.version>4.18.1</selenium-java.version>
+        <aspectj.version>1.9.19</aspectj.version>
+        <gson.version>2.10.1</gson.version>
+        <jayway.jsonpath.version>2.9.0</jayway.jsonpath.version>
+        <zjsonpatch.version>0.4.16</zjsonpatch.version>
+        <jsonassert.version>1.5.0</jsonassert.version>
+        <poi.version>5.2.5</poi.version>
         <encoding>UTF-8</encoding>
-        <tags></tags>
-        <webdriver.base.url></webdriver.base.url>
     </properties>
     <dependencies>
         <dependency>
@@ -85,13 +88,6 @@
             <version>3.23.1</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/com.jayway.jsonpath/json-path -->
-        <dependency>
-            <groupId>com.jayway.jsonpath</groupId>
-            <artifactId>json-path</artifactId>
-            <version>${json-path.version}</version>
-        </dependency>
-
         <!-- https://mvnrepository.com/artifact/io.appium/java-client -->
         <dependency>
             <groupId>io.appium</groupId>
@@ -131,18 +127,52 @@
             <version>${serenity.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>net.serenity-bdd</groupId>
+            <artifactId>serenity-rest-assured</artifactId>
+            <version>${serenity.version}</version>
+        </dependency>
 
+        <!-- https://mvnrepository.com/artifact/com.epam.reportportal/agent-java-cucumber6 -->
+        <dependency>
+            <groupId>com.epam.reportportal</groupId>
+            <artifactId>agent-java-cucumber6</artifactId>
+            <version>5.3.2</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml -->
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>${poi.version}</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>${gson.version}</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.flipkart.zjsonpatch/zjsonpatch -->
+        <dependency>
+            <groupId>com.flipkart.zjsonpatch</groupId>
+            <artifactId>zjsonpatch</artifactId>
+            <version>${zjsonpatch.version}</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.jayway.jsonpath/json-path -->
+        <dependency>
+            <groupId>com.jayway.jsonpath</groupId>
+            <artifactId>json-path</artifactId>
+            <version>${jayway.jsonpath.version}</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.skyscreamer/jsonassert -->
+        <dependency>
+            <groupId>org.skyscreamer</groupId>
+            <artifactId>jsonassert</artifactId>
+            <version>${jsonassert.version}</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.0.0-M5</version>
-                <configuration>
-                    <skip>true</skip>
-                </configuration>
-            </plugin>
             <plugin>
                 <artifactId>maven-failsafe-plugin</artifactId>
                 <version>3.0.0-M5</version>
@@ -156,7 +186,19 @@
                     <parallel>classes</parallel>
                     <parallel>methods</parallel>
                     <useUnlimitedThreads>true</useUnlimitedThreads>
+                    <!-- For nested steps only -->
+                    <argLine>
+                        -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
+                    </argLine>
                 </configuration>
+                <dependencies>
+                    <!-- For nested steps only -->
+                    <dependency>
+                        <groupId>org.aspectj</groupId>
+                        <artifactId>aspectjweaver</artifactId>
+                        <version>${aspectj.version}</version>
+                    </dependency>
+                </dependencies>
                 <executions>
                     <execution>
                         <goals>
