@@ -1,0 +1,11 @@
+{
+  "requestId": "202404231416333",
+  "providerId": "Y3Test",
+  "merchantId": "Y3Test",
+  "transId": null,
+  "status": {
+    "code": "00",
+    "message": "Success"
+  },
+  "transStatus": "U"
+}
