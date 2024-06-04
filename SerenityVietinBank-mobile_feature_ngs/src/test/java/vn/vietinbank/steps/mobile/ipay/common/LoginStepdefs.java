@@ -1,0 +1,28 @@
+package vn.vietinbank.steps.mobile.ipay.common;
+
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.When;
+import runner.Runner;
+import vn.vietinbank.screens.mobile.ipay.ipay_common.Launcher;
+import vn.vietinbank.screens.mobile.ipay.ipay_common.OTP;
+import vn.vietinbank.screens.mobile.ipay.ipay_common.Signup;
+import vn.vietinbank.steps.mobile.ipay.base.M7S01BaseStep;
+
+
+public class LoginStepdefs extends M7S01BaseStep {
+
+  @Given("^Mở VTB iPayApp$")
+  public void open_Vietinbank_iPay_app() {
+    Launcher launcher = new Launcher(appiumDriver);
+    Signup signup = launcher.click_Skip();
+    login = signup.click_dang_nhap_or_dang_ky_button();
+  }
+
+  @When("Đăng nhập user {string}, password {string}, otp {string}")
+  public void login_with(String userName, String password, String otpCode) {
+    OTP otp;
+    otp = login.login_with(userName, password);
+    home = otp.inputOTP(otpCode);
+    home.advertisingPopup().close();
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "requestId": "202404231416333",
+  "providerId": "Y3Test",
+  "merchantId": "Y3Test",
+  "terminalId": "01",
+  "merchantCode": "",
+  "txnId": "280441",
+  "beginDate": "21/05/2024",
+  "endDate": "28/05/2024",
+  "checksum": "",
+  "transTime": "",
+  "channel": "",
+  "version": "",
+  "language": "",
+  "sinature": ""
+}

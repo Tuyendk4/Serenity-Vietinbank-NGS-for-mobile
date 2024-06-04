@@ -1,0 +1,21 @@
+{
+  "requestId": "202404231416333",
+  "clientDt": "2024-04-26T14:12:39.632Z",
+  "providerId": "Y3Test",
+  "merchantId": "Y3Test",
+  "channel": "internal",
+  "version": "0.0.1",
+  "language": "EN",
+  "clientIP": "172.20.3.162",
+  "signature": "MjAyNDA0MjMxNDE2VmlldGluQmFua2R2LmNodW9uZzIwMjQtMDQvMjNUMTQ6MTI6MzkuNjMyWnR1ZHQ=",
+  "data": {
+    "accountNumber": "119000172742",
+    "amount": "10000",
+    "billNumber": "9999",
+    "storeLabel": "storeLabel",
+    "referenceLabel": "fb53cf92-bbc",
+    "customerLabel": "customerLabel",
+    "terminalLabel": "terminalLabel",
+    "purposeOfTrans": "Auto"
+  }
+}
