@@ -1,5 +1,6 @@
 package vn.vietinbank.screens.mobile.ipay.ipay_sections;
 
+import screens.mobile.M2S02.TransferAndReceive;
 import vn.vietinbank.screens.mobile.base.BaseScreen;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
@@ -23,5 +24,14 @@ public class FavoriteServices extends BaseScreen {
       click(ios_iconLoanAndCreaditService);
     }
     return new LoanAndCreditServices(appiumDriver);
+  }
+  @Step("Di chuyển vào Chuyển tiền")
+  public TransferAndReceive click_on_transfer_money(){
+    if(appiumDriver instanceof AndroidDriver){
+
+    } else {
+    }
+
+    return new TransferAndReceive(appiumDriver);
   }
 }

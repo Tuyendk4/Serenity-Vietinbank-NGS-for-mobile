@@ -1,14 +1,11 @@
 package steps;
 
-import io.appium.java_client.android.AndroidDriver;
-import io.appium.java_client.ios.IOSDriver;
 import io.cucumber.java.vi.Cho;
 import io.cucumber.java.vi.Khi;
 import runner.Runner;
-import screens.mobile.Launcher;
-import screens.mobile.OTP;
-import screens.mobile.Signup;
-
+import vn.vietinbank.screens.mobile.ipay.ipay_common.Launcher;;
+import vn.vietinbank.screens.mobile.ipay.ipay_common.OTP;
+import vn.vietinbank.screens.mobile.ipay.ipay_common.Signup;
 
 public class LoginStepdefs extends Runner {
 

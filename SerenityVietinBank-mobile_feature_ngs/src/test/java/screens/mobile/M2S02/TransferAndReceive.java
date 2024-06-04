@@ -1,7 +1,7 @@
 package screens.mobile.M2S02;
 
-import base.BaseScreen;
-import base.ScrollDirection;
+import vn.vietinbank.screens.mobile.base.BaseScreen;
+import vn.vietinbank.screens.mobile.base.ScrollDirection;
 import dev.failsafe.internal.util.Assert;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.pagefactory.iOSXCUITBy;

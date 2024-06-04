@@ -5,8 +5,6 @@ import com.epam.reportportal.annotations.Step;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import vn.vietinbank.screens.mobile.ipay.ipay_sections.ChangeAccountPopup;
-import net.serenitybdd.annotations.Step;
-import screens.mobile.sections.ChangeAccountPopup;
 
 public class Login extends BaseScreen {
 

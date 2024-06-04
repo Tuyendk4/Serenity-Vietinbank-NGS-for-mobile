@@ -1,9 +1,9 @@
 package screens.mobile;
 
-import base.BaseScreen;
+import vn.vietinbank.screens.mobile.base.BaseScreen;
 import io.appium.java_client.AppiumDriver;
-import screens.mobile.sections.AdvertisingPopup;
-import screens.mobile.sections.FavoriteServices;
+import vn.vietinbank.screens.mobile.ipay.ipay_sections.AdvertisingPopup;
+import vn.vietinbank.screens.mobile.ipay.ipay_sections.FavoriteServices;
 
 public class Home extends BaseScreen {
 

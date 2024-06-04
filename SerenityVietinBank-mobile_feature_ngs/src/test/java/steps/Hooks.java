@@ -1,6 +1,6 @@
 package steps;
 
-import base.MobileDriver;
+import vn.vietinbank.screens.mobile.base.MobileDriver;
 import io.cucumber.java.After;
 import io.cucumber.java.AfterAll;
 import io.cucumber.java.Before;
