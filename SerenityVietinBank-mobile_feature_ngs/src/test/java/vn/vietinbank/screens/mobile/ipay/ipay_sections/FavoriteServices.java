@@ -1,6 +1,6 @@
 package vn.vietinbank.screens.mobile.ipay.ipay_sections;
 
-import screens.mobile.M2S02.TransferAndReceive;
+import vn.vietinbank.screens.mobile.ipay.M2S02.TransferAndReceive;
 import vn.vietinbank.screens.mobile.base.BaseScreen;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;

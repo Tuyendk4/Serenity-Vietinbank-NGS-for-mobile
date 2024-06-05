@@ -1,10 +1,8 @@
-package steps;
+package vn.vietinbank.steps.mobile.ipay.m2s02;
 
-import io.cucumber.java.vi.Khi;
 import io.cucumber.java.vi.Thì;
 import io.cucumber.java.vi.Và;
 import runner.Runner;
-import screens.mobile.*;
 
 
 public class TransferMoneyObroadStepdefs extends Runner {

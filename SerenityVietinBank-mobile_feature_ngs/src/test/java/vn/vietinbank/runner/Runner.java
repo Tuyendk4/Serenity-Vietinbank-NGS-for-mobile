@@ -4,7 +4,7 @@ import io.appium.java_client.AppiumDriver;
 import io.cucumber.junit.CucumberOptions;
 import io.cucumber.junit.CucumberSerenityRunner;
 import org.junit.runner.RunWith;
-import screens.mobile.M2S02.TransferAndReceive;
+import vn.vietinbank.screens.mobile.ipay.M2S02.TransferAndReceive;
 import vn.vietinbank.screens.mobile.base.MobileDriver;
 import vn.vietinbank.screens.mobile.ipay.ipay_common.Home;
 import vn.vietinbank.screens.mobile.ipay.ipay_common.Login;
