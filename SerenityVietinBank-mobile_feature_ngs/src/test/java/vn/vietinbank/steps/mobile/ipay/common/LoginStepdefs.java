@@ -2,14 +2,14 @@ package vn.vietinbank.steps.mobile.ipay.common;
 
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
-import runner.Runner;
+import io.cucumber.java.vi.Khi;
 import vn.vietinbank.screens.mobile.ipay.ipay_common.Launcher;
 import vn.vietinbank.screens.mobile.ipay.ipay_common.OTP;
 import vn.vietinbank.screens.mobile.ipay.ipay_common.Signup;
-import vn.vietinbank.steps.mobile.ipay.base.M7S01BaseStep;
+import vn.vietinbank.steps.mobile.ipay.base.BaseStep;
 
 
-public class LoginStepdefs extends M7S01BaseStep {
+public class LoginStepdefs extends BaseStep {
 
   @Given("^Mở VTB iPayApp$")
   public void open_Vietinbank_iPay_app() {
@@ -24,5 +24,11 @@ public class LoginStepdefs extends M7S01BaseStep {
     otp = login.login_with(userName, password);
     home = otp.inputOTP(otpCode);
     home.advertisingPopup().close();
+  }
+  @Khi("Thực hiện đăng nhập với khi đã đăng nhập một lần với mật khẩu {string}")
+  public void login_with_password(String password){
+    OTP otp;
+    otp = login.login_with_pass(password);
+    home = otp.inputOTP("");
   }
 }

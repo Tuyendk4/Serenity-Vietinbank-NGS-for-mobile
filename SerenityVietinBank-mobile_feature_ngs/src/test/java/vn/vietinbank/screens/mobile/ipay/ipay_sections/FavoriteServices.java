@@ -11,6 +11,7 @@ public class FavoriteServices extends BaseScreen {
 
   private final String android_iconLoanAndCreaditService = "//android.widget.TextView[@resource-id=\"com.vietinbank.mobile.ipay:id/tvProvider\" and (@text=\"Sản phẩm vay\" or @text=\"Dịch vụ vay & tín dụng\")]/preceding-sibling::android.widget.FrameLayout/android.widget.ImageView";
   private final String ios_iconLoanAndCreaditService = "//XCUIElementTypeStaticText[@name=\"Dịch vụ vay & tín dụng\" or @name=\"Sản phẩm vay\"]/preceding-sibling::XCUIElementTypeOther/XCUIElementTypeImage";
+  private final String transfer = "//XCUIElementTypeStaticText[@name=\"Chuyển tiền\"]";
 
   public FavoriteServices(AppiumDriver appiumDriver) {
     super(appiumDriver);
@@ -30,8 +31,8 @@ public class FavoriteServices extends BaseScreen {
     if(appiumDriver instanceof AndroidDriver){
 
     } else {
+      click(transfer);
     }
-
     return new TransferAndReceive(appiumDriver);
   }
 }

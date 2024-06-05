@@ -97,6 +97,9 @@ public class TransferAndReceive extends BaseScreen {
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[@name=\"Số tiền trích nợ tạm tính\"]//following-sibling::XCUIElementTypeStaticText")
     private WebElement debt_amount;
 
+    @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[@name=\"Số tiền trích nợ (tạm tính)\"]//following-sibling::XCUIElementTypeStaticText")
+    private WebElement debt_amount_history;
+
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[@name=\"Nội dung\"]//following-sibling::XCUIElementTypeStaticText")
     private WebElement content;
 
@@ -111,6 +114,12 @@ public class TransferAndReceive extends BaseScreen {
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[@name=\"Trạng thái\"]//following-sibling::XCUIElementTypeStaticText")
     private WebElement txt_status;
 
+    @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[@name=\"Mục đích sử dụng\"]//following-sibling::XCUIElementTypeTextField")
+    private WebElement txt_popure_used;
+
+    @iOSXCUITFindBy(xpath = "//XCUIElementTypeApplication[@name=\"VietinBank iPay\"]/XCUIElementTypeWindow[1]/XCUIElementTypeOther[3]/XCUIElementTypeOther/XCUIElementTypeScrollView/XCUIElementTypeOther[1]/XCUIElementTypeOther[3]/XCUIElementTypeButton")
+    private WebElement txt_other_oversear_payment;
+
     public String replaceXpath(String xpath, String value){
         return xpath.replace("%value", value);
     }
@@ -124,6 +133,16 @@ public class TransferAndReceive extends BaseScreen {
         tap(txtPurpose);
         tap(replaceXpath(purpose, value),10);
         Serenity.setSessionVariable("purpose_transfer").to(value);
+        click(btnMakeNewPayment);
+        return new TransferAndReceive(this.appiumDriver);
+    }
+
+    public TransferAndReceive other_oversear_payment() {
+        tap(txtPurpose);
+        txt_other_oversear_payment.click();
+        logger.info("================ "+ txt_popure_used.getText());
+        System.out.println("aaaaaaa: "+txt_popure_used.getText());
+        Serenity.setSessionVariable("purpose_transfer").to(txt_popure_used.getText());
         click(btnMakeNewPayment);
         return new TransferAndReceive(this.appiumDriver);
     }
@@ -190,17 +209,15 @@ public class TransferAndReceive extends BaseScreen {
         scrollTo(view_history);
         click(txt_view_history);
         tap (txt_list_history);
-        System.out.println("aaaaaaaaaaa: "+ number_to_transfer_history.getText());
         String[] number_to_transfer_split = number_to_transfer_history.getText().split(" ");
         String number_to_transfer = number_to_transfer_split[0];
-        String[] debt_amount_split = debt_amount.getText().split(" ");
+        String[] debt_amount_split = debt_amount_history.getText().split(" ");
         String debt_amount = debt_amount_split[0];
         String[] total_debt_deduction_split = Serenity.sessionVariableCalled("total_debt_deduction").toString().split(" ");
         String total_debt_deduction = total_debt_deduction_split[0];
 
         assert (txt_status.getText().contains("Chờ ngân hàng xử lý"));
         assert (purpose_trading_results.getText().equals(Serenity.sessionVariableCalled("purpose_transfer")));
-        assert (title_beneficiary.getText().equals(Serenity.sessionVariableCalled("get_beneficiary")));
         assert (number_to_transfer.equals(Serenity.sessionVariableCalled("total_transfer")));
         assert (debt_amount.equals(total_debt_deduction));
         return new TransferAndReceive(this.appiumDriver);

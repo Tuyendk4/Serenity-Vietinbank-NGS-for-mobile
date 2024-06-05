@@ -1,4 +1,4 @@
-package runner;
+package vn.vietinbank.runner;
 
 import io.appium.java_client.AppiumDriver;
 import io.cucumber.junit.CucumberOptions;
@@ -17,15 +17,5 @@ import vn.vietinbank.screens.mobile.ipay.loan_service_m7s01.LoanAndCreditService
     plugin = {"pretty", "com.epam.reportportal.cucumber.StepReporter"},
     glue = {"vn.vietinbank.steps"})
 public class Runner {
-    public static MobileDriver mobileDriver;
 
-    protected static AppiumDriver appiumDriver;
-
-    protected static Login login;
-
-    protected static Home home;
-
-    protected static LoanAndCreditServices loanAndCreditServices;
-
-    protected static TransferAndReceive transferAndReceive;
 }

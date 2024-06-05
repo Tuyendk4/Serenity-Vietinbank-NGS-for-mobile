@@ -97,10 +97,11 @@ public class Login extends BaseScreen {
     return new ChangeAccountPopup(appiumDriver);
   }
 
-  @Step("Đăng nhập hệ thống bằng mật khẩu {0}")
+  @Step("login")
   public OTP login_with_pass(String password){
     inputPassword(password);
     clickLoginButton();
     return new OTP(appiumDriver);
   }
+
 }

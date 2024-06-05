@@ -31,9 +31,9 @@ import vn.vietinbank.screens.mobile.ipay.loan_service_m7s01.RepayAndFinalizeTheL
 import vn.vietinbank.screens.mobile.ipay.loan_service_m7s01.SecuredOverdraft;
 import vn.vietinbank.screens.mobile.ipay.loan_service_m7s01.TransactionApproval;
 import vn.vietinbank.screens.mobile.ipay.loan_service_m7s01.TransactionResult;
-import vn.vietinbank.steps.mobile.ipay.base.M7S01BaseStep;
+import vn.vietinbank.steps.mobile.ipay.base.BaseStep;
 
-public class LoanAndCreditServicesStepdefs extends M7S01BaseStep {
+public class LoanAndCreditServicesStepdefs extends BaseStep {
 
   private ReferenceRepaymentSchedule referenceRepaymentSchedule;
   private CalculatorTool calculatorTool;

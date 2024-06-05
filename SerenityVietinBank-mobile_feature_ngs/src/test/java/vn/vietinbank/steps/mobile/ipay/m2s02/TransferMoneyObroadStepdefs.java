@@ -2,23 +2,28 @@ package vn.vietinbank.steps.mobile.ipay.m2s02;
 
 import io.cucumber.java.vi.Thì;
 import io.cucumber.java.vi.Và;
-import runner.Runner;
+import vn.vietinbank.steps.mobile.ipay.base.BaseStep;
 
 
-public class TransferMoneyObroadStepdefs extends Runner {
+public class TransferMoneyObroadStepdefs extends BaseStep {
 
     public TransferMoneyObroadStepdefs() {
         super();
     }
 
     @Và("Chọn Mua Chuyển ngoại tệ")
-    public void moveToPersonalInstalmentLoan() {
+    public void moveToTransferObroad() {
         transferAndReceive = transferAndReceive.click_on_transfer_money_obroad();
     }
 
     @Và("Chọn mục đích chuyển tiền là {string}")
     public void studyObroadLivingExpenses(String purpose) {
         transferAndReceive = transferAndReceive.purpose_transfer(purpose);
+    }
+
+    @Và("Chọn mục đích chuyển tiền là Trợ cấp cho thân nhân ở nước ngoài")
+    public void otherOVerseas() {
+        transferAndReceive = transferAndReceive.other_oversear_payment();
     }
 
     @Và("Chon người nhận")
