@@ -25,7 +25,7 @@ public class LoginStepdefs extends BaseStep {
     home = otp.inputOTP(otpCode);
     home.advertisingPopup().close();
   }
-  @Khi("Thực hiện đăng nhập với khi đã đăng nhập một lần với mật khẩu {string}")
+  @When("Thực hiện đăng nhập với khi đã đăng nhập một lần với mật khẩu {string}")
   public void login_with_password(String password){
     OTP otp;
     otp = login.login_with_pass(password);

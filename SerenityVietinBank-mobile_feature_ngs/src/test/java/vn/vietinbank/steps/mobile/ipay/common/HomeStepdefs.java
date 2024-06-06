@@ -19,7 +19,7 @@ public class HomeStepdefs extends BaseStep {
     accountNumberList = home.move_to_AccountNumberList();
   }
 
-  @Và("Di chuyển vào Chuyển tiền")
+  @And("Di chuyển vào Chuyển tiền")
   public void moveToTransfer(){
     transferAndReceive = home.favoriteServices().click_on_transfer_money();
   }

@@ -28,7 +28,7 @@ public class TransferAndReceive extends BaseScreen {
     @iOSXCUITFindBy(xpath = "(//XCUIElementTypeStaticText[@name=\"Chuyển tiền trả các loại phí, lệ phí cho nước ngoài\"])[2]")
     private static WebElement txtLivingExpenses;
 
-    private String purpose = "(//XCUIElementTypeStaticText[@name=\"%value\"])[2]";
+    private String purpose = "//XCUIElementTypeApplication[@name=\"VietinBank iPay\"]/XCUIElementTypeWindow[1]/XCUIElementTypeOther[3]/XCUIElementTypeOther/XCUIElementTypeScrollView/XCUIElementTypeOther[1]/XCUIElementTypeOther[%value]/XCUIElementTypeButton";
 
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeButton[@name=\"Tạo điện mua/chuyển ngoại tệ\"]")
     private WebElement btnMakeNewPayment;
@@ -120,8 +120,54 @@ public class TransferAndReceive extends BaseScreen {
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeApplication[@name=\"VietinBank iPay\"]/XCUIElementTypeWindow[1]/XCUIElementTypeOther[3]/XCUIElementTypeOther/XCUIElementTypeScrollView/XCUIElementTypeOther[1]/XCUIElementTypeOther[3]/XCUIElementTypeButton")
     private WebElement txt_other_oversear_payment;
 
+    @iOSXCUITFindBy(xpath = "//XCUIElementTypeButton[@name=\"bene icon\"]")
+    private WebElement btn_beneficiary;
+
+    @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[@name=\"Số tài khoản người nhận\"]//preceding-sibling::XCUIElementTypeApplication")
+    private WebElement title_account_number;
+
+    @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[@name=\"Tên người nhận\"]//preceding-sibling::XCUIElementTypeApplication")
+    private WebElement title_recipient_name;
+
+    @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[@name=\"Địa chỉ người nhận\"]//preceding-sibling::XCUIElementTypeApplication")
+    private WebElement title_address;
+
+    @iOSXCUITFindBy(xpath = "//XCUIElementTypeButton[@name=\"Done\"]")
+    private WebElement title_done;
+
+    @iOSXCUITFindBy(xpath = "(//XCUIElementTypeButton[@name=\"iconLineEditPencil\"])[1]")
+    private WebElement iconLineEditPencil;
+
+    String icon_receiving_bank_country_code = "(//XCUIElementTypeButton[@name=\"ic drop down blue\"])[%value]";
+
+    @iOSXCUITFindBy(xpath = "//XCUIElementTypeTextField[@value=\"Tìm kiếm\"]")
+    private WebElement title_find;
+
+    @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[@name=\"JP - JAPAN\"]")
+    private WebElement title_JAPAN;
+
     public String replaceXpath(String xpath, String value){
         return xpath.replace("%value", value);
+    }
+
+    public void choose_receiving_bank(String code_swift){
+        iconLineEditPencil.click();
+        click(replaceXpath(icon_receiving_bank_country_code,"1"));
+        title_find.sendKeys("JP");
+        title_JAPAN.click();
+        click(replaceXpath(icon_receiving_bank_country_code,"2"));
+    }
+
+    public void enter_infomation_beneficiary(){
+        btn_beneficiary.click();
+        title_account_number.click();
+        title_account_number.sendKeys("01132342598768");
+        title_recipient_name.click();
+        title_recipient_name.sendKeys("duc");
+        title_address.click();
+        title_address.sendKeys("cau giay");
+        title_done.click();
+        btnSaveContinue.click();
     }
 
     public TransferAndReceive click_on_transfer_money_obroad() {
@@ -131,7 +177,32 @@ public class TransferAndReceive extends BaseScreen {
 
     public TransferAndReceive purpose_transfer(String value) {
         tap(txtPurpose);
-        tap(replaceXpath(purpose, value),10);
+        switch (value){
+            case "Sinh hoạt phí du học":
+                tap(replaceXpath(purpose, "1"),10);
+                break;
+            case "Chuyển tiền trả các loại phí, lệ phí cho nước ngoài":
+                tap(replaceXpath(purpose, "2"),10);
+                break;
+            case "Trợ cấp cho thân nhân ở nước ngoài":
+                tap(replaceXpath(purpose, "3"),10);
+                break;
+            case "Đặt cọc tiền khám chữa bệnh ở nước ngoài":
+                tap(replaceXpath(purpose, "4"),10);
+                break;
+            case "Viện phí khám chữa bệnh ở nước ngoài":
+                tap(replaceXpath(purpose, "5"),10);
+                break;
+            case "Sinh hoạt phí khám chữa bệnh ở nước ngoài":
+                tap(replaceXpath(purpose, "6"),10);
+                break;
+            case "Đặt cọc du học":
+                tap(replaceXpath(purpose, "7"),10);
+                break;
+            case "Học phí du học":
+                tap(replaceXpath(purpose, "8"),10);
+                break;
+        }
         Serenity.setSessionVariable("purpose_transfer").to(value);
         click(btnMakeNewPayment);
         return new TransferAndReceive(this.appiumDriver);
