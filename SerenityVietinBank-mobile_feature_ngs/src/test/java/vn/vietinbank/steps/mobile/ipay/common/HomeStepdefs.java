@@ -23,4 +23,22 @@ public class HomeStepdefs extends BaseStep {
   public void moveToTransfer(){
     transferAndReceive = home.favoriteServices().click_on_transfer_money();
   }
+
+  @Và("mở Dịch vụ thẻ")
+  public void moveCardServices() {
+    cardList = home.favoriteServices().chonDichVuThe();
+
+  }
+
+  @Và("mở Tất cả dịch vụ")
+  public void moveAllServices() {
+
+    allServicesPage = home.favoriteServices().chonTatCaDichVu();
+  }
+
+  @Và("mở Danh sách tài khoản từ màn hình chính")
+  public void moveToAccountList() {
+
+    accountListPage = home.moveToAccountList().chonAccountList();
+  }
 }

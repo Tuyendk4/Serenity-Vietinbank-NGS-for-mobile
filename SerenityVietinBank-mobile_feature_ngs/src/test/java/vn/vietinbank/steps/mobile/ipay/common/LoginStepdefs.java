@@ -31,4 +31,9 @@ public class LoginStepdefs extends BaseStep {
     otp = login.login_with_pass(password);
     home = otp.inputOTP("");
   }
+
+  @Khi("Đăng nhập với password {string}")
+  public void login_with_pass(String password){
+    home = login.login_with_password_only(password);
+  }
 }

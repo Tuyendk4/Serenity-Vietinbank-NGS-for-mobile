@@ -23,6 +23,22 @@ public class Home extends BaseScreen {
     return new AdvertisingPopup(appiumDriver);
   }
 
+  public HomeSearch homeSearch() {
+    return new HomeSearch(appiumDriver);
+  }
+
+  public FavoriteServices cardServices() {
+    return new FavoriteServices(appiumDriver);
+  }
+
+  public FavoriteServices allServicespage() {
+    return new FavoriteServices(appiumDriver);
+  }
+
+  public MoveToAccountList moveToAccountList() {
+    return new MoveToAccountList(appiumDriver);
+  }
+
   public AccountNumberList move_to_AccountNumberList() {
     if(appiumDriver instanceof AndroidDriver) {
       click(android_btnAccountNumberList);

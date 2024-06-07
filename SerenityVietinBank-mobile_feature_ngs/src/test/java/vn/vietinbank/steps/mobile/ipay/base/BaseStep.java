@@ -1,11 +1,20 @@
 package vn.vietinbank.steps.mobile.ipay.base;
 
 import io.appium.java_client.AppiumDriver;
+import io.cucumber.java.After;
 import vn.vietinbank.screens.mobile.base.MobileDriver;
 import vn.vietinbank.screens.mobile.ipay.M2S02.TransferAndReceive;
 import vn.vietinbank.screens.mobile.ipay.ipay_common.AccountNumberList;
 import vn.vietinbank.screens.mobile.ipay.ipay_common.Home;
+import vn.vietinbank.screens.mobile.ipay.ipay_common.HomeSearch;
 import vn.vietinbank.screens.mobile.ipay.ipay_common.Login;
+import vn.vietinbank.screens.mobile.ipay.ipay_InstallmentCreditCard.AccountList.AccountListPage;
+import vn.vietinbank.screens.mobile.ipay.ipay_InstallmentCreditCard.AccountList.CreditAccountPage;
+import vn.vietinbank.screens.mobile.ipay.ipay_InstallmentCreditCard.AllServices.AllServicesPage;
+import vn.vietinbank.screens.mobile.ipay.ipay_InstallmentCreditCard.AllServices.TraGopOnlineAllServices;
+import vn.vietinbank.screens.mobile.ipay.ipay_InstallmentCreditCard.BySearch.BySearch;
+import vn.vietinbank.screens.mobile.ipay.ipay_InstallmentCreditCard.BySearch.TapInstallmentBySearch;
+import vn.vietinbank.screens.mobile.ipay.ipay_InstallmentCreditCard.CardServices.*;
 import vn.vietinbank.screens.mobile.ipay.loan_service_m7s01.LoanAndCreditServices;
 import vn.vietinbank.screens.mobile.ipay.loan_service_m7s01.PersonalInstalmentLoan;
 
@@ -24,4 +33,42 @@ public class BaseStep {
   protected static AccountNumberList accountNumberList;
   protected static String newestAccountNumber;
   protected static TransferAndReceive transferAndReceive;
+  protected static AllServicesPage allServicesPage;
+
+  protected static CardList cardList;
+
+  protected static CardDetails cardDetails;
+
+  protected static EligibleTransactions eligibleTransactions;
+
+  protected static InstallmentIntro installmentIntro ;
+
+  protected static InstallmentTransactionDetail installmentTransactionDetail ;
+
+  protected static ResultPage resultPage ;
+
+  protected static OTPCC oTPCC ;
+
+  protected static TraGopOnlineAllServices traGopOnlineAllServices ;
+
+  protected static HomeSearch homeSearch;
+
+  protected static BySearch bySearch;
+
+  protected static TapInstallmentBySearch tapInstallmentBySearch;
+
+  protected static InstallmentTransactionManagement installmentTransactionManagement;
+
+  protected static TransactionDetails transactionDetails;
+
+  protected static AccountListPage accountListPage;
+
+  protected static CreditAccountPage creditAccountPage;
+
+
+
+
+
+
+
 }

@@ -19,6 +19,7 @@ import java.util.List;
 import javax.imageio.ImageIO;
 
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
+import net.serenitybdd.core.pages.PageObject;
 import net.thucydides.model.environment.SystemEnvironmentVariables;
 import net.thucydides.model.util.EnvironmentVariables;
 import org.openqa.selenium.By;
@@ -55,7 +56,9 @@ public class BaseScreen {
 
   public BaseScreen(AppiumDriver appiumDriver) {
     this.appiumDriver = appiumDriver;
+
     PageFactory.initElements(new AppiumFieldDecorator(appiumDriver, Duration.ofSeconds(30)), this);
+//    setDriver(appiumDriver);
   }
 
   public void delay(int time) {

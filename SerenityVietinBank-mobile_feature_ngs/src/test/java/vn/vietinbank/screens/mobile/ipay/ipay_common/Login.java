@@ -6,6 +6,8 @@ import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import vn.vietinbank.screens.mobile.ipay.ipay_sections.ChangeAccountPopup;
 
+
+
 public class Login extends BaseScreen {
 
   private final String android_txtUserName = "//android.widget.EditText[@resource-id=\"com.vietinbank.ipay:id/wUserName\" and @text=\"Tên đăng nhập\"]";
@@ -102,6 +104,13 @@ public class Login extends BaseScreen {
     inputPassword(password);
     clickLoginButton();
     return new OTP(appiumDriver);
+  }
+
+  @Step("Đăng nhập với password {string}")
+  public Home login_with_password_only(String password){
+    inputPassword(password);
+    clickLoginButton();
+    return new Home(appiumDriver);
   }
 
 }
