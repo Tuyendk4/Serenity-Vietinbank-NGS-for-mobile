@@ -83,12 +83,20 @@ Feature: : M2S02 - Chuyển tiền ngoại tệ
     Then Kiểm tra lịch sử chuyển tiền ngoại tệ
 
   @test_case_11
-  Scenario: KH tạo giao dịch CTNT với mục đích:bất kỳ, nhưng chọn mã SWIFT ngân hàng nhận, loại tiền JPY
+  Scenario Outline: KH tạo giao dịch CTNT với mục đích:bất kỳ, nhưng chọn mã SWIFT ngân hàng nhận, loại tiền JPY
     And Di chuyển vào Chuyển tiền
     And Chọn Mua Chuyển ngoại tệ
     And Chọn mục đích chuyển tiền là "Học phí du học"
     And Điền thông tin người nhận
+    And Điền thông tin ngân hàng nhận "<SWIFT>"
     And Nhập số ngoại tệ cần chuyển đi là "1"
     And Chọn hồ sơ cung cấp
     Then Xác nhận giao dịch
     Then Kiểm tra lịch sử chuyển tiền ngoại tệ
+    Examples:
+      | SWIFT       |
+      | JPPSJPJT    |
+      | JPPSJPJ1    |
+      | JPPSJPJK    |
+      | JPPSJPJJIRS |
+      | SVVNJPJJ    |

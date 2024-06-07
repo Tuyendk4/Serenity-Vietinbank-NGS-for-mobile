@@ -138,7 +138,8 @@ public class TransferAndReceive extends BaseScreen {
     @iOSXCUITFindBy(xpath = "(//XCUIElementTypeButton[@name=\"iconLineEditPencil\"])[1]")
     private WebElement iconLineEditPencil;
 
-    String icon_receiving_bank_country_code = "(//XCUIElementTypeButton[@name=\"ic drop down blue\"])[%value]";
+    @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[@name=\"Mã nước ngân hàng nhận\"]//parent::XCUIElementTypeTextField//following-sibling::XCUIElementTypeButton")
+    private WebElement icon_receiving_bank_country_code;
 
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeTextField[@value=\"Tìm kiếm\"]")
     private WebElement title_find;
@@ -146,16 +147,19 @@ public class TransferAndReceive extends BaseScreen {
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[@name=\"JP - JAPAN\"]")
     private WebElement title_JAPAN;
 
+    @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[@name=\"Mã SWIFT Ngân hàng nhận\"]//parent::XCUIElementTypeTextField//following-sibling::XCUIElementTypeButton")
+    private WebElement code_swift_bank;
+
     public String replaceXpath(String xpath, String value){
         return xpath.replace("%value", value);
     }
 
     public void choose_receiving_bank(String code_swift){
         iconLineEditPencil.click();
-        click(replaceXpath(icon_receiving_bank_country_code,"1"));
+        icon_receiving_bank_country_code.click();
         title_find.sendKeys("JP");
         title_JAPAN.click();
-        click(replaceXpath(icon_receiving_bank_country_code,"2"));
+        code_swift_bank.click();
     }
 
     public void enter_infomation_beneficiary(){

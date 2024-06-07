@@ -53,8 +53,13 @@ public class TransferMoneyObroadStepdefs extends BaseStep {
         transferAndReceive = transferAndReceive.verifyTransferAndReceive();
     }
 
-    @Then("Điền thông tin người nhận")
+    @And("Điền thông tin người nhận")
     public void enter_beneficiary(){
+        transferAndReceive.enter_infomation_beneficiary();
+    }
 
+    @And("Điền thông tin ngân hàng nhận {string}")
+    public void enter_receiving_bank(String swiftCode){
+        transferAndReceive.choose_receiving_bank(swiftCode);
     }
 }
