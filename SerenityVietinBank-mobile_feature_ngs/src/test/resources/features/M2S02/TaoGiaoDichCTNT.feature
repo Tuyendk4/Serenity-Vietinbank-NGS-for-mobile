@@ -10,7 +10,7 @@ Feature: : M2S02 - Chuyển tiền ngoại tệ
     And Di chuyển vào Chuyển tiền
     And Chọn Mua Chuyển ngoại tệ
     And Chọn mục đích chuyển tiền là "Chuyển tiền trả các loại phí, lệ phí cho nước ngoài"
-    And Chon người nhận
+    And Chon người nhận với nội dung "Test"
     And Nhập số ngoại tệ cần chuyển đi là "1"
     And Chọn hồ sơ cung cấp
     Then Xác nhận giao dịch
@@ -21,7 +21,7 @@ Feature: : M2S02 - Chuyển tiền ngoại tệ
     And Di chuyển vào Chuyển tiền
     And Chọn Mua Chuyển ngoại tệ
     And Chọn mục đích chuyển tiền là Trợ cấp cho thân nhân ở nước ngoài
-    And Chon người nhận
+    And Chon người nhận với nội dung "Test"
     And Nhập số ngoại tệ cần chuyển đi là "1"
     And Chọn hồ sơ cung cấp
     Then Xác nhận giao dịch
@@ -32,7 +32,7 @@ Feature: : M2S02 - Chuyển tiền ngoại tệ
     And Di chuyển vào Chuyển tiền
     And Chọn Mua Chuyển ngoại tệ
     And Chọn mục đích chuyển tiền là "Đặt cọc tiền khám chữa bệnh ở nước ngoài"
-    And Chon người nhận
+    And Chon người nhận với nội dung "Test"
     And Nhập số ngoại tệ cần chuyển đi là "1"
     And Chọn hồ sơ cung cấp
     And Xác nhận giao dịch
@@ -43,7 +43,7 @@ Feature: : M2S02 - Chuyển tiền ngoại tệ
     And Di chuyển vào Chuyển tiền
     And Chọn Mua Chuyển ngoại tệ
     And Chọn mục đích chuyển tiền là "Viện phí khám chữa bệnh ở nước ngoài"
-    And Chon người nhận
+    And Chon người nhận với nội dung "Test"
     And Nhập số ngoại tệ cần chuyển đi là "1"
     And Chọn hồ sơ cung cấp
     Then Xác nhận giao dịch
@@ -54,7 +54,7 @@ Feature: : M2S02 - Chuyển tiền ngoại tệ
     And Di chuyển vào Chuyển tiền
     And Chọn Mua Chuyển ngoại tệ
     And Chọn mục đích chuyển tiền là "Sinh hoạt phí khám chữa bệnh ở nước ngoài"
-    And Chon người nhận
+    And Chon người nhận với nội dung "Test"
     And Nhập số ngoại tệ cần chuyển đi là "1"
     And Chọn hồ sơ cung cấp
     Then Xác nhận giao dịch
@@ -65,7 +65,7 @@ Feature: : M2S02 - Chuyển tiền ngoại tệ
     And Di chuyển vào Chuyển tiền
     And Chọn Mua Chuyển ngoại tệ
     And Chọn mục đích chuyển tiền là "Đặt cọc du học"
-    And Chon người nhận
+    And Chon người nhận với nội dung "Test"
     And Nhập số ngoại tệ cần chuyển đi là "1"
     And Chọn hồ sơ cung cấp
     And Xác nhận giao dịch
@@ -76,7 +76,7 @@ Feature: : M2S02 - Chuyển tiền ngoại tệ
     And Di chuyển vào Chuyển tiền
     And Chọn Mua Chuyển ngoại tệ
     And Chọn mục đích chuyển tiền là "Học phí du học"
-    And Chon người nhận
+    And Chon người nhận với nội dung "Test"
     And Nhập số ngoại tệ cần chuyển đi là "1"
     And Chọn hồ sơ cung cấp
     Then Xác nhận giao dịch

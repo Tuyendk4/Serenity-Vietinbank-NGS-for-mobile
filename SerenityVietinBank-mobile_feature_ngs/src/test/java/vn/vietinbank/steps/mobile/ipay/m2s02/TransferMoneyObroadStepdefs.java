@@ -27,9 +27,9 @@ public class TransferMoneyObroadStepdefs extends BaseStep {
         transferAndReceive = transferAndReceive.other_oversear_payment();
     }
 
-    @And("Chon người nhận")
-    public void show_interest_rate_in_Reference_Payment_Schedule_as() {
-        transferAndReceive = transferAndReceive.chooseBeneficiary();
+    @And("Chon người nhận với nội dung {string}")
+    public void show_interest_rate_in_Reference_Payment_Schedule_as(String paymentNote) {
+        transferAndReceive = transferAndReceive.chooseBeneficiary(paymentNote);
     }
 
     @And("Nhập số ngoại tệ cần chuyển đi là {string}")
