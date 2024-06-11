@@ -175,10 +175,14 @@
         <plugins>
             <plugin>
                 <artifactId>maven-failsafe-plugin</artifactId>
-                <version>3.0.0-M5</version>
+                <version>3.1.2</version>
                 <configuration>
                     <includes>
                         <include>**/Runner.java</include>
+                        <include>**/*Test.java</include>
+                        <include>**/Test*.java</include>
+                        <include>**/*TestSuite.java</include>
+                        <include>**/When*.java</include>
                     </includes>
                     <systemPropertyVariables>
                         <!--                        <webdriver.base.url>${webdriver.base.url}</webdriver.base.url>-->
@@ -222,7 +226,6 @@
                 <artifactId>serenity-maven-plugin</artifactId>
                 <version>${serenity.version}</version>
                 <configuration>
-                    <tags>${tags}</tags>
                 </configuration>
                 <dependencies>
                     <dependency>
