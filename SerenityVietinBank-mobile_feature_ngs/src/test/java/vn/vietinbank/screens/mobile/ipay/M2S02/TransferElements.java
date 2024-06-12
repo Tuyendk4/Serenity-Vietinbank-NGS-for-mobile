@@ -13,6 +13,7 @@ public class TransferElements extends BaseScreen {
     public TransferElements(AppiumDriver appiumDriver) {
         super(appiumDriver);
     }
+
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeTable/XCUIElementTypeButton[6]")
     public WebElement btnTranferMoneyObroad;
 
