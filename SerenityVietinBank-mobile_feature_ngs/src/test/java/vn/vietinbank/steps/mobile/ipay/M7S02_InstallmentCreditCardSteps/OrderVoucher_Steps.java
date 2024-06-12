@@ -21,13 +21,13 @@ public class OrderVoucher_Steps extends BaseStep {
     }
 
     @Và("Nhập thông tin người nhận {string} và email {string}")
-    public void inputThongTin(String nguoiNhan, String email ) {
-        orderVoucher=orderVoucher.inputThongTin(nguoiNhan,email);
+    public void inputThongTin(String nguoiNhan, String email) {
+        orderVoucher = orderVoucher.inputThongTin(nguoiNhan, email);
     }
 
-    @Và ("Xác nhận thanh toán")
+    @Và("Xác nhận thanh toán")
     public void xacNhanThanhToan() {
-        oTPCC=orderVoucher.xacNhanThanhToan();
+        oTPCC = orderVoucher.xacNhanThanhToan();
     }
 
 }
