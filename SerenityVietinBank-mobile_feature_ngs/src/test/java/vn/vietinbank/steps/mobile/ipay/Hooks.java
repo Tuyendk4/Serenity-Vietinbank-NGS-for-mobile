@@ -14,8 +14,8 @@ public class Hooks extends BaseStep {
     appiumDriver = mobileDriver.newDriver();
   }
 
-//  @After
-//  public void after() {
-//    mobileDriver.closeApplication();
-//  }
+  @After
+  public void after() {
+    mobileDriver.closeApplication();
+  }
 }

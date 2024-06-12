@@ -6,20 +6,26 @@ import io.appium.java_client.AppiumDriver;
 import vn.vietinbank.screens.mobile.ipay.ipay_sections.AdvertisingPopup;
 import vn.vietinbank.screens.mobile.ipay.ipay_sections.FavoriteServices;
 
+
+
+
 public class Home extends BaseScreen {
 
   private final String android_btnAccountNumberList = "";
   private final String ios_btnAccountNumberList = "//XCUIElementTypeStaticText[@name=\"Danh sách tài khoản\"]";
 
   public Home(AppiumDriver appiumDriver) {
+
     super(appiumDriver);
   }
 
   public FavoriteServices favoriteServices() {
+
     return new FavoriteServices(appiumDriver);
   }
 
   public AdvertisingPopup advertisingPopup() {
+
     return new AdvertisingPopup(appiumDriver);
   }
 
@@ -28,16 +34,20 @@ public class Home extends BaseScreen {
   }
 
   public FavoriteServices cardServices() {
+
     return new FavoriteServices(appiumDriver);
   }
 
   public FavoriteServices allServicespage() {
+
     return new FavoriteServices(appiumDriver);
   }
 
   public MoveToAccountList moveToAccountList() {
+
     return new MoveToAccountList(appiumDriver);
   }
+
 
   public AccountNumberList move_to_AccountNumberList() {
     if(appiumDriver instanceof AndroidDriver) {

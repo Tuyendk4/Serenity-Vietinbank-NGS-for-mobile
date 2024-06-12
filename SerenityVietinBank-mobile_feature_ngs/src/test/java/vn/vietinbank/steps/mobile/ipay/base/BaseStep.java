@@ -1,9 +1,10 @@
 package vn.vietinbank.steps.mobile.ipay.base;
 
 import io.appium.java_client.AppiumDriver;
-import io.cucumber.java.After;
 import vn.vietinbank.screens.mobile.base.MobileDriver;
 import vn.vietinbank.screens.mobile.ipay.M2S02.TransferAndReceive;
+import vn.vietinbank.screens.mobile.ipay.ipay_InstallmentCreditCard.EVoucher.EVoucher;
+import vn.vietinbank.screens.mobile.ipay.ipay_InstallmentCreditCard.EVoucher.OrderVoucher;
 import vn.vietinbank.screens.mobile.ipay.ipay_common.AccountNumberList;
 import vn.vietinbank.screens.mobile.ipay.ipay_common.Home;
 import vn.vietinbank.screens.mobile.ipay.ipay_common.HomeSearch;
@@ -13,7 +14,7 @@ import vn.vietinbank.screens.mobile.ipay.ipay_InstallmentCreditCard.AccountList.
 import vn.vietinbank.screens.mobile.ipay.ipay_InstallmentCreditCard.AllServices.AllServicesPage;
 import vn.vietinbank.screens.mobile.ipay.ipay_InstallmentCreditCard.AllServices.TraGopOnlineAllServices;
 import vn.vietinbank.screens.mobile.ipay.ipay_InstallmentCreditCard.BySearch.BySearch;
-import vn.vietinbank.screens.mobile.ipay.ipay_InstallmentCreditCard.BySearch.TapInstallmentBySearch;
+import vn.vietinbank.screens.mobile.ipay.ipay_InstallmentCreditCard.BySearch.TapResultBySearch;
 import vn.vietinbank.screens.mobile.ipay.ipay_InstallmentCreditCard.CardServices.*;
 import vn.vietinbank.screens.mobile.ipay.loan_service_m7s01.LoanAndCreditServices;
 import vn.vietinbank.screens.mobile.ipay.loan_service_m7s01.PersonalInstalmentLoan;
@@ -55,7 +56,7 @@ public class BaseStep {
 
   protected static BySearch bySearch;
 
-  protected static TapInstallmentBySearch tapInstallmentBySearch;
+  protected static TapResultBySearch tapResultBySearch;
 
   protected static InstallmentTransactionManagement installmentTransactionManagement;
 
@@ -65,7 +66,9 @@ public class BaseStep {
 
   protected static CreditAccountPage creditAccountPage;
 
+  protected static EVoucher eVoucher;
 
+  protected static OrderVoucher orderVoucher;
 
 
 

@@ -21,11 +21,11 @@ public class BySearch extends BaseScreen {
 
 
     @Step("Nhập từ {string} cần tìm kiếm ")
-    public TapInstallmentBySearch nhapTuCanTimKiem( String tuTimKiem) {
+    public TapResultBySearch nhapTuCanTimKiem(String tuTimKiem) {
         sendKeys(ios_txtSearch, tuTimKiem);
 //      hàm nhập từ cần tìm kiếm
 //        inputSearch.sendKeys(tuTimKiem);
 //        tap(btnSearch);
-        return new TapInstallmentBySearch(appiumDriver);
+        return new TapResultBySearch(appiumDriver);
     }
 }
