@@ -1,12 +1,6 @@
 package vn.vietinbank.api.utils;
 
-import static vn.vietinbank.api.configs.APIConstants.FALSE;
-import static vn.vietinbank.api.configs.APIConstants.TRUE;
-import static vn.vietinbank.api.configs.GetDataConstants.RESPONSE_STATUS;
-
 import com.jayway.jsonpath.JsonPath;
-import java.util.Iterator;
-import java.util.List;
 import net.serenitybdd.core.Serenity;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -14,6 +8,13 @@ import org.jetbrains.annotations.NotNull;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
+
+import java.util.Iterator;
+import java.util.List;
+
+import static vn.vietinbank.api.configs.APIConstants.FALSE;
+import static vn.vietinbank.api.configs.APIConstants.TRUE;
+import static vn.vietinbank.api.configs.GetDataConstants.RESPONSE_STATUS;
 
 public class CompareData {
 

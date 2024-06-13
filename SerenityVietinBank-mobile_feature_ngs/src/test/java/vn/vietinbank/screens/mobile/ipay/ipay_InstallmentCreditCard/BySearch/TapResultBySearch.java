@@ -21,7 +21,7 @@ public class TapResultBySearch extends BaseScreen {
     }
 
     @Step("Chọn Trả góp thẻ tín dụng bằng tìm kiếm")
-    public InstallmentIntro  chonTraGopTheBangTimKiem() {
+    public InstallmentIntro chonTraGopTheBangTimKiem() {
         tap(ios_btnKQ, 20);
         return new InstallmentIntro(appiumDriver);
     }

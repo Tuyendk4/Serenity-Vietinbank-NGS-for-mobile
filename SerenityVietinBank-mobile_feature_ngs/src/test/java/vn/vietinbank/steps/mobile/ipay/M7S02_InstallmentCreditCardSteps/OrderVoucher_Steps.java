@@ -1,8 +1,6 @@
 package vn.vietinbank.steps.mobile.ipay.M7S02_InstallmentCreditCardSteps;
 
 import io.cucumber.java.vi.Và;
-import net.serenitybdd.annotations.Step;
-import vn.vietinbank.screens.mobile.ipay.ipay_InstallmentCreditCard.EVoucher.OrderVoucher;
 import vn.vietinbank.steps.mobile.ipay.base.BaseStep;
 
 

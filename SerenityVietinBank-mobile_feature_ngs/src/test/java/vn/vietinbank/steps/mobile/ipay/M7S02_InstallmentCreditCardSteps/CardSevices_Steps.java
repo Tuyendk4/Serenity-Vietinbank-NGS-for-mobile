@@ -3,7 +3,6 @@ package vn.vietinbank.steps.mobile.ipay.M7S02_InstallmentCreditCardSteps;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-
 import vn.vietinbank.steps.mobile.ipay.base.BaseStep;
 
 
@@ -52,11 +51,13 @@ public class CardSevices_Steps extends BaseStep {
 
     @When("Nhập OTP {string}")
     public void inputOTP(String otp) {
-        oTPCC.inputOTP(otp);
+        resultPage = oTPCC.inputOTP(otp);
+
     }
 
     @Then("Nhận thông báo thành công")
-    public void nhanThongBaoThanhCong() {
+    public void nhanThongBaoThanhCong() throws InterruptedException {
+        Thread.sleep(10000);
         resultPage.nhanThongBaoThanhCong();
     }
 

@@ -18,14 +18,14 @@ public class TransactionDetails extends BaseScreen {
     public TransactionDetails(AppiumDriver appiumDriver) {
         super(appiumDriver);
     }
-        @Step ("Hiển thị chi tiếp giao dịch")
-        public void hienThiChiTietGiaoDichTraGop() {
-            String elementText = txtTransactionDetails.getText();
-            System.out.println(elementText);
+
+    @Step("Hiển thị chi tiếp giao dịch")
+    public void hienThiChiTietGiaoDichTraGop() {
+        String elementText = txtTransactionDetails.getText();
+        System.out.println(elementText);
 
 
-
-}
     }
+}
 
 

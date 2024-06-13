@@ -9,10 +9,9 @@ import vn.vietinbank.screens.mobile.base.BaseScreen;
 
 public class InstallmentIntro extends BaseScreen {
 
+    private final String ios_btnTraGopNgay = "//XCUIElementTypeButton[@name=\"Trả góp ngay\"]";
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeButton[@name=\"Trả góp ngay\"]")
     private WebElement btnTraGopNgay;
-
-    private final String ios_btnTraGopNgay = "//XCUIElementTypeButton[@name=\"Trả góp ngay\"]";
 
     public InstallmentIntro(AppiumDriver appiumDriver) {
         super(appiumDriver);

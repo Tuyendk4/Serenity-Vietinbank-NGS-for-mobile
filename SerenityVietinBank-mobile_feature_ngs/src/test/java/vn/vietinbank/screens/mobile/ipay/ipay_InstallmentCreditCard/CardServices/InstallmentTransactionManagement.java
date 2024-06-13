@@ -18,8 +18,8 @@ public class InstallmentTransactionManagement extends BaseScreen {
         super(appiumDriver);
     }
 
-    @Step ("Chọn giao dịch trả góp theo trạng thái {0} và số tiền {1}")
-    public TransactionDetails chonGiaoDichTraGop(String trangThai,String soTien) {
+    @Step("Chọn giao dịch trả góp theo trạng thái {0} và số tiền {1}")
+    public TransactionDetails chonGiaoDichTraGop(String trangThai, String soTien) {
         delay(10000);
         WebElement transactionElement = findTransactionElement(trangThai, soTien);
         if (transactionElement != null) {
@@ -50,7 +50,6 @@ public class InstallmentTransactionManagement extends BaseScreen {
         return null;
 
     }
-
 
 
 }

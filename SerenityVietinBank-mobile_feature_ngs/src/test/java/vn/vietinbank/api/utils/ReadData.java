@@ -1,9 +1,9 @@
 package vn.vietinbank.api.utils;
 
-import static vn.vietinbank.api.configs.GetDataConstants.*;
-
 import net.serenitybdd.core.Serenity;
 import org.junit.Assert;
+
+import static vn.vietinbank.api.configs.GetDataConstants.*;
 
 public class ReadData {
     public static void readJsonFile(String sessionVariableName, String pathJsonFile) {

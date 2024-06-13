@@ -1,33 +1,25 @@
 package vn.vietinbank.screens.mobile.ipay.M2S02;
 
-import vn.vietinbank.screens.mobile.base.BaseScreen;
-import vn.vietinbank.screens.mobile.base.ScrollDirection;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.pagefactory.iOSXCUITBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindAll;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import net.serenitybdd.core.Serenity;
 import org.openqa.selenium.WebElement;
+import vn.vietinbank.screens.mobile.base.BaseScreen;
+import vn.vietinbank.screens.mobile.base.ScrollDirection;
 
 import java.util.List;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-
 public class TransferAndReceive extends BaseScreen {
-
-    public TransferAndReceive(AppiumDriver appiumDriver) {
-        super(appiumDriver);
-    }
 
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeTable/XCUIElementTypeButton[6]")
     private static WebElement btnTranferMoneyObroad;
-
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeScrollView/XCUIElementTypeOther[1]/XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeOther[1]/XCUIElementTypeButton")
     private static WebElement txtPurpose;
-
     @iOSXCUITFindBy(xpath = "(//XCUIElementTypeStaticText[@name=\"Chuyển tiền trả các loại phí, lệ phí cho nước ngoài\"])[2]")
     private static WebElement txtLivingExpenses;
-
+    String view_history = "Xem lịch sử điện ngoại tệ";
     private String purpose = "(//XCUIElementTypeStaticText[@name=\"%value\"])[2]";
 
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeButton[@name=\"Tạo điện mua/chuyển ngoại tệ\"]")
@@ -105,22 +97,20 @@ public class TransferAndReceive extends BaseScreen {
 
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeButton[@name=\"Xem lịch sử điện ngoại tệ\"]")
     private WebElement txt_view_history;
-
-    String view_history = "Xem lịch sử điện ngoại tệ";
-
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeTable/XCUIElementTypeCell[43]/XCUIElementTypeOther[1]/XCUIElementTypeOther")
     private WebElement txt_list_history;
-
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[@name=\"Trạng thái\"]//following-sibling::XCUIElementTypeStaticText")
     private WebElement txt_status;
-
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[@name=\"Mục đích sử dụng\"]//following-sibling::XCUIElementTypeTextField")
     private WebElement txt_popure_used;
-
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeApplication[@name=\"VietinBank iPay\"]/XCUIElementTypeWindow[1]/XCUIElementTypeOther[3]/XCUIElementTypeOther/XCUIElementTypeScrollView/XCUIElementTypeOther[1]/XCUIElementTypeOther[3]/XCUIElementTypeButton")
     private WebElement txt_other_oversear_payment;
 
-    public String replaceXpath(String xpath, String value){
+    public TransferAndReceive(AppiumDriver appiumDriver) {
+        super(appiumDriver);
+    }
+
+    public String replaceXpath(String xpath, String value) {
         return xpath.replace("%value", value);
     }
 
@@ -131,7 +121,7 @@ public class TransferAndReceive extends BaseScreen {
 
     public TransferAndReceive purpose_transfer(String value) {
         tap(txtPurpose);
-        tap(replaceXpath(purpose, value),10);
+        tap(replaceXpath(purpose, value), 10);
         Serenity.setSessionVariable("purpose_transfer").to(value);
         click(btnMakeNewPayment);
         return new TransferAndReceive(this.appiumDriver);
@@ -140,8 +130,8 @@ public class TransferAndReceive extends BaseScreen {
     public TransferAndReceive other_oversear_payment() {
         tap(txtPurpose);
         txt_other_oversear_payment.click();
-        logger.info("================ "+ txt_popure_used.getText());
-        System.out.println("aaaaaaa: "+txt_popure_used.getText());
+        logger.info("================ " + txt_popure_used.getText());
+        System.out.println("aaaaaaa: " + txt_popure_used.getText());
         Serenity.setSessionVariable("purpose_transfer").to(txt_popure_used.getText());
         click(btnMakeNewPayment);
         return new TransferAndReceive(this.appiumDriver);
@@ -208,7 +198,7 @@ public class TransferAndReceive extends BaseScreen {
     public TransferAndReceive verifyTransferAndReceive() {
         scrollTo(view_history);
         click(txt_view_history);
-        tap (txt_list_history);
+        tap(txt_list_history);
         String[] number_to_transfer_split = number_to_transfer_history.getText().split(" ");
         String number_to_transfer = number_to_transfer_split[0];
         String[] debt_amount_split = debt_amount_history.getText().split(" ");

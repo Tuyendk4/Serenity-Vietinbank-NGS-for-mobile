@@ -20,22 +20,19 @@ public class InstallmentTransactionDetail extends BaseScreen {
     private WebElement chkTerm;
 
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeTable/XCUIElementTypeCell[3]/XCUIElementTypeOther[1]/XCUIElementTypeOther")
-    private WebElement kyHan9T ;
+    private WebElement kyHan9T;
 
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeTable/XCUIElementTypeCell[4]/XCUIElementTypeOther[1]/XCUIElementTypeOther")
-    private WebElement kyHan12T ;
+    private WebElement kyHan12T;
 
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeTable/XCUIElementTypeCell[1]/XCUIElementTypeOther[1]/XCUIElementTypeOther")
-    private WebElement kyHan3T ;
+    private WebElement kyHan3T;
 
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeTable/XCUIElementTypeCell[5]/XCUIElementTypeOther[1]/XCUIElementTypeOther")
-    private WebElement kyHan18T ;
+    private WebElement kyHan18T;
 
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeTable/XCUIElementTypeCell[6]/XCUIElementTypeOther[1]/XCUIElementTypeOther")
-    private WebElement kyHan24T ;
-
-
-
+    private WebElement kyHan24T;
 
 
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeButton[@name='Tiếp tục']")
@@ -44,8 +41,6 @@ public class InstallmentTransactionDetail extends BaseScreen {
     public InstallmentTransactionDetail(AppiumDriver appiumDriver) {
         super(appiumDriver);
     }
-
-
 
 
     @Step("Chọn kỳ hạn {string}")

@@ -1,7 +1,6 @@
 package vn.vietinbank.screens.mobile.ipay.ipay_InstallmentCreditCard.EVoucher;
 
 import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import net.serenitybdd.annotations.Step;
 import org.openqa.selenium.WebElement;
@@ -46,26 +45,25 @@ public class OrderVoucher extends BaseScreen {
     @Step("Chọn loại voucher và số lượng ")
     public OrderVoucher chonLoaiVaSoLuong() {
 
-            tap(btnAdd1);
-            delay(10000);
-            for (int i = 0; i < 10; i++) {
-                tap(btnAddQuantity);
-            }
-            delay(1000);
-            tap(btnTiepTuc);
+        tap(btnAdd1);
+        delay(10000);
+        for (int i = 0; i < 10; i++) {
+            tap(btnAddQuantity);
+        }
+        delay(1000);
+        tap(btnTiepTuc);
 
         return new OrderVoucher(appiumDriver);
     }
 
     @Step("Nhập thông tin người nhận {0} và email {1}  ")
-    public OrderVoucher inputThongTin(String nguoiNhan, String email ) {
+    public OrderVoucher inputThongTin(String nguoiNhan, String email) {
         txtNguoiNhan.sendKeys(nguoiNhan);
         txtEmail.sendKeys(email);
         tap(btnXong);
         tap(btnTiepTuc);
         return new OrderVoucher(appiumDriver);
     }
-
 
 
     @Step("Xác nhận thanh toán ")
@@ -75,6 +73,7 @@ public class OrderVoucher extends BaseScreen {
         tap(btnTiepTuc);
         delay(3000);
         tap(btnHoanTat);
+        delay(3000);
         return new OTPCC(appiumDriver);
     }
 

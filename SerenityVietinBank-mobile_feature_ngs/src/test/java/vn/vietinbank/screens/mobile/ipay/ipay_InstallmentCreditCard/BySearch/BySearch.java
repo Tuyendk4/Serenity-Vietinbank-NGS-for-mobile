@@ -13,11 +13,9 @@ public class BySearch extends BaseScreen {
     private final String ios_txtSearch = "//XCUIElementTypeTextField[@value=\"Bạn đang muốn tìm gì?\"]";
 
 
-
     public BySearch(AppiumDriver appiumDriver) {
         super(appiumDriver);
     }
-
 
 
     @Step("Nhập từ {string} cần tìm kiếm ")

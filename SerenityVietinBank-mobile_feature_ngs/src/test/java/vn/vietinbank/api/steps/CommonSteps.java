@@ -1,5 +1,18 @@
 package vn.vietinbank.api.steps;
 
+import io.cucumber.datatable.DataTable;
+import io.cucumber.java.en.And;
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.restassured.response.Response;
+import net.serenitybdd.core.Serenity;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.junit.Assert;
+import org.skyscreamer.jsonassert.JSONAssert;
+
+import java.util.Map;
+
 import static vn.vietinbank.api.common.BodyHelper.createBody;
 import static vn.vietinbank.api.common.BodyHelper.getExcelToJson;
 import static vn.vietinbank.api.common.HeaderHelper.*;
@@ -9,18 +22,6 @@ import static vn.vietinbank.api.configs.GetDataConstants.*;
 import static vn.vietinbank.api.utils.CompareData.*;
 import static vn.vietinbank.api.utils.DataInput.setBodyJson;
 import static vn.vietinbank.api.utils.ReadData.readJsonFile;
-
-import io.cucumber.datatable.DataTable;
-import io.cucumber.java.en.And;
-import io.cucumber.java.en.Given;
-import io.cucumber.java.en.Then;
-import io.restassured.response.Response;
-import java.util.Map;
-import net.serenitybdd.core.Serenity;
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.junit.Assert;
-import org.skyscreamer.jsonassert.JSONAssert;
 
 public class CommonSteps {
 

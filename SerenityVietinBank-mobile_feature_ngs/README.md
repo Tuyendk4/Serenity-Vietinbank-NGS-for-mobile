@@ -15,12 +15,14 @@ This project is used to automation test using Serenity and Appium with Java.
 7. Install Appium Doctor
 
 ---
+
 #### Install SDK (software development kit)
 
 1. Open Android Studio.
 2. Click in 'Configure -> SDK Manager'.
 3. On tab 'SDK Platforms' choose the "OS Android" and click in "Apply".
-4. On tab 'SDK Tools' choose the "Android SDK Build-Tools", "Android Emulator", "Android SDK Platform-Tools","Android SDK Tools", "Intel x86 Emulator Accelerator (HAXM installer)" and click in "Apply".
+4. On tab 'SDK Tools' choose the "Android SDK Build-Tools", "Android Emulator", "Android SDK Platform-Tools","Android
+   SDK Tools", "Intel x86 Emulator Accelerator (HAXM installer)" and click in "Apply".
 
 ---
 
@@ -41,10 +43,12 @@ This project is used to automation test using Serenity and Appium with Java.
             - export PATH=$PATH/:$ANDROID_HOME/platform-tools
 
 ---
+
 #### WINDOWS
 
 - **JAVA HOME**
-    - Configure the environments variables (Control panel -> System -> Advanced configuration> Environment variables -> SYSTEM VARIABLES)
+    - Configure the environments variables (Control panel -> System -> Advanced configuration> Environment variables ->
+      SYSTEM VARIABLES)
     - New
         - JAVA_HOME
         - C:\Program Files\Java\jdk-11.0.10
@@ -54,7 +58,8 @@ This project is used to automation test using Serenity and Appium with Java.
 
 
 - **ANDROID HOME**
-    - Configure the environments variables (Control panel -> System -> Advanced configuration> Environment variables -> SYSTEM VARIABLES)
+    - Configure the environments variables (Control panel -> System -> Advanced configuration> Environment variables ->
+      SYSTEM VARIABLES)
     - New
         - ANDROID_HOME
             - C:\Ferramentas
@@ -71,6 +76,7 @@ This project is used to automation test using Serenity and Appium with Java.
                 - emulator -list-avds
 
 ---
+
 #### Create Emulator (Android) on Android Studio
 
 1. Open Android Studio.
@@ -81,6 +87,7 @@ This project is used to automation test using Serenity and Appium with Java.
 6. Open terminal.
 7. Execute command.
 8. The device name is returned (example: Nexus_5X_API_27).
+
 ```bash
 emulator -list-avds
 ```
@@ -88,8 +95,10 @@ emulator -list-avds
 ---
 
 #### Open the emulator
+
 1. Open terminal.
 2. Execute command
+
 ```bash
 cd $ANDROID_HOME/tools
 emulator @Nexus_5X_API_27
@@ -98,8 +107,10 @@ emulator @Nexus_5X_API_27
 ---
 
 #### Open the search elements
+
 1. Open terminal.
 2. Execute command
+
 ```bash
 cd $ANDROID_HOME/tools
 uiautomatorviewer
@@ -116,6 +127,7 @@ uiautomatorviewer
 ---
 
 #### To open locator in Appium.
+
 1. Open Appium.
 2. Click in 'Start Server'.
 3. Click in Search.
@@ -150,8 +162,6 @@ or
 }
 ```
 
-
-
 ---
 
 ## Run Tests:
@@ -167,8 +177,8 @@ mvn instal
 mvn clean verify
 mvn clean verify -Dtags="@TC_01"
 ```
-3. Access on project 'target/site/index.html' and open Chrome browser to see results dasboards.
 
+3. Access on project 'target/site/index.html' and open Chrome browser to see results dasboards.
 
 ---
 

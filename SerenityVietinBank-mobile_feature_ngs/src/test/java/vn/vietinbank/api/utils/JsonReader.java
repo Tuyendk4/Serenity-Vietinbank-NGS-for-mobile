@@ -1,9 +1,10 @@
 package vn.vietinbank.api.utils;
 
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import net.serenitybdd.core.Serenity;
 import org.json.JSONObject;
+
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 public class JsonReader {
     public void readJsonFileAndSetToSession(String filePath, String sessionVariableName) {

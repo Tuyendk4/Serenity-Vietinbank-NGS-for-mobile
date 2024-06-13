@@ -8,29 +8,29 @@ import vn.vietinbank.screens.mobile.ipay.ipay_sections.loan.PendingLoanPopup;
 
 public class Overdraft extends BaseScreen {
 
-  private final String android_btnContinue = "";
-  private final String ios_btnContinue = "//XCUIElementTypeButton[@name=\"Tiếp tục\"]";
+    private final String android_btnContinue = "";
+    private final String ios_btnContinue = "//XCUIElementTypeButton[@name=\"Tiếp tục\"]";
 
-  public Overdraft(AppiumDriver appiumDriver) {
-    super(appiumDriver);
-  }
-
-  private PendingLoanPopup pendingLoanPopup() {
-    return new PendingLoanPopup(this.appiumDriver);
-  }
-
-  @Step("Nhấn Tiếp tục")
-  public Overdraft_LoanProfileDetail click_Continue_button() {
-    if(pendingLoanPopup().isDisplayed()) {
-      pendingLoanPopup().clickRetry();
+    public Overdraft(AppiumDriver appiumDriver) {
+        super(appiumDriver);
     }
-    if(appiumDriver instanceof AndroidDriver) {
-      click(android_btnContinue);
-    } else {
-      click(ios_btnContinue);
+
+    private PendingLoanPopup pendingLoanPopup() {
+        return new PendingLoanPopup(this.appiumDriver);
     }
-    delay(3000);
-    return new Overdraft_LoanProfileDetail(appiumDriver);
-  }
+
+    @Step("Nhấn Tiếp tục")
+    public Overdraft_LoanProfileDetail click_Continue_button() {
+        if (pendingLoanPopup().isDisplayed()) {
+            pendingLoanPopup().clickRetry();
+        }
+        if (appiumDriver instanceof AndroidDriver) {
+            click(android_btnContinue);
+        } else {
+            click(ios_btnContinue);
+        }
+        delay(3000);
+        return new Overdraft_LoanProfileDetail(appiumDriver);
+    }
 
 }

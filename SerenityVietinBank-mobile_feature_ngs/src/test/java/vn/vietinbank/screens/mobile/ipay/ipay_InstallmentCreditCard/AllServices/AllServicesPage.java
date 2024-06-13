@@ -19,7 +19,7 @@ public class AllServicesPage extends BaseScreen {
 
     @Step("Đi tới màn hình Trả góp online từ Tất cả dịch vụ")
     public TraGopOnlineAllServices tapTaiKhoan() {
-         tap(btnTaiKhoan);
+        tap(btnTaiKhoan);
 
         return new TraGopOnlineAllServices(appiumDriver);
     }

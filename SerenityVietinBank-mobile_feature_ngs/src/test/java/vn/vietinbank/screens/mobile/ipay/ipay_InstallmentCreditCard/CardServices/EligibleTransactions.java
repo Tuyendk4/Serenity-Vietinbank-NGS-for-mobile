@@ -15,21 +15,21 @@ public class EligibleTransactions extends BaseScreen {
 
 
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeApplication[@name=\"VietinBank iPay\"]//XCUIElementTypeOther[2]//XCUIElementTypeButton")
-    private WebElement buttonQLTG ;
+    private WebElement buttonQLTG;
 
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeScrollView/XCUIElementTypeOther[1]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeButton")
-    private WebElement buttonQLTGThe ;
+    private WebElement buttonQLTGThe;
 
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeApplication[@name=\"VietinBank iPay\"]/XCUIElementTypeWindow[1]//XCUIElementTypeTable\n")
-    private WebElement tableDanhSachThe ;
+    private WebElement tableDanhSachThe;
 
     public EligibleTransactions(AppiumDriver appiumDriver) {
         super(appiumDriver);
     }
 
-    @Step ("Chọn quản lý trả góp")
-public InstallmentTransactionManagement chonQLTGTab() {
-    delay(10000);
+    @Step("Chọn quản lý trả góp")
+    public InstallmentTransactionManagement chonQLTGTab() {
+        delay(10000);
         tap(buttonQLTG);
 
         return new InstallmentTransactionManagement(appiumDriver);
@@ -92,11 +92,7 @@ public InstallmentTransactionManagement chonQLTGTab() {
     }
 
 
-
-
-
-
-    @Step ("Chọn giao dịch trả góp theo số tiền {string}")
+    @Step("Chọn giao dịch trả góp theo số tiền {string}")
     public InstallmentTransactionDetail chonGiaoDichDauTien(String soTien) {
         WebElement transactionElement = findElement(".//XCUIElementTypeStaticText[@name='" + soTien + "']");
         if (transactionElement != null) {
@@ -108,5 +104,5 @@ public InstallmentTransactionManagement chonQLTGTab() {
     }
 
 
-    }
+}
 

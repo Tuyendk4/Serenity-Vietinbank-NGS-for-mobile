@@ -22,6 +22,20 @@ public class ResultPage extends BaseScreen {
         super(appiumDriver);
     }
 
+//    @Step("Nhận thông báo thành công")
+//    public ResultPage nhanThongBaoThanhCong() {
+//        delay(5000);
+//        String expectedText = "đã được tiếp nhận";
+//        try {
+//            String actualText = txtKQ.getText();
+//            System.out.println(actualText);
+//            assertTrue("Đăng ký thành công.", actualText.contains(expectedText));
+//        } catch (NoSuchElementException e) {
+//            fail("Đăng ký không thành công.");
+//        }
+//        return new ResultPage(appiumDriver);
+//    }
+
     @Step("Nhận thông báo thành công")
     public void nhanThongBaoThanhCong() {
 
@@ -34,9 +48,12 @@ public class ResultPage extends BaseScreen {
         }
     }
 
+
     @Step("Về trang chủ")
-    public void veTrangChu() {
+    public ResultPage veTrangChu() {
         delay(5000);
         tap(btnBackHome);
+        return new ResultPage(appiumDriver);
     }
+
 }

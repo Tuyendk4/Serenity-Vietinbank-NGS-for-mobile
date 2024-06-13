@@ -1,7 +1,6 @@
 package vn.vietinbank.steps.mobile.ipay.M7S02_InstallmentCreditCardSteps;
 
 import io.cucumber.java.en.When;
-
 import vn.vietinbank.steps.mobile.ipay.base.BaseStep;
 
 

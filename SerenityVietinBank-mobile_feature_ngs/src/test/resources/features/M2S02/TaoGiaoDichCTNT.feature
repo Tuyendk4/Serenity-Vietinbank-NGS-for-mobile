@@ -1,6 +1,7 @@
 # language: vi
 @transfer
 Tính năng: M2S02 - Chuyển tiền ngoại tệ
+
   Bối cảnh:
     Cho Mở VTB iPayApp
     Khi Thực hiện đăng nhập với khi đã đăng nhập một lần với mật khẩu "12121212"

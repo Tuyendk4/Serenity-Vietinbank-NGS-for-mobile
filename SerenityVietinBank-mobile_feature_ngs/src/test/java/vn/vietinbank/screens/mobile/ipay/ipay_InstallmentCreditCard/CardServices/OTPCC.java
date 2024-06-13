@@ -41,7 +41,6 @@ public class OTPCC extends BaseScreen {
     public WebElement btnHoanThanh;
 
 
-
     public OTPCC(AppiumDriver appiumDriver) {
         super(appiumDriver);
     }

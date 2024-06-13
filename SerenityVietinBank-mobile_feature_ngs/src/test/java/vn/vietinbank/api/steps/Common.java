@@ -1,16 +1,17 @@
 package vn.vietinbank.api.steps;
 
+import io.cucumber.java.en.And;
+import io.cucumber.java.en.Given;
+import net.serenitybdd.core.Serenity;
+import vn.vietinbank.api.common.CommonAPI;
+
+import java.util.Map;
+
 import static vn.vietinbank.api.common.HeaderHelper.headersDefault;
 import static vn.vietinbank.api.configs.GetDataConstants.HEADERS;
 import static vn.vietinbank.api.configs.QRSmartPOS.Constants.X_IBM_CLIENT_ID;
 import static vn.vietinbank.api.configs.QRSmartPOS.Constants.X_IBM_CLIENT_SECRET;
 import static vn.vietinbank.api.utils.ConvertData.decodeBase64String;
-
-import vn.vietinbank.api.common.CommonAPI;
-import io.cucumber.java.en.And;
-import io.cucumber.java.en.Given;
-import java.util.Map;
-import net.serenitybdd.core.Serenity;
 
 public class Common extends CommonAPI {
 

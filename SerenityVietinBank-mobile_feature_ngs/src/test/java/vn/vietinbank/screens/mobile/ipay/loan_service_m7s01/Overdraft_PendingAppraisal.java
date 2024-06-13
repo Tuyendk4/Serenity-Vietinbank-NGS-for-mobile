@@ -5,7 +5,7 @@ import vn.vietinbank.screens.mobile.base.BaseScreen;
 
 public class Overdraft_PendingAppraisal extends BaseScreen {
 
-  public Overdraft_PendingAppraisal(AppiumDriver appiumDriver) {
-    super(appiumDriver);
-  }
+    public Overdraft_PendingAppraisal(AppiumDriver appiumDriver) {
+        super(appiumDriver);
+    }
 }

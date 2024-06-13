@@ -1,14 +1,7 @@
 package vn.vietinbank.api.utils;
 
-import static vn.vietinbank.api.configs.GenDataConstants.*;
-import static vn.vietinbank.api.configs.GetDataConstants.*;
-import static vn.vietinbank.api.utils.GenerateDateTime.*;
-import static vn.vietinbank.api.utils.GenerateRandom.*;
-
 import com.jayway.jsonpath.JsonPath;
 import io.cucumber.datatable.DataTable;
-import java.util.List;
-import java.util.Objects;
 import net.serenitybdd.core.Serenity;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -16,6 +9,14 @@ import org.jetbrains.annotations.NotNull;
 import org.json.JSONException;
 import org.json.JSONObject;
 import vn.vietinbank.api.configs.PropertiesManager;
+
+import java.util.List;
+import java.util.Objects;
+
+import static vn.vietinbank.api.configs.GenDataConstants.*;
+import static vn.vietinbank.api.configs.GetDataConstants.*;
+import static vn.vietinbank.api.utils.GenerateDateTime.*;
+import static vn.vietinbank.api.utils.GenerateRandom.*;
 
 public class DataInput {
 

@@ -23,6 +23,7 @@ public class AccountListPage extends BaseScreen {
         delay(3000);
         WebElement buttonSoTKTheTD = findElement("//XCUIElementTypeStaticText[@name='" + soTaiKhoanTheTinDung + "']");
         tap(buttonSoTKTheTD);
-        return new CreditAccountPage(appiumDriver);}
+        return new CreditAccountPage(appiumDriver);
+    }
 
 }

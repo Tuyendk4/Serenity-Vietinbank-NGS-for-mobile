@@ -1,10 +1,10 @@
 package vn.vietinbank.api.steps.QRCode.transaction;
 
+import io.cucumber.java.en.And;
+import vn.vietinbank.api.common.CommonAPI;
+
 import static vn.vietinbank.api.configs.DataCommonAppRestService.BASE_URL_DEVELOPMENT;
 import static vn.vietinbank.api.configs.QRSmartPOS.APIPath.*;
-
-import vn.vietinbank.api.common.CommonAPI;
-import io.cucumber.java.en.And;
 
 public class qrTransInqSmartPos extends CommonAPI {
 

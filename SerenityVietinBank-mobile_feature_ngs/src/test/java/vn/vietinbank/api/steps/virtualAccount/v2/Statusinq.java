@@ -1,10 +1,10 @@
 package vn.vietinbank.api.steps.virtualAccount.v2;
 
+import io.cucumber.java.en.And;
+import vn.vietinbank.api.common.CommonAPI;
+
 import static vn.vietinbank.api.configs.DataCommonAppRestService.BASE_URL_DEVELOPMENT;
 import static vn.vietinbank.api.configs.QRSmartPOS.APIPath.*;
-
-import vn.vietinbank.api.common.CommonAPI;
-import io.cucumber.java.en.And;
 
 
 public class Statusinq extends CommonAPI {

@@ -48,7 +48,7 @@ public class CardList extends BaseScreen {
     }
 
     @Step("Chọn thẻ dựa trên số thẻ đầy đủ {string}")
-    public CardDetails chonTheTheoSo(String soThe){
+    public CardDetails chonTheTheoSo(String soThe) {
         tap(buttonXemTatCa);
         WebElement cardElement = findCardElement(soThe);
         if (cardElement != null) {
@@ -66,7 +66,7 @@ public class CardList extends BaseScreen {
         for (WebElement cardElement : cardElements) {
             String cardText = cardElement.getAttribute("name");
 
-            if (cardText.contains(lastFourDigits) ) {
+            if (cardText.contains(lastFourDigits)) {
                 System.out.println("return");
                 return cardElement;
             }

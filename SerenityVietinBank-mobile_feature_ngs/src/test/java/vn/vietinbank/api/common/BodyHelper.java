@@ -1,14 +1,15 @@
 package vn.vietinbank.api.common;
 
-import static vn.vietinbank.api.utils.ExcelActions.excelToJsonConverter;
-
 import io.cucumber.datatable.DataTable;
-import java.util.List;
-import java.util.Map;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.List;
+import java.util.Map;
+
+import static vn.vietinbank.api.utils.ExcelActions.excelToJsonConverter;
 
 public class BodyHelper {
 
