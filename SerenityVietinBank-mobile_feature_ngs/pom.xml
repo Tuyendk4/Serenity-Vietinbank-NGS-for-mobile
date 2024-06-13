@@ -94,7 +94,12 @@
             <artifactId>java-client</artifactId>
             <version>${appium.version}</version>
         </dependency>
-
+        <dependency>
+            <groupId>net.serenity-bdd</groupId>
+            <artifactId>serenity-ensure</artifactId>
+            <version>${serenity.version}</version>
+            <scope>test</scope>
+        </dependency>
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
@@ -120,7 +125,8 @@
             <version>${serenity.version}</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/net.serenity-bdd/serenity-single-page-report -->
+        <!-- https://mvnrepository.com/artifact/net.serenity-bdd/serenity-single-
+        -report -->
         <dependency>
             <groupId>net.serenity-bdd</groupId>
             <artifactId>serenity-single-page-report</artifactId>

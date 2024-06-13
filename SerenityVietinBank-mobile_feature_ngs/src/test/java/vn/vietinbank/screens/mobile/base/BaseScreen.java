@@ -1,9 +1,8 @@
 package vn.vietinbank.screens.mobile.base;
 
-import static org.junit.Assert.fail;
-
 import com.epam.reportportal.annotations.Step;
 import com.google.common.collect.ImmutableList;
+import io.appium.java_client.AppiumBy;
 import io.appium.java_client.AppiumBy.ByAndroidUIAutomator;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
@@ -19,16 +18,13 @@ import java.util.List;
 import javax.imageio.ImageIO;
 
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
+import net.serenitybdd.core.Serenity;
+import net.serenitybdd.screenplay.Actor;
+import net.serenitybdd.screenplay.ensure.Ensure;
+import net.thucydides.core.pages.PageObject;
 import net.thucydides.model.environment.SystemEnvironmentVariables;
 import net.thucydides.model.util.EnvironmentVariables;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.Point;
-import org.openqa.selenium.Rectangle;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Pause;
 import org.openqa.selenium.interactions.PointerInput;
 import org.openqa.selenium.interactions.PointerInput.Kind;
@@ -43,15 +39,18 @@ import org.slf4j.Logger;
 import vn.vietinbank.screens.mobile.ipay.ipay_common.Home;
 import vn.vietinbank.utils.helper.LogHelper;
 
+import static org.junit.Assert.*;
+
 public class BaseScreen {
 
   protected static final Logger logger = LogHelper.getLogger();
   private static final Duration SCROLL_DUR = Duration.ofMillis(1000);
   private static final double SCROLL_RATIO = 0.8;
   private static final int ANDROID_SCROLL_DIVISOR = 3;
-  private static final int defaultTimeOut = 60;
+  private static final int defaultTimeOut = 20;
   public static EnvironmentVariables env = SystemEnvironmentVariables.createEnvironmentVariables();
   protected AppiumDriver appiumDriver;
+  WebDriver mobileFacade;
 
   public BaseScreen(AppiumDriver appiumDriver) {
     this.appiumDriver = appiumDriver;
@@ -115,9 +114,11 @@ public class BaseScreen {
     } catch (Exception e) {
       logger.error("Cannot click on mobile element located by ''{}''. Root cause: {}",
           locator, e.getMessage());
+      assertNotNull(null);
 //      ReportPortal.emitLog("Cannot click clear text mobile element", LogLevel.ERROR.name(), new Date(),
 //          appiumDriver.getScreenshotAs(OutputType.FILE).getAbsoluteFile());
     }
+    Serenity.takeScreenshot();
   }
 
   public void click(String locator, int timeOut) {
@@ -780,4 +781,49 @@ public class BaseScreen {
     }
     return new Home(appiumDriver);
   }
+
+  public WebElement findElement_iosClassChain(String locator) {
+    WebElement element = null;
+    logger.info("Finding mobile element {}", locator);
+    try {
+      WebDriverWait wait = new WebDriverWait(appiumDriver, Duration.ofSeconds(defaultTimeOut));
+      element = wait.until(ExpectedConditions.presenceOfElementLocated(AppiumBy.ByIosClassChain.iOSClassChain(locator)));
+      logger.info("Found 1 mobile element {}", locator);
+    } catch (Exception e) {
+      logger.error("Cannot find mobile element {}. Root cause: {}", locator, e.getMessage());
+    }
+    return element;
+  }
+
+  public void click_iosClassChain(String locator) {
+    try {
+      logger.info("Click on mobile element located by {}", locator);
+      WebElement we = findElement_iosClassChain(locator);
+      we.click();
+      logger.info("Clicked on mobile element located by {} successfully", locator);
+    } catch (Exception e) {
+      logger.error("Cannot click on mobile element located by ''{}''. Root cause: {}",
+              locator, e.getMessage());
+//      ReportPortal.emitLog("Cannot click clear text mobile element", LogLevel.ERROR.name(), new Date(),
+//          appiumDriver.getScreenshotAs(OutputType.FILE).getAbsoluteFile());
+      assertNotNull(null);
+    }
+  }
+
+  public void sendKeys_iosClassChain(String locator, String text) {
+    WebElement element = findElement_iosClassChain(locator);
+    if (element != null) {
+      try {
+        element.clear();
+        element.sendKeys(text);
+        logger.info("Enter text ''{}'' to mobile element located by ''{}''", text, locator);
+      } catch (Exception e) {
+        logger.error("Cannot enter text {} into mobile element located by {}. Root cause: {}", text,
+                locator,
+                e.getMessage());
+        assertNotNull(null);
+      }
+    }
+  }
+
 }

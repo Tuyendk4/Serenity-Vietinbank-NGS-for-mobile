@@ -16,6 +16,7 @@ import net.thucydides.model.util.EnvironmentVariables;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.slf4j.Logger;
 import vn.vietinbank.utils.helper.LogHelper;
+import static net.thucydides.core.webdriver.ThucydidesWebDriverSupport.useDriver;
 
 public class MobileDriver {
 
@@ -111,6 +112,7 @@ public class MobileDriver {
       throw new RuntimeException(e);
     }
     logger.info("Driver: {}", driver);
+    useDriver(driver);
     return driver;
   }
 
