@@ -9,10 +9,10 @@ import vn.vietinbank.screens.mobile.ipay.loan_service_m7s01.PersonalInstalmentLo
 
 public class SuccessPopup extends BaseScreen {
 
-  private final String android_lblNotification = "";
+  private final String android_lblNotification = "//android.widget.TextView[@resource-id=\"com.vietinbank.ipay:id/tv_title\"]/following-sibling::android.widget.TextView";
   private final String ios_lblNotification = "//XCUIElementTypeStaticText[@name=\"Thành công\"]/following-sibling::XCUIElementTypeStaticText";
 
-  private final String android_btnAgree = "";
+  private final String android_btnAgree = "//android.widget.TextView[@resource-id=\"com.vietinbank.ipay:id/bt_right\" and @text=\"Đồng ý\"]";
   private final String ios_btnAgree = "//XCUIElementTypeButton[@name=\"Đồng ý\"]";
 
   public SuccessPopup(AppiumDriver appiumDriver) {
@@ -26,18 +26,17 @@ public class SuccessPopup extends BaseScreen {
     } else {
       lblNotification = findElement(ios_lblNotification);
     }
-    return lblNotification.getText();
+    return getText(lblNotification);
   }
 
   @Step("Nhấn Đồng ý")
   public PersonalInstalmentLoan_SuccessfulApplicationAppraisal clickAgreeButton() {
-    WebElement btnAgree = null;
     if (appiumDriver instanceof AndroidDriver) {
       click(android_btnAgree);
     } else {
       click(ios_btnAgree);
     }
-    delay(3000);
+    delay(5000);
     return new PersonalInstalmentLoan_SuccessfulApplicationAppraisal(appiumDriver);
   }
 }

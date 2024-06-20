@@ -6,7 +6,7 @@ import io.appium.java_client.android.AndroidDriver;
 
 public class TransactionApproval extends BaseScreen {
 
-  private final String android_txtOTPCode = "";
+  private final String android_txtOTPCode = "//android.widget.EditText[@resource-id=\"com.vietinbank.ipay:id/otp_editText\"]";
   private final String ios_txtOTPCode = "//XCUIElementTypeImage[@name=\"iconLineTrace\"]/parent::XCUIElementTypeOther/following-sibling::XCUIElementTypeOther";
 
 //  private final String android_ = "";
@@ -42,7 +42,7 @@ public class TransactionApproval extends BaseScreen {
 //  private final String android_ = "";
   private final String ios_btnKey0 = "//XCUIElementTypeKey[11]";
 
-  private final String android_btnConfirmAndFinish = "//android.widget.TextView[@resource-id=\"com.vietinbank.mobile.ipay:id/submit\"]";
+  private final String android_btnConfirmAndFinish = "//android.widget.Button[@text=\"Xác nhận & hoàn tất\"]";
   private final String ios_btnConfirmAndFinish = "//XCUIElementTypeButton[@name=\"Xác nhận & hoàn tất\"]";
 
   public TransactionApproval(AppiumDriver appiumDriver) {
@@ -104,6 +104,7 @@ public class TransactionApproval extends BaseScreen {
     } else {
       click(ios_btnConfirmAndFinish);
     }
+    delay(5000);
   }
 
 }

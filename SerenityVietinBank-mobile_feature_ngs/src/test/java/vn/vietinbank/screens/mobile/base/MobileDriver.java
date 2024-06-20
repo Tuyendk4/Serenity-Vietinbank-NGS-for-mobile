@@ -1,5 +1,8 @@
 package vn.vietinbank.screens.mobile.base;
 
+import static net.thucydides.core.webdriver.ThucydidesWebDriverSupport.getDriver;
+import static net.thucydides.core.webdriver.ThucydidesWebDriverSupport.useDriver;
+
 import com.jayway.jsonpath.JsonPath;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.InteractsWithApps;
@@ -26,6 +29,8 @@ public class MobileDriver {
   private static final String APPIUM_CONFIG_PATH =
       System.getProperty("user.dir") + File.separator + "src" + File.separator + "test"
           + File.separator + "resources" + File.separator + "appium_config" + JSON_EXTENSION;
+  private static final String APPIUM_LOG_FILE_PATH =
+      System.getProperty("user.dir") + File.separator + "test_log" + File.separator + "appium.log";
   public static EnvironmentVariables env = SystemEnvironmentVariables.createEnvironmentVariables();
   public static String APP_PATH = System.getProperty("user.dir") + File.separator + "apps" + File.separator;
   private static AppiumDriverLocalService service;
@@ -50,8 +55,8 @@ public class MobileDriver {
   private void startAppiumServer() {
     logger.info("Starting appium server");
     try {
-        service = AppiumDriverLocalService.buildService(
-          new AppiumServiceBuilder().withIPAddress(ADDRESS).usingAnyFreePort()
+      service = AppiumDriverLocalService.buildService(
+          new AppiumServiceBuilder().withLogFile(new File(APPIUM_LOG_FILE_PATH)).withIPAddress(ADDRESS).usingAnyFreePort()
               .usingDriverExecutable(new File(node_path)).
               withAppiumJS(new File(appium_path)));
       service.start();
@@ -107,6 +112,7 @@ public class MobileDriver {
         }
       }
       appiumDriver = driver;
+      useDriver(driver);
     } catch (Exception e) {
       throw new RuntimeException(e);
     }
@@ -128,6 +134,7 @@ public class MobileDriver {
       } catch (Exception e) {
         logger.error(e.getMessage());
       }
+      getDriver().quit();
       if(EnvironmentSpecificConfiguration.from(env)
           .getProperty("appium_server").equals("auto")) {
         stopAppiumServer();

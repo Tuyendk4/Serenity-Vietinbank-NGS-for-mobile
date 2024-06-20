@@ -7,7 +7,7 @@ import io.appium.java_client.android.AndroidDriver;
 
 public class Signup extends BaseScreen {
 
-  private final String android_btnLogin = "//android.widget.Button[@text=\"Đăng nhập/Đăng ký\" or @text=\"Đăng nhập\"]";
+  private final String android_btnLogin = "//android.widget.TextView[@text=\"Đăng nhập/đăng ký\" or @text=\"Đăng nhập\"]";
   private final String ios_btnLogin = "//XCUIElementTypeButton[@name=\"Đăng nhập/Đăng ký\" or @name=\"Đăng nhập\"]";
 
   public Signup(AppiumDriver appiumDriver) {

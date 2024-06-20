@@ -2,7 +2,6 @@ package vn.vietinbank.steps.mobile.ipay.common;
 
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
-import io.cucumber.java.vi.Khi;
 import vn.vietinbank.screens.mobile.ipay.ipay_common.Launcher;
 import vn.vietinbank.screens.mobile.ipay.ipay_common.OTP;
 import vn.vietinbank.screens.mobile.ipay.ipay_common.Signup;
@@ -25,8 +24,9 @@ public class LoginStepdefs extends BaseStep {
     home = otp.inputOTP(otpCode);
     home.advertisingPopup().close();
   }
+
   @When("Thực hiện đăng nhập với khi đã đăng nhập một lần với mật khẩu {string}")
-  public void login_with_password(String password){
+  public void login_with_password(String password) {
     OTP otp;
     otp = login.login_with_pass(password);
     home = otp.inputOTP("");

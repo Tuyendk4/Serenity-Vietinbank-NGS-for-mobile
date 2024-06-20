@@ -1,10 +1,11 @@
 package vn.vietinbank.screens.mobile.ipay.ipay_common;
 
-import vn.vietinbank.screens.mobile.base.BaseScreen;
 import com.epam.reportportal.annotations.Step;
+import vn.vietinbank.screens.mobile.base.BaseScreen;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import vn.vietinbank.screens.mobile.ipay.ipay_sections.ChangeAccountPopup;
+import vn.vietinbank.screens.mobile.ipay.ipay_sections.NotificationPopup;
 
 public class Login extends BaseScreen {
 
@@ -14,23 +15,30 @@ public class Login extends BaseScreen {
   private final String android_txtPassword = "//android.widget.EditText[@resource-id=\"com.vietinbank.ipay:id/edtContent\" and @text=\"Mật khẩu\"]";
   private final String ios_txtPassword = "//XCUIElementTypeSecureTextField[@value=\"Mật khẩu\"]";
 
-  private final String android_btnLogin = "//android.widget.Button[@resource-id=\"com.vietinbank.ipay:id/submit\" and @text=\"Đăng nhập\"]";
-  private final String ios_btnLogin = "//XCUIElementTypeButton[@name=\"Đăng nhập\"]";
+  private final String android_btnLogin = "//*[@text=\"Đăng nhập\" or @text=\"Đăng nhập/đăng ký\"]";
+  private final String ios_btnLogin = "//XCUIElementTypeButton[@name=\"Đăng nhập\" or @name=\"Đăng nhập/Đăng ký\"]";
 
   private final String android_lblLoginWithOtherAccount = "//*[contains(@text,\"Đăng nhập tài khoản khác\")]";
   private final String ios_lblLoginWithOtherAccount = "//*[contains(@name,\"Đăng nhập tài khoản khác\")]";
+
 
   public Login(AppiumDriver appiumDriver) {
     super(appiumDriver);
   }
 
+  @Step("Input user name: {userName}")
   private void inputUserName(String userName) {
     if (appiumDriver instanceof AndroidDriver) {
-      tapAt(30, 280);
-      String[] keys = userName.split("");
-      for (String key : keys) {
-        pressKey(key);
+      if(waitForElementVisible(android_txtUserName, 20)) {
+        sendKeys(android_txtUserName, userName);
+      } else {
+        tapAt(30, 280);
+        String[] keys = userName.split("");
+        for (String key : keys) {
+          pressKey(key);
+        }
       }
+
       ((AndroidDriver) appiumDriver).hideKeyboard();
       delay(300);
     } else {
@@ -38,19 +46,19 @@ public class Login extends BaseScreen {
     }
   }
 
+  @Step("Input password: {password}")
   private void inputPassword(String password) {
     if (appiumDriver instanceof AndroidDriver) {
-      tapAt(60, 680);
-      String[] keys = password.split("");
-      for (String key : keys) {
-//        if(key.equals("1")){
-//          tapAt(30, 1580);
-//        }
-//        if(key.equals("2")){
-//          tapAt(110, 1580);
-//        }
-        pressKey(key);
+      if(waitForElementVisible(android_txtPassword, 20)) {
+        sendKeys(android_txtPassword, password);
+      } else {
+        tapAt(60, 680);
+        String[] keys = password.split("");
+        for (String key : keys) {
+          pressKey(key);
+        }
       }
+
       ((AndroidDriver) appiumDriver).hideKeyboard();
       delay(600);
     } else {
@@ -58,14 +66,23 @@ public class Login extends BaseScreen {
     }
   }
 
+  @Step("Click Login button")
   private void clickLoginButton() {
     if (appiumDriver instanceof AndroidDriver) {
-//      click(android_btnLogin);
-      tapAt(150, 980);
+      tap(android_btnLogin);
+      if (notificationPopup().should_show_agree_button()) {
+        notificationPopup().clickAgreeButton();
+        delay(3000);
+        tap(android_btnLogin);
+      }
+//      tapAt(150, 980);
     } else {
-      click(ios_btnLogin);
-//      WebElementFacade btnLogin = find(ios_btnLogin);
-//      Click.on(ios_btnLogin);
+      tap(ios_btnLogin);
+      if (notificationPopup().should_show_agree_button()) {
+        notificationPopup().clickAgreeButton();
+        delay(3000);
+        tap(ios_btnLogin);
+      }
     }
   }
 
@@ -80,7 +97,15 @@ public class Login extends BaseScreen {
         click_change_account().clickYes();
       }
     }
-    hideKeyboard();
+    if (appiumDriver instanceof AndroidDriver) {
+      if (!waitForElementVisible(android_txtUserName, 10)) {
+        click(android_btnLogin);
+      }
+    } else {
+      if (!waitForElementVisible(ios_txtUserName, 10)) {
+        click(ios_btnLogin);
+      }
+    }
     inputUserName(userName);
     inputPassword(password);
     clickLoginButton();
@@ -90,10 +115,11 @@ public class Login extends BaseScreen {
   @Step("Nhấn Thay đổi tài khoản")
   public ChangeAccountPopup click_change_account() {
     if (appiumDriver instanceof AndroidDriver) {
-      click(android_lblLoginWithOtherAccount);
+      tap(android_lblLoginWithOtherAccount);
     } else {
       click(ios_lblLoginWithOtherAccount);
     }
+    delay(3000);
     return new ChangeAccountPopup(appiumDriver);
   }
 
@@ -104,4 +130,7 @@ public class Login extends BaseScreen {
     return new OTP(appiumDriver);
   }
 
+  public NotificationPopup notificationPopup() {
+    return new NotificationPopup(appiumDriver);
+  }
 }

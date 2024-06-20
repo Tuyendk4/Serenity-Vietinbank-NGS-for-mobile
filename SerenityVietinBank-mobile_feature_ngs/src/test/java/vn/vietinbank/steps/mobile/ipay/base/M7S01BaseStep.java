@@ -9,18 +9,10 @@ import vn.vietinbank.screens.mobile.ipay.ipay_common.Login;
 import vn.vietinbank.screens.mobile.ipay.loan_service_m7s01.LoanAndCreditServices;
 import vn.vietinbank.screens.mobile.ipay.loan_service_m7s01.PersonalInstalmentLoan;
 
-public class BaseStep {
-  protected static MobileDriver mobileDriver;
+public class M7S01BaseStep extends BaseStep {
 
-  protected static AppiumDriver appiumDriver;
+  protected static LoanAndCreditServices loanAndCreditServices;
 
-  protected static Login login;
+  protected static PersonalInstalmentLoan personalInstalmentLoan;
 
-  protected static Home home;
-
-  protected static AccountNumberList accountNumberList;
-
-  protected static String newestAccountNumber;
-
-  protected static TransferAndReceive transferAndReceive;
 }

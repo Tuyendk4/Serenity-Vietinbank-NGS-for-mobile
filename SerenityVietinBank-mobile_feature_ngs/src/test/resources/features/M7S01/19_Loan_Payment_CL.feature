@@ -1,7 +1,7 @@
-@TNDKTCCTSDBFlow
-Feature: M7S01 - Thấu chi sổ tiết kiệm - Trả nợ định kỳ
+@TNDKVTDFlow @loan19
+Feature: 18 - Vay tiêu dùng cá nhân - Trả nợ định kỳ vay tiêu dùng
 
-  Scenario Outline: Trả nợ định kỳ thấu chi sổ tiết kiệm
+  Scenario Outline: Trả nợ định kỳ khoản vay tiêu dùng
     Given Mở VTB iPayApp
     When Đăng nhập user "<user_name>", password "<password>", otp "<otp_code>"
     And Menu Dịch vụ vay và tín dụng

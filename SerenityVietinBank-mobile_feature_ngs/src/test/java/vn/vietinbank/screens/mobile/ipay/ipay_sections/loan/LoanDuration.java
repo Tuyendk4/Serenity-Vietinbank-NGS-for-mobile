@@ -17,7 +17,7 @@ public class LoanDuration extends BaseScreen {
     WebElement lblMonth;
     if(appiumDriver instanceof AndroidDriver) {
       lblMonth =  findElement(
-          "//android.widget.TextView[@resource-id=\"com.vietinbank.mobile.ipay:id/title_text\" and @text=\"Thời hạn vay\"]/parent::android.widget.LinearLayout/following-sibling::android.widget.LinearLayout//android.widget.TextView[@resource-id=\"com.vietinbank.mobile.ipay:id/tvLeft\"]");
+          "//android.widget.TextView[@resource-id=\"com.vietinbank.ipay:id/title_text\" and @text=\"Thời hạn vay\"]/parent::android.widget.LinearLayout/following-sibling::android.widget.LinearLayout//android.widget.TextView[@resource-id=\"com.vietinbank.ipay:id/tvLeft\"]");
     } else {
       lblMonth = findElement(
           "//XCUIElementTypeStaticText[@name=\"Thời hạn vay\" or @name=\"Chọn kỳ hạn\"]/parent::XCUIElementTypeOther/following-sibling::XCUIElementTypeScrollView//XCUIElementTypeStaticText[contains(@label, '" + month + "') or contains(@text, '" + month + "') or contains(@name, '" + month + "')]");
