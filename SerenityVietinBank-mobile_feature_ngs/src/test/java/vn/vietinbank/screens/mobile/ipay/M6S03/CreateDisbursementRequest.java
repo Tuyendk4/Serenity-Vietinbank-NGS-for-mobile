@@ -3,9 +3,13 @@ package vn.vietinbank.screens.mobile.ipay.M6S03;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
+import org.openqa.selenium.WebElement;
 import vn.vietinbank.screens.mobile.base.BaseScreen;
 
 public class CreateDisbursementRequest extends BaseScreen {
+
+    private final String ios_classChainLoanDemandInformationTxt = "**/XCUIElementTypeStaticText[`name == \"Thông tin nhu cầu vay\"`]";
+    private final String android_loanDemandInformationTxt = "//android.widget.TextView[@text=\"Thông tin nhu cầu vay\"]";
 
     private final String ios_disbursementPurposesDrp = "//XCUIElementTypeStaticText[@name=\"Chọn mục đích giải ngân\"]/../..";
     private final String android_disbursementPurposesDrp = "//android.widget.TextView[@text=\"Chọn mục đích giải ngân\"]";
@@ -28,6 +32,17 @@ public class CreateDisbursementRequest extends BaseScreen {
 
     public CreateDisbursementRequest(AppiumDriver appiumDriver) {
         super(appiumDriver);
+    }
+
+    public Boolean findLoanDemandInformationTxt(){
+        if(appiumDriver instanceof AndroidDriver) {
+            WebElement web_LoanDemandInformationTxt = findElement(android_loanDemandInformationTxt);
+            return web_LoanDemandInformationTxt.isDisplayed();
+        }else{
+            WebElement web_LoanDemandInformationTxt = findElement_iosClassChain(ios_classChainLoanDemandInformationTxt);
+            return web_LoanDemandInformationTxt.isDisplayed();
+        }
+
     }
 
     public void clickDisbursementPurposes(String purposes) {

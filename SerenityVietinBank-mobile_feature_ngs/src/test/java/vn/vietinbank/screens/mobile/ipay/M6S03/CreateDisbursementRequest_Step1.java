@@ -3,10 +3,13 @@ package vn.vietinbank.screens.mobile.ipay.M6S03;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
+import org.openqa.selenium.WebElement;
 import vn.vietinbank.screens.mobile.base.BaseScreen;
 
 public class CreateDisbursementRequest_Step1 extends BaseScreen {
 
+    private final String ios_classChainDisbursementInformationTxt = "**/XCUIElementTypeStaticText[`name == \"Thông tin giải ngân\"`]";
+    private final String android_disbursementInformationTxt = "//android.widget.TextView[@text=\"Thông tin giải ngân\"]";
 
     private final String ios_doneBtn = "//XCUIElementTypeButton[@name=\"Xong\"]";
 
@@ -35,6 +38,17 @@ public class CreateDisbursementRequest_Step1 extends BaseScreen {
 
     public CreateDisbursementRequest_Step1(AppiumDriver appiumDriver) {
         super(appiumDriver);
+    }
+
+    public Boolean findDisbursementInformationTxt(){
+        if(appiumDriver instanceof AndroidDriver) {
+            WebElement web_DisbursementInformationTxt = findElement(android_disbursementInformationTxt);
+            return web_DisbursementInformationTxt.isDisplayed();
+        }else{
+            WebElement web_DisbursementInformationTxt = findElement_iosClassChain(ios_classChainDisbursementInformationTxt);
+            return web_DisbursementInformationTxt.isDisplayed();
+        }
+
     }
 
     public void inputBeneficiaryAccount(String accountBeneficiary) {

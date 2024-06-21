@@ -3,9 +3,12 @@ package vn.vietinbank.steps.mobile.ipay.m6s03;
 
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import vn.vietinbank.screens.mobile.ipay.M6S03.*;
 import vn.vietinbank.screens.mobile.ipay.ipay_common.Home_M6S03;
 import vn.vietinbank.steps.mobile.ipay.base.BaseStep;
+
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class Stepdefs_M6S03 extends BaseStep {
     private Home_M6S03 home_m6S03;
@@ -32,9 +35,19 @@ public class Stepdefs_M6S03 extends BaseStep {
         loansForProductionAndBusiness_2 = loanAndCreditService.click_vay_san_xuat_kinh_doanh();
     }
 
+    @Then("Hiển thị danh sách hợp đồng")
+    public void should_show_contract_list() {
+        assertThat("Không Hiển thị danh sách hợp đồng",loansForProductionAndBusiness_2.findContractListTxt());
+    }
+
     @And("Chọn tạo yêu cầu giải ngân")
     public void createRequestLoanProductionAndBusiness() {
         createDisbursementRequest = loansForProductionAndBusiness_2.clickCreateRequest();
+    }
+
+    @Then("Hiển thị thông tin nhu cầu vay")
+    public void should_show_loan_demand_information() {
+        assertThat("Không Hiển thị thông tin nhu cầu vay",createDisbursementRequest.findLoanDemandInformationTxt());
     }
 
     @And("Chọn mục đích giải ngân {string}")
@@ -62,6 +75,11 @@ public class Stepdefs_M6S03 extends BaseStep {
         createDisbursementRequest_step1 = createDisbursementRequest.clickContinueCreatingDisbursementRequest();
     }
 
+    @Then("Hiển thị thông tin giải ngân")
+    public void should_show_disbursement_information() {
+        assertThat("Không Hiển thị thông tin giải ngân",createDisbursementRequest_step1.findDisbursementInformationTxt());
+    }
+
     @And("Nhập tài khoản thụ hưởng {string}")
     public void beneficiaryAccount(String accountBeneficiary) {
         createDisbursementRequest_step1.inputBeneficiaryAccount(accountBeneficiary);
@@ -85,6 +103,11 @@ public class Stepdefs_M6S03 extends BaseStep {
     @And("Chọn Đính kèm hoá đơn, hợp đồng")
     public void attachContractInvoice() {
         uploadInvoiceDocuments = createDisbursementRequest_step1.clickAttachContractInvoice();
+    }
+
+    @Then("Hiển thị tải lên hoá đơn chứng từ")
+    public void should_show_Upload_Invoices_And_Documents() {
+        assertThat("Không Hiển thị tải lên hoá đơn chứng từ",uploadInvoiceDocuments.findUploadInvoicesAndDocumentsTxt());
     }
 
     @And("Nhập Nhập mã số hóa đơn, hợp đồng {string}")
@@ -130,10 +153,5 @@ public class Stepdefs_M6S03 extends BaseStep {
     @Then("Thông báo giao dich thành công")
     public void notificationSuccess() {
         transactionResult.notificationSuccess();
-    }
-
-    @And("Quay về Home")
-    public void returnHomePage() {
-        loansForProductionAndBusiness_2 = transactionResult.backHomePage();
     }
 }

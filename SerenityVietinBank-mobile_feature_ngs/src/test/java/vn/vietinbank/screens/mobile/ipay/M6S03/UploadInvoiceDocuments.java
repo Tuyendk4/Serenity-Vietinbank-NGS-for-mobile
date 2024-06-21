@@ -10,6 +10,10 @@ import java.util.Date;
 import java.util.List;
 
 public class UploadInvoiceDocuments extends BaseScreen {
+
+    private final String ios_classChainUploadInvoicesAndDocumentsTxt = "**/XCUIElementTypeStaticText[`name == \"Tải lên hoá đơn, chứng từ\"`]";
+    private final String android_uploadInvoicesAndDocumentsTxt = "//android.widget.TextView[@text=\"Tải lên chứng từ hóa đơn\"]";
+
     private final String ios_invoiceAndContractCodesInp = "//XCUIElementTypeTextField[@value=\"Nhập mã số hoá đơn, hợp đồng\"]";
     private final String android_invoiceAndContractCodesInp = "//android.widget.EditText[@text=\"Nhập mã số hóa đơn, hợp đồng.\"]";
 
@@ -37,6 +41,17 @@ public class UploadInvoiceDocuments extends BaseScreen {
         super(appiumDriver);
     }
 
+
+    public Boolean findUploadInvoicesAndDocumentsTxt(){
+        if(appiumDriver instanceof AndroidDriver) {
+            WebElement web_UploadInvoicesAndDocumentsTxt = findElement(android_uploadInvoicesAndDocumentsTxt);
+            return web_UploadInvoicesAndDocumentsTxt.isDisplayed();
+        }else {
+            WebElement web_UploadInvoicesAndDocumentsTxt = findElement_iosClassChain(ios_classChainUploadInvoicesAndDocumentsTxt);
+            return web_UploadInvoicesAndDocumentsTxt.isDisplayed();
+        }
+    }
+
     public void inputInvoiceAndContractCodes(String txtInvoiceAndContractCodes) {
         if(appiumDriver instanceof AndroidDriver) {
             sendKeys(android_invoiceAndContractCodesInp, txtInvoiceAndContractCodes);
@@ -58,7 +73,9 @@ public class UploadInvoiceDocuments extends BaseScreen {
         if (appiumDriver instanceof IOSDriver) {
             click(ios_dateOnContractInvoiceDrp);
             String dateOnContractInvoiceChoose = "//XCUIElementTypeStaticText[@name=\"" + txtDateNow + "\"]";
-            click(dateOnContractInvoiceChoose);
+            List<WebElement> elementList = findElements(dateOnContractInvoiceChoose);
+            waitForElementVisible(elementList.get(elementList.size() -1),5);
+            click(elementList.get(elementList.size() -1));
         } else {
             click(android_dateOnContractInvoiceDrp);
             String dateOnContractInvoiceChoose = "//android.widget.TextView[@text=\"" + txtDateNow + "\"]";
@@ -86,7 +103,6 @@ public class UploadInvoiceDocuments extends BaseScreen {
             click(ios_fromTheLibraryBtn);
             click(ios_pictureChoose);
         }
-
     }
 
     public CreateDisbursementRequest_Step1 clickSave() {

@@ -13,7 +13,7 @@ import vn.vietinbank.screens.mobile.ipay.loan_service_m7s01.LoanAndCreditService
 
 @RunWith(CucumberSerenityRunner.class)
 @CucumberOptions(
-    features = "src/test/resources/features/M6S03/",
+    features = "src/test/resources/features/",
     plugin = {"pretty", "com.epam.reportportal.cucumber.StepReporter"},
     glue = {"vn.vietinbank.steps"})
 public class Runner {

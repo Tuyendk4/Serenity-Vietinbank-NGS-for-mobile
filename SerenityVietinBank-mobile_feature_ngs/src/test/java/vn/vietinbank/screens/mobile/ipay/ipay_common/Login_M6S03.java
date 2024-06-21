@@ -7,11 +7,8 @@ import vn.vietinbank.screens.mobile.base.BaseScreen;
 
 
 public class Login_M6S03 extends BaseScreen {
-  private final String android_SigupTxt = "//android.widget.TextView[@text=\"Đăng nhập/đăng ký\"]";
-  private final String ios_ClassChainSigupTxt = "**/XCUIElementTypeStaticText[`name == \"Đăng nhập/Đăng ký\"`]";
 
-  private  final String android_LoginTxt = "//android.widget.TextView[@text=\"Đăng nhập\"]";
-  private final String ios_ClassChainLoginTxt = "**/XCUIElementTypeStaticText[`name == \"Đăng nhập\"`]";
+  private static final int waitTimeOutMillisEnable = 3000;
 
   private final String android_UserOtherTxt = "//android.widget.TextView[@text=\"Đăng nhập tài khoản khác ?\"]";
   private final String ios_ClassChainUserOtherTxt = "**/XCUIElementTypeStaticText[`name == \"Đăng nhập tài khoản khác ?\"`]";
@@ -43,10 +40,7 @@ public class Login_M6S03 extends BaseScreen {
 
   public void login_with_M6S03(String userName, String password, String otpCode) {
     if (appiumDriver instanceof AndroidDriver) {
-      if(findElement(android_SigupTxt) != null){
-        click(android_SigupTxt);
-      }else{
-        click(android_LoginTxt);
+      if(findElement(android_UserOtherTxt) != null){
         click(android_UserOtherTxt);
         click(android_YesBtn);
       }
@@ -57,14 +51,10 @@ public class Login_M6S03 extends BaseScreen {
       click(android_ContinueBtn);
       //click(android_ClosePopupBtn);
     }else{
-      if(findElement_iosClassChain(ios_ClassChainSigupTxt) != null){
-        WebElement web_SigupTxt = findElement_iosClassChain(ios_ClassChainSigupTxt);
-        click(web_SigupTxt);
-      }else{
-        WebElement web_LoginTxt = findElement_iosClassChain(ios_ClassChainLoginTxt);
-        click(web_LoginTxt);
+      if(findElement_iosClassChain(ios_ClassChainUserOtherTxt) != null){
         WebElement web_UserOtherTxt = findElement_iosClassChain(ios_ClassChainUserOtherTxt);
-        click(web_UserOtherTxt);
+        tap(web_UserOtherTxt);
+
         WebElement web_YesBtn = findElement_iosClassChain(ios_ClassChainYesBtn);
         click(web_YesBtn);
       }
@@ -76,15 +66,19 @@ public class Login_M6S03 extends BaseScreen {
 
       WebElement web_LoginBtn = findElement_iosClassChain(ios_ClassChainLoginBtn);
       click(web_LoginBtn);
-      delay(3000);
+
+      delay(waitTimeOutMillisEnable);
+
       WebElement web_OTPInp = findElement_iosClassChain(ios_ClassChainOTPInp);
       sendKeys(web_OTPInp,otpCode);
-      delay(2000);
+
+      delay(waitTimeOutMillisEnable);
+
       WebElement web_CompleteBtn = findElement_iosClassChain(ios_ClassChainCompleteBtn);
       click(web_CompleteBtn);
+
       WebElement web_ClosePopupBtn = findElement_iosClassChain(ios_ClassChainClosePopupBtn);
       click(web_ClosePopupBtn);
     }
   }
-
 }

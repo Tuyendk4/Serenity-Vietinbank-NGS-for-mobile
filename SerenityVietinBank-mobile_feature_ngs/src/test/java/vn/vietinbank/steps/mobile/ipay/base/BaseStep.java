@@ -18,6 +18,8 @@ public class BaseStep {
 
   protected static Home home;
 
+  protected static LoanAndCreditServices loanAndCreditServices;
+
   protected static AccountNumberList accountNumberList;
 
   protected static String newestAccountNumber;

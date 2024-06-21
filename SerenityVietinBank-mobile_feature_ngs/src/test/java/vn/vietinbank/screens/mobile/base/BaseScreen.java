@@ -893,6 +893,8 @@ public class BaseScreen {
       logger.info("Found 1 mobile element {}", locator);
     } catch (Exception e) {
       logger.error("Cannot find mobile element {}. Root cause: {}", locator, e.getMessage());
+      ReportPortal.emitLog("Cannot find the mobile element", LogLevel.ERROR.name(), new Date(),
+              appiumDriver.getScreenshotAs(OutputType.FILE).getAbsoluteFile());
     }
     return element;
   }
