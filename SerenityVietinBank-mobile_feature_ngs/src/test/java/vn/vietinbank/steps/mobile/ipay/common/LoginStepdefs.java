@@ -2,7 +2,6 @@ package vn.vietinbank.steps.mobile.ipay.common;
 
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
-import io.cucumber.java.vi.Khi;
 import vn.vietinbank.screens.mobile.ipay.ipay_common.Launcher;
 import vn.vietinbank.screens.mobile.ipay.ipay_common.OTP;
 import vn.vietinbank.screens.mobile.ipay.ipay_common.Signup;

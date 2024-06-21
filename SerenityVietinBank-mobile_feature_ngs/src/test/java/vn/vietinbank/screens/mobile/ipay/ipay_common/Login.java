@@ -103,5 +103,4 @@ public class Login extends BaseScreen {
     clickLoginButton();
     return new OTP(appiumDriver);
   }
-
 }

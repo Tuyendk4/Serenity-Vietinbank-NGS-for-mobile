@@ -1,4 +1,4 @@
-@TTTCKTSDBFlow
+  @TTTCKTSDBFlow
 Feature: M7S01 - Thấu chi không có tài sản đảm bảo - Tất toán khoản vay
 
   Scenario Outline: Tất toán khoản vay thấu chi không có tài sản đảm bảo

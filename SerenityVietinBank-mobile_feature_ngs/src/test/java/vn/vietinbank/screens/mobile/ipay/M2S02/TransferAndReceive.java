@@ -2,6 +2,7 @@ package vn.vietinbank.screens.mobile.ipay.M2S02;
 
 import net.serenitybdd.annotations.Step;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import vn.vietinbank.screens.mobile.base.ScrollDirection;
 import io.appium.java_client.AppiumDriver;
 import net.serenitybdd.core.Serenity;
@@ -16,15 +17,6 @@ public class TransferAndReceive extends TransferElements {
 
     public String replaceXpath(String xpath, String value){
         return xpath.replace("%value", value);
-    }
-
-    public String getDynamicXpath(String locatorType, String... dynamicValues) {
-        locatorType = String.format(locatorType, (Object[]) dynamicValues);
-        return locatorType;
-    }
-
-    public By getByLocator(String locator, String text) {
-        return By.xpath(getDynamicXpath(locator, text));
     }
 
     public void choose_receiving_bank(String code_swift){
@@ -88,7 +80,6 @@ public class TransferAndReceive extends TransferElements {
 
     @Step
     public TransferAndReceive other_oversear_payment() {
-        System.out.println("aaaaaaaaaaaaaaaaaaa");
         tap(txtPurpose);
         txt_other_oversear_payment.click();
         Serenity.setSessionVariable("purpose_transfer").to(txt_popure_used.getText());

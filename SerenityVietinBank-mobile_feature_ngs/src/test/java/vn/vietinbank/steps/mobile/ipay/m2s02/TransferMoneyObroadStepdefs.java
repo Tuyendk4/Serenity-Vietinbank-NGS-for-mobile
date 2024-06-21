@@ -1,7 +1,6 @@
 package vn.vietinbank.steps.mobile.ipay.m2s02;
 
 import io.cucumber.java.en.Then;
-import io.cucumber.java.en.When;
 import io.cucumber.java.en.And;
 import vn.vietinbank.steps.mobile.ipay.base.BaseStep;
 
@@ -43,7 +42,6 @@ public class TransferMoneyObroadStepdefs extends BaseStep {
     }
 
     @Then("Xác nhận giao dịch")
-
     public void verify_transaction_confirmation() {
         transferAndReceive = transferAndReceive.verifyTransactionConfirmation();
     }
