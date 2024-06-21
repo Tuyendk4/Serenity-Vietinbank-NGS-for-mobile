@@ -15,11 +15,11 @@ public class HomeStepdefs extends BaseStep {
   }
 
   @And("Vào Danh sách tài khoản")
-  public void move_to_Account_Number_List() {
+  public void xmove_to_Account_Number_List() {
     accountNumberList = home.move_to_AccountNumberList();
   }
 
-  @Và("Di chuyển vào Chuyển tiền")
+  @And("Di chuyển vào Chuyển tiền")
   public void moveToTransfer(){
     transferAndReceive = home.favoriteServices().click_on_transfer_money();
   }

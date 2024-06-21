@@ -1,5 +1,5 @@
-@CLNBCBHFlow
-Feature: M7S01 - Vay tiêu dùng cá nhân - Nội bộ - Có bảo hiểm
+@CLNBCBHFlow @flow1 @loan02
+Feature: 02 - Vay tiêu dùng cá nhân - Nội bộ - Có bảo hiểm
 
   Scenario Outline: Thực hiện tạo vay tiêu dùng có ưu đãi thông qua tính toán khoản vay bằng tài khoản nội bộ
     Given Mở VTB iPayApp
@@ -42,8 +42,8 @@ Feature: M7S01 - Vay tiêu dùng cá nhân - Nội bộ - Có bảo hiểm
     And Hồ sơ vay tiêu dùng cá nhân - Email nhận hợp đồng "<receive_email>"
 
     Examples:
-      | user_name    | password | otp_code | number_of_money | number_of_months | edit_type | interest_rate | monthly_charge_amount          | interest_payable_total | principal_and_interest_payable_total | repayment_date | loan_purpose         | receive_email             | province      | district             | full_format_number_of_money | full_format_number_of_months | borrow_full_name | loan_status   | loan_purpose_not_tone |
-      | 711A57165998 | 12121212 | 888888   | 3000000         | 12               | EditText  | 5.2%/năm      | Từ 251,083 VND đến 263,000 VND | 84,500 VND             | 3,084,500 VND                        | 15             | Mua thiết bị di động | nhungauto1@mailinator.com | TINH AN GIANG | THANH PHO LONG XUYEN | 3,000,000 VND               | 12 tháng                     | CUSTOMER NAME    | Chờ thẩm định | Mua thiet bi di dong  |
+      | user_name         | password | otp_code | number_of_money | number_of_months | edit_type | interest_rate | monthly_charge_amount          | interest_payable_total | principal_and_interest_payable_total | repayment_date | loan_purpose         | receive_email             | province      | district             | full_format_number_of_money | full_format_number_of_months | borrow_full_name | loan_status   | loan_purpose_not_tone |
+      | nguyenthikimhoang | 12121212 | 888888   | 3000000         | 12               | EditText  | 5.2%/năm      | Từ 251,083 VND đến 263,000 VND | 84,500 VND             | 3,084,500 VND                        | 15             | Mua thiết bị di động | nhungauto1@mailinator.com | TINH AN GIANG | THANH PHO LONG XUYEN | 3,000,000 VND               | 12 tháng                     | CUSTOMER NAME    | Chờ thẩm định | Mua thiet bi di dong  |
 
   Scenario Outline: Xóa khoản vay tiêu dùng có bảo hiểm bằng tài khoản nội bộ
     Given Mở VTB iPayApp
@@ -57,5 +57,5 @@ Feature: M7S01 - Vay tiêu dùng cá nhân - Nội bộ - Có bảo hiểm
     Then MH Vay tiêu dùng cá nhân - Thông báo thành công: "Yêu cầu vay <full_format_number_of_money> để phục vụ mục đích Mua thiet bi di dong đã được hủy thành công. Xin vui lòng gửi lại yêu cầu vay mới phù hợp hơn với nhu cầu của Quý khách"
 
     Examples:
-      | user_name    | password | otp_code | loan_status   | full_format_number_of_money |
-      | 711A57165998 | 12121212 | 888888   | Chờ thẩm định | 3,000,000.00 VND            |
+      | user_name         | password | otp_code | loan_status   | full_format_number_of_money |
+      | nguyenthikimhoang | 12121212 | 888888   | Chờ thẩm định | 3,000,000.00 VND            |

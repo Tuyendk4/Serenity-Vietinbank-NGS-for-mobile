@@ -8,16 +8,16 @@ import vn.vietinbank.screens.mobile.ipay.ipay_sections.SuccessPopup;
 
 public class LoanProfile extends BaseScreen {
 
-  private final String android_lblLoanProfile = "//android.widget.TextView[@resource-id=\"com.vietinbank.mobile.ipay:id/tvPersonalLoanApplication\"]";
+  private final String android_lblLoanProfile = "//android.widget.TextView[@resource-id=\"com.vietinbank.ipay:id/tvPersonalLoanApplication\"]";
   private final String ios_lblLoanProfile = "//XCUIElementTypeButton[@name=\"Khoản vay đang được thẩm định\"]";
 
-  private final String android_btnAbort = "//android.widget.TextView[@resource-id=\"com.vietinbank.mobile.ipay:id/tvPersonalLoanCancel\" and @text=\"Hủy hồ sơ vay\"]";
+  private final String android_btnAbort = "//android.widget.TextView[@resource-id=\"com.vietinbank.ipay:id/tvPersonalLoanCancel\" and @text=\"Hủy hồ sơ vay\"]";
   private final String ios_btnAbort = "//XCUIElementTypeButton[@name=\"Hủy hồ sơ vay\"]";
 
-  private final String android_btnBackToHome = "//android.widget.Button[@resource-id=\"com.vietinbank.mobile.ipay:id/btnNext\" and @text=\"Về Trang chủ\"]";
+  private final String android_btnBackToHome = "//android.widget.Button[@resource-id=\"com.vietinbank.ipay:id/btnNext\" and @text=\"Về Trang chủ\"]";
   private final String ios_btnBackToHome = "//XCUIElementTypeButton[@name=\"Về trang chủ\"]";
 
-  private final String android_btnContactWithVietinBank = "//android.widget.Button[@resource-id=\"com.vietinbank.mobile.ipay:id/btnContactViettin\"] and @text=\"Liên hệ VietinBank\"";
+  private final String android_btnContactWithVietinBank = "//android.widget.Button[@resource-id=\"com.vietinbank.ipay:id/btnContactViettin\"] and @text=\"Liên hệ VietinBank\"";
   private final String ios_btnContactWithVietinBank = "//XCUIElementTypeButton[@name=\"Liên hệ VietinBank\"]";
 
   public LoanProfile(AppiumDriver appiumDriver) {
@@ -26,7 +26,7 @@ public class LoanProfile extends BaseScreen {
 
   public LoanProfileDetail viewLoanProfileDetail() {
     if(appiumDriver instanceof AndroidDriver) {
-      click(android_lblLoanProfile);
+      tap(android_lblLoanProfile);
     } else {
       click(ios_lblLoanProfile);
     }
@@ -35,7 +35,7 @@ public class LoanProfile extends BaseScreen {
 
   public void clickAbort() {
     if(appiumDriver instanceof AndroidDriver) {
-      click(android_btnAbort);
+      tap(android_btnAbort);
     } else {
       click(ios_btnAbort);
     }
@@ -43,7 +43,7 @@ public class LoanProfile extends BaseScreen {
 
   public void clickBackToHome() {
     if(appiumDriver instanceof AndroidDriver) {
-      click(android_btnBackToHome);
+      tap(android_btnBackToHome);
     } else {
       click(ios_btnBackToHome);
     }
@@ -51,7 +51,7 @@ public class LoanProfile extends BaseScreen {
 
   public void clickContactWithVietinBank() {
     if(appiumDriver instanceof AndroidDriver) {
-      click(android_btnContactWithVietinBank);
+      tap(android_btnContactWithVietinBank);
     } else {
       click(ios_btnContactWithVietinBank);
     }

@@ -8,7 +8,7 @@ import vn.vietinbank.screens.mobile.ipay.ipay_sections.loan.PendingLoanPopup;
 
 public class Overdraft extends BaseScreen {
 
-  private final String android_btnContinue = "";
+  private final String android_btnContinue = "//android.widget.Button[@resource-id=\"com.vietinbank.ipay:id/btnNext\" and @text=\"Tiếp tục\"]";
   private final String ios_btnContinue = "//XCUIElementTypeButton[@name=\"Tiếp tục\"]";
 
   public Overdraft(AppiumDriver appiumDriver) {

@@ -1,30 +1,36 @@
 package vn.vietinbank.screens.mobile.base;
 
+import static org.junit.Assert.fail;
+
 import com.epam.reportportal.annotations.Step;
+import com.epam.reportportal.listeners.LogLevel;
+import com.epam.reportportal.service.ReportPortal;
 import com.google.common.collect.ImmutableList;
-import io.appium.java_client.AppiumBy;
 import io.appium.java_client.AppiumBy.ByAndroidUIAutomator;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.nativekey.AndroidKey;
 import io.appium.java_client.android.nativekey.KeyEvent;
 import io.appium.java_client.ios.IOSDriver;
+import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.time.Duration;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import javax.imageio.ImageIO;
-
-import io.appium.java_client.pagefactory.AppiumFieldDecorator;
-import net.serenitybdd.core.Serenity;
-import net.serenitybdd.screenplay.Actor;
-import net.serenitybdd.screenplay.ensure.Ensure;
-import net.thucydides.core.pages.PageObject;
 import net.thucydides.model.environment.SystemEnvironmentVariables;
 import net.thucydides.model.util.EnvironmentVariables;
-import org.openqa.selenium.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.Point;
+import org.openqa.selenium.Rectangle;
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Pause;
 import org.openqa.selenium.interactions.PointerInput;
 import org.openqa.selenium.interactions.PointerInput.Kind;
@@ -39,8 +45,6 @@ import org.slf4j.Logger;
 import vn.vietinbank.screens.mobile.ipay.ipay_common.Home;
 import vn.vietinbank.utils.helper.LogHelper;
 
-import static org.junit.Assert.*;
-
 public class BaseScreen {
 
   protected static final Logger logger = LogHelper.getLogger();
@@ -50,7 +54,6 @@ public class BaseScreen {
   private static final int defaultTimeOut = 20;
   public static EnvironmentVariables env = SystemEnvironmentVariables.createEnvironmentVariables();
   protected AppiumDriver appiumDriver;
-  WebDriver mobileFacade;
 
   public BaseScreen(AppiumDriver appiumDriver) {
     this.appiumDriver = appiumDriver;
@@ -74,6 +77,8 @@ public class BaseScreen {
       logger.info("Found 1 mobile element {}", locator);
     } catch (Exception e) {
       logger.error("Cannot find mobile element {}. Root cause: {}", locator, e.getMessage());
+      ReportPortal.emitLog("Cannot find the mobile element", LogLevel.ERROR.name(), new Date(),
+          appiumDriver.getScreenshotAs(OutputType.FILE).getAbsoluteFile());
     }
     return element;
   }
@@ -114,11 +119,10 @@ public class BaseScreen {
     } catch (Exception e) {
       logger.error("Cannot click on mobile element located by ''{}''. Root cause: {}",
           locator, e.getMessage());
-      assertNotNull(null);
-//      ReportPortal.emitLog("Cannot click clear text mobile element", LogLevel.ERROR.name(), new Date(),
-//          appiumDriver.getScreenshotAs(OutputType.FILE).getAbsoluteFile());
+      ReportPortal.emitLog("Cannot click clear text mobile element", LogLevel.ERROR.name(),
+          new Date(),
+          appiumDriver.getScreenshotAs(OutputType.FILE).getAbsoluteFile());
     }
-    Serenity.takeScreenshot();
   }
 
   public void click(String locator, int timeOut) {
@@ -130,8 +134,9 @@ public class BaseScreen {
     } catch (Exception e) {
       logger.error("Cannot click on mobile element located by ''{}''. Root cause: {}",
           locator, e.getMessage());
-//      ReportPortal.emitLog("Cannot click clear text mobile element", LogLevel.ERROR.name(), new Date(),
-//          appiumDriver.getScreenshotAs(OutputType.FILE).getAbsoluteFile());
+      ReportPortal.emitLog("Cannot click clear text mobile element", LogLevel.ERROR.name(),
+          new Date(),
+          appiumDriver.getScreenshotAs(OutputType.FILE).getAbsoluteFile());
     }
   }
 
@@ -144,6 +149,9 @@ public class BaseScreen {
     } catch (Exception e) {
       logger.error("Cannot clear text mobile element located by ''{}''. Root cause: {}",
           locator, e.getMessage());
+      ReportPortal.emitLog("Cannot click clear text mobile element", LogLevel.ERROR.name(),
+          new Date(),
+          appiumDriver.getScreenshotAs(OutputType.FILE).getAbsoluteFile());
     }
   }
 
@@ -156,8 +164,8 @@ public class BaseScreen {
     } catch (Exception e) {
       logger.error("Cannot clear text mobile element located by ''{}''. Root cause: {}",
           locator, e.getMessage());
-//      ReportPortal.emitLog("Cannot clear text mobile element", LogLevel.ERROR.name(), new Date(),
-//          appiumDriver.getScreenshotAs(OutputType.FILE).getAbsoluteFile());
+      ReportPortal.emitLog("Cannot clear text mobile element", LogLevel.ERROR.name(), new Date(),
+          appiumDriver.getScreenshotAs(OutputType.FILE).getAbsoluteFile());
     }
   }
 
@@ -324,6 +332,22 @@ public class BaseScreen {
     if (element != null) {
       try {
         text = element.getText();
+        ReportPortal.emitLog("Text of element is " + text, LogLevel.INFO.name(), new Date());
+      } catch (Exception e) {
+        logger.error("Cannot get text of mobile element located by {}. Root cause: {}", locator,
+            e.getMessage());
+      }
+    }
+    return text;
+  }
+
+  public String getText(String locator, int timeOut) {
+    WebElement element = findElement(locator, timeOut);
+    String text = "";
+    if (element != null) {
+      try {
+        text = element.getText();
+        ReportPortal.emitLog("Text of element is " + text, LogLevel.INFO.name(), new Date());
       } catch (Exception e) {
         logger.error("Cannot get text of mobile element located by {}. Root cause: {}", locator,
             e.getMessage());
@@ -340,6 +364,8 @@ public class BaseScreen {
         logger.info("Text of mobile element {} is {}", we, text);
       } catch (Exception e) {
         logger.error("Cannot get text of mobile element {}. Root cause: {}", we, e.getMessage());
+        ReportPortal.emitLog("Cannot get text of mobile element", LogLevel.ERROR.name(), new Date(),
+            appiumDriver.getScreenshotAs(OutputType.FILE).getAbsoluteFile());
       }
     }
     return text;
@@ -379,6 +405,7 @@ public class BaseScreen {
 
   public void scrollTo(String text) {
     try {
+      delay(500);
       WebElement element = null;
       if (appiumDriver instanceof AndroidDriver) {
         String uiScrollable =
@@ -479,6 +506,24 @@ public class BaseScreen {
     return false;
   }
 
+  public boolean waitForElementInvisible(String locator, int timeOut) {
+    try {
+      logger.info("Waiting for mobile element {} to be invisible", locator);
+      WebDriverWait wait = new WebDriverWait(appiumDriver, Duration.ofSeconds(timeOut));
+      Boolean invisibleStatus = wait.until(
+          ExpectedConditions.invisibilityOfElementLocated(By.xpath(locator)));
+      if (invisibleStatus) {
+        logger.info("Mobile element located by {} is invisible", locator);
+        return true;
+      }
+    } catch (Exception e) {
+      logger.error(
+          "Cannot wait for mobile element located by {} to be invisible within {} second(s). Root cause: {}",
+          locator, timeOut, e.getMessage());
+    }
+    return false;
+  }
+
   public boolean waitForElementVisible(WebElement we, int timeOut) {
     try {
       logger.info("Waiting for element {} to be visible", we);
@@ -543,12 +588,13 @@ public class BaseScreen {
 
   public void clickBackButton() {
     if (appiumDriver instanceof AndroidDriver) {
-      String btnBack = "//android.widget.RelativeLayout[@resource-id=\"com.vietinbank.mobile.ipay:id/header_toolbar\"]/android.widget.ImageButton[@resource-id=\"com.vietinbank.mobile.ipay:id/btn_left\"]";
+      String btnBack = "//android.widget.RelativeLayout[@resource-id=\"com.vietinbank.ipay:id/header_toolbar\"]/android.widget.ImageButton[@resource-id=\"com.vietinbank.ipay:id/btn_left\"]";
       click(btnBack, 5);
     } else {
       String btnBack = "//*[@name=\"ic back blue\" or @name=\"ic back white\"]";
       click(btnBack, 5);
     }
+    delay(5000);
   }
 
   public void pressKey(String key) {
@@ -773,13 +819,70 @@ public class BaseScreen {
   @Step("Trở về màn hình Home")
   public Home go_to_Home() {
     if (appiumDriver instanceof AndroidDriver) {
-      String iconHome = "//android.widget.RelativeLayout[@resource-id=\"com.vietinbank.mobile.ipay:id/header_toolbar\"]/android.widget.ImageButton[@resource-id=\"com.vietinbank.mobile.ipay:id/btn_left\"]";
+      String iconHome = "//android.widget.ImageView[@resource-id=\"com.vietinbank.ipay:id/btn_home\"]";
       click(iconHome, 10);
     } else {
       String iconHome = "//XCUIElementTypeButton[@name=\"iconLineHome\"]";
       click(iconHome, 10);
     }
     return new Home(appiumDriver);
+  }
+
+  public boolean waitForElementText(String locator, String expectedText, int timeOut) {
+    try {
+      logger.info("Waiting for text ''{}'' of mobile element {} to be visible", expectedText,
+          locator);
+      WebDriverWait wait = new WebDriverWait(appiumDriver, Duration.ofSeconds(timeOut));
+      Boolean status = wait.until(ExpectedConditions.textToBe(By.xpath(locator), expectedText));
+      if (status) {
+        logger.info("Expected text ''{}'' of mobile element located by {} is visible", expectedText,
+            locator);
+        return true;
+      }
+    } catch (Exception e) {
+      logger.error(
+          "Cannot wait for text ''{}'' of mobile element located by {} to be visible within {} second(s). Root cause: {}",
+          expectedText, locator, timeOut, e.getMessage());
+    }
+    ReportPortal.emitLog("Cannot wait for mobile element text", LogLevel.ERROR.name(), new Date(),
+        appiumDriver.getScreenshotAs(OutputType.FILE).getAbsoluteFile());
+    return false;
+  }
+
+  public boolean verifyElementContainsText(String locator, String expectedText) {
+    WebElement we = findElement(locator);
+    try {
+      String actualText = we.getText();
+      if (actualText.contains(expectedText)) {
+        return true;
+      }
+    } catch (Exception ignored) {
+
+    }
+    ReportPortal.emitLog("Cannot verify mobile element contains text", LogLevel.ERROR.name(),
+        new Date(),
+        appiumDriver.getScreenshotAs(OutputType.FILE).getAbsoluteFile());
+    return false;
+  }
+
+  public boolean verifyElementContainsText(WebElement we, String expectedText) {
+    try {
+      String actualText = we.getText();
+      if (actualText.contains(expectedText)) {
+        return true;
+      }
+    } catch (Exception ignored) {
+
+    }
+    ReportPortal.emitLog("Cannot verify mobile element contains text", LogLevel.ERROR.name(),
+        new Date(),
+        appiumDriver.getScreenshotAs(OutputType.FILE).getAbsoluteFile());
+    return false;
+  }
+
+  public void attachmentScreenshot() {
+    ReportPortal.emitLog("Take screenshot", LogLevel.INFO.name(), new Date(),
+        appiumDriver.getScreenshotAs(OutputType.FILE).getAbsoluteFile());
   }
 
   public WebElement findElement_iosClassChain(String locator) {

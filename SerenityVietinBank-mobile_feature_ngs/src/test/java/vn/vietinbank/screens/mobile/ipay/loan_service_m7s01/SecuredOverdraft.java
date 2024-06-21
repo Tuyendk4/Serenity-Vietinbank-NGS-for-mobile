@@ -13,7 +13,7 @@ public class SecuredOverdraft extends BaseScreen {
   private final String android_chkTermAgreements = "";
   private final String ios_chkTermAgreements = "//XCUIElementTypeStaticText[@name=\"Tôi đã đọc & đồng ý với Quy định sản phẩm vay thấu chi online\"]/preceding-sibling::XCUIElementTypeButton[@name=\"iconChoiceCheckOff\"]";
 
-  private final String android_btnContinue = "";
+  private final String android_btnContinue = "//android.widget.Button[@resource-id=\"com.vietinbank.ipay:id/btnNext\" and @text=\"Tiếp tục\"]";
   private final String ios_btnContinue = "//XCUIElementTypeButton[@name=\"Tiếp tục\"]";
 
   public SecuredOverdraft(AppiumDriver appiumDriver) {
