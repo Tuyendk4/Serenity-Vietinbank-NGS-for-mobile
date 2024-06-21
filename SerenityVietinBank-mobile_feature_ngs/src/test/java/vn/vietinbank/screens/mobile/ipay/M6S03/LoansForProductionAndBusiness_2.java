@@ -7,7 +7,7 @@ import vn.vietinbank.screens.mobile.base.BaseScreen;
 
 public class LoansForProductionAndBusiness_2 extends BaseScreen {
 
-    private final String ios_btnCreateRequest = "**/XCUIElementTypeStaticText[`name == \"Tạo yêu cầu\"`][1]";
+    private final String ios_btnCreateRequest = "**/XCUIElementTypeStaticText[`name == \"Tạo yêu cầu giải ngân\"`][1]";
     private final String android_btnCreateRequest = "//android.widget.TextView[@text=\"Tạo yêu cầu\"]";
 
     private final String ios_histoyDisbursementBtn = "(//XCUIElementTypeStaticText[@name=\"Lịch sử giải ngân\"])[1]";

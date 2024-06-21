@@ -18,4 +18,6 @@ public class Hooks extends BaseStep {
   public void after() {
     mobileDriver.closeApplication();
   }
+
+
 }

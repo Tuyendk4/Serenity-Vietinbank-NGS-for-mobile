@@ -15,18 +15,24 @@ public class Stepdefs_M6S03 extends BaseStep {
     private LoansForProductionAndBusiness_2 loansForProductionAndBusiness_2;
     private TransactionIdentification transactionIdentification;
     private TransactionResult transactionResult;
+    private LoanAndCreditService loanAndCreditService;
 
     public Stepdefs_M6S03() {
         super();
     }
 
-    @And("Chọn Vay sản xuất kinh doanh")
-    public void moveToLoansForProductionAndBusiness() {
+    @And("Chọn Dịch vụ vay và tín dụng")
+    public void ChooseLoanAndCreditService() {
         home_m6S03 = new Home_M6S03(appiumDriver);
-        loansForProductionAndBusiness_2 = home_m6S03.click_vay_san_xuat_kinh_doanh();
+        loanAndCreditService = home_m6S03.click_dich_vu_vay_va_tin_dung();
     }
 
-    @And("Chọn tạo yêu cầu")
+    @And("Chọn Vay sản xuất kinh doanh")
+    public void moveToLoansForProductionAndBusiness() {
+        loansForProductionAndBusiness_2 = loanAndCreditService.click_vay_san_xuat_kinh_doanh();
+    }
+
+    @And("Chọn tạo yêu cầu giải ngân")
     public void createRequestLoanProductionAndBusiness() {
         createDisbursementRequest = loansForProductionAndBusiness_2.clickCreateRequest();
     }

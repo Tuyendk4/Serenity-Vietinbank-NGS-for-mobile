@@ -107,12 +107,12 @@ public class MobileDriver {
           driver = new IOSDriver(new URL("http://127.0.0.1:4723/"), dc);
         }
       }
+      useDriver(driver);
       appiumDriver = driver;
     } catch (Exception e) {
       throw new RuntimeException(e);
     }
     logger.info("Driver: {}", driver);
-    useDriver(driver);
     return driver;
   }
 
@@ -130,6 +130,7 @@ public class MobileDriver {
       } catch (Exception e) {
         logger.error(e.getMessage());
       }
+      appiumDriver.quit();
       if(EnvironmentSpecificConfiguration.from(env)
           .getProperty("appium_server").equals("auto")) {
         stopAppiumServer();

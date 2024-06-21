@@ -1,11 +1,12 @@
 Feature: M6S03 - Vay san xuat kinh doanh
 
-  @TC_001
+  @TC001
   Scenario Outline: Thực hiện vay san xuat kinh doanh
     Given Mở VTB iPayApp
     When Nhập user "<user_name>", password "<password>", otp "<otp_code>"
+    And Chọn Dịch vụ vay và tín dụng
     And Chọn Vay sản xuất kinh doanh
-    And Chọn tạo yêu cầu
+    And Chọn tạo yêu cầu giải ngân
     And Chọn mục đích giải ngân "<disbursement purposes>"
     And Chọn tài khoản trả nợ gốc và lãi mặc định
     And Chọn thời hạn trả nợ gốc "<principal RepaymentPeriod>"
@@ -30,5 +31,6 @@ Feature: M6S03 - Vay san xuat kinh doanh
 #    And Chọn lịch sử giải ngân
 
     Examples:
-      | user_name  | password | otp_code | disbursement purposes                          | principal RepaymentPeriod | regular Automatic Repayment Date | account Number | beneficiary Bank | beneficiary Amount | Content  | invoice And Contract Codes | invoice And Contract Amount |
-      | lieukhuong | 12121212 | 888888   | Thanh toán chi phí khác phục vụ hoạt động SXKD | 5 tháng                   | 15                               | 106004176150   | VietinBank       | 1000000            | Vay SXKD | ABC12345                   | 1000000                     |
+      | user_name | password | otp_code | disbursement purposes                          | principal RepaymentPeriod | regular Automatic Repayment Date | account Number | beneficiary Bank | beneficiary Amount | Content  | invoice And Contract Codes | invoice And Contract Amount |
+      | vtb12     | 12121212 | 888888   | Thanh toán chi phí khác phục vụ hoạt động SXKD | 5 tháng                   | 15                               | 106004176150   | VietinBank       | 1000000            | Vay SXKD | ABC12345                   | 1000000                     |
+

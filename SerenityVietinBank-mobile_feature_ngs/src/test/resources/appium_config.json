@@ -1,4 +1,4 @@
 {
-  "node_path": "/usr/local/bin/node",
-  "appium_path": "/usr/local/lib/node_modules/appium"
+  "node_path": "/opt/homebrew/bin/node",
+  "appium_path": "/Users/phamvanbinh/node_modules/appium"
 }
