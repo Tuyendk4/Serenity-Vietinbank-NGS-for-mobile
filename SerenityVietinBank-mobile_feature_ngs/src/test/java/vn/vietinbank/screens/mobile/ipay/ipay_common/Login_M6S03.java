@@ -2,6 +2,7 @@ package vn.vietinbank.screens.mobile.ipay.ipay_common;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
+import org.openqa.selenium.WebElement;
 import vn.vietinbank.screens.mobile.base.BaseScreen;
 
 
@@ -57,21 +58,32 @@ public class Login_M6S03 extends BaseScreen {
       //click(android_ClosePopupBtn);
     }else{
       if(findElement_iosClassChain(ios_ClassChainSigupTxt) != null){
-        click_iosClassChain(ios_ClassChainSigupTxt);
+        WebElement web_SigupTxt = findElement_iosClassChain(ios_ClassChainSigupTxt);
+        click(web_SigupTxt);
       }else{
-        click_iosClassChain(ios_ClassChainLoginTxt);
-        click_iosClassChain(ios_ClassChainUserOtherTxt);
-        click_iosClassChain(ios_ClassChainYesBtn);
+        WebElement web_LoginTxt = findElement_iosClassChain(ios_ClassChainLoginTxt);
+        click(web_LoginTxt);
+        WebElement web_UserOtherTxt = findElement_iosClassChain(ios_ClassChainUserOtherTxt);
+        click(web_UserOtherTxt);
+        WebElement web_YesBtn = findElement_iosClassChain(ios_ClassChainYesBtn);
+        click(web_YesBtn);
       }
+      WebElement web_UserInp = findElement_iosClassChain(ios_ClassChainUserInp);
+      sendKeys(web_UserInp,userName);
 
-      sendKeys_iosClassChain(ios_ClassChainUserInp,userName);
-      sendKeys_iosClassChain(ios_ClassChainPasswordInp,password);
-      click_iosClassChain(ios_ClassChainLoginBtn);
+      WebElement web_PasswordInp = findElement_iosClassChain(ios_ClassChainPasswordInp);
+      sendKeys(web_PasswordInp,password);
+
+      WebElement web_LoginBtn = findElement_iosClassChain(ios_ClassChainLoginBtn);
+      click(web_LoginBtn);
       delay(3000);
-      sendKeys_iosClassChain(ios_ClassChainOTPInp,otpCode);
+      WebElement web_OTPInp = findElement_iosClassChain(ios_ClassChainOTPInp);
+      sendKeys(web_OTPInp,otpCode);
       delay(2000);
-      click_iosClassChain(ios_ClassChainCompleteBtn);
-      click_iosClassChain(ios_ClassChainClosePopupBtn);
+      WebElement web_CompleteBtn = findElement_iosClassChain(ios_ClassChainCompleteBtn);
+      click(web_CompleteBtn);
+      WebElement web_ClosePopupBtn = findElement_iosClassChain(ios_ClassChainClosePopupBtn);
+      click(web_ClosePopupBtn);
     }
   }
 

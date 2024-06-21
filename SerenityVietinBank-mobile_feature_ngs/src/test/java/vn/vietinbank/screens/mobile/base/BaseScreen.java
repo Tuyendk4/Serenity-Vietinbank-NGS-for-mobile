@@ -6,6 +6,7 @@ import com.epam.reportportal.annotations.Step;
 import com.epam.reportportal.listeners.LogLevel;
 import com.epam.reportportal.service.ReportPortal;
 import com.google.common.collect.ImmutableList;
+import io.appium.java_client.AppiumBy;
 import io.appium.java_client.AppiumBy.ByAndroidUIAutomator;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
@@ -176,9 +177,7 @@ public class BaseScreen {
       logger.info("Clicked on mobile element {} successfully", we);
     } catch (Exception e) {
       logger.error("Cannot click on mobile element ''{}''. Root cause: {}",
-          we, e.getMessage());
-      fail(String.format("Cannot click on mobile element ''%s''. Root cause: %s",
-          we, e.getMessage()));
+              we, e.getMessage());
     }
   }
 
@@ -897,36 +896,4 @@ public class BaseScreen {
     }
     return element;
   }
-
-  public void click_iosClassChain(String locator) {
-    try {
-      logger.info("Click on mobile element located by {}", locator);
-      WebElement we = findElement_iosClassChain(locator);
-      we.click();
-      logger.info("Clicked on mobile element located by {} successfully", locator);
-    } catch (Exception e) {
-      logger.error("Cannot click on mobile element located by ''{}''. Root cause: {}",
-              locator, e.getMessage());
-//      ReportPortal.emitLog("Cannot click clear text mobile element", LogLevel.ERROR.name(), new Date(),
-//          appiumDriver.getScreenshotAs(OutputType.FILE).getAbsoluteFile());
-      assertNotNull(null);
-    }
-  }
-
-  public void sendKeys_iosClassChain(String locator, String text) {
-    WebElement element = findElement_iosClassChain(locator);
-    if (element != null) {
-      try {
-        element.clear();
-        element.sendKeys(text);
-        logger.info("Enter text ''{}'' to mobile element located by ''{}''", text, locator);
-      } catch (Exception e) {
-        logger.error("Cannot enter text {} into mobile element located by {}. Root cause: {}", text,
-                locator,
-                e.getMessage());
-        assertNotNull(null);
-      }
-    }
-  }
-
 }

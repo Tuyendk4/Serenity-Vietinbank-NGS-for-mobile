@@ -2,6 +2,7 @@ package vn.vietinbank.screens.mobile.ipay.ipay_common;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
+import org.openqa.selenium.WebElement;
 import vn.vietinbank.screens.mobile.base.BaseScreen;
 import vn.vietinbank.screens.mobile.ipay.M6S03.LoanAndCreditService;
 
@@ -20,7 +21,8 @@ public class Home_M6S03 extends BaseScreen {
     if(appiumDriver instanceof AndroidDriver) {
       click(android_btnLoanAndCreditService);
     } else {
-      click_iosClassChain(ios_classChainLoanAndCreditService);
+      WebElement web_LoanAndCreditService = findElement_iosClassChain(ios_classChainLoanAndCreditService);
+      click(web_LoanAndCreditService);
     }
     return new LoanAndCreditService(this.appiumDriver);
   }

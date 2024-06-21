@@ -136,9 +136,4 @@ public class Stepdefs_M6S03 extends BaseStep {
     public void returnHomePage() {
         loansForProductionAndBusiness_2 = transactionResult.backHomePage();
     }
-
-    @And("Chọn lịch sử giải ngân")
-    public void historyDisbursement() {
-        loansForProductionAndBusiness_2.clickDisbursementLoan();
-    }
 }
