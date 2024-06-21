@@ -1,12 +1,13 @@
 package vn.vietinbank.screens.mobile.ipay.loan_service_m7s01;
 
+import io.appium.java_client.AppiumBy.ByIosClassChain;
 import vn.vietinbank.screens.mobile.base.BaseScreen;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 
 public class TransactionResult extends BaseScreen {
 
-  private final String android_lblNotificationContent = "";
+  private final String android_lblNotificationContent = "//android.widget.TextView[@resource-id=\"com.vietinbank.ipay:id/tvNoteSuccess\"]";
   private final String ios_lblNotificationContent = "//XCUIElementTypeImage[@name=\"logoVietinFull\"]/following-sibling::XCUIElementTypeOther[1]/XCUIElementTypeStaticText";
 
   public TransactionResult(AppiumDriver appiumDriver) {

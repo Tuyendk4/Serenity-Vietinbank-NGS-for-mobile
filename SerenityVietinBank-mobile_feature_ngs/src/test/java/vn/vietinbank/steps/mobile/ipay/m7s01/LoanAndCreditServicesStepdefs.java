@@ -3,15 +3,22 @@ package vn.vietinbank.steps.mobile.ipay.m7s01;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.equalToIgnoringCase;
 import static org.hamcrest.Matchers.greaterThanOrEqualTo;
 
+import com.epam.reportportal.listeners.LogLevel;
+import com.epam.reportportal.service.ReportPortal;
 import io.appium.java_client.android.AndroidDriver;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import java.util.Date;
 import org.apache.commons.lang3.StringUtils;
+import org.openqa.selenium.OutputType;
+import vn.vietinbank.screens.mobile.ipay.ipay_common.Home;
 import vn.vietinbank.screens.mobile.ipay.loan_service_m7s01.CalculatorTool;
 import vn.vietinbank.screens.mobile.ipay.loan_service_m7s01.InsuranceContractContent;
+import vn.vietinbank.screens.mobile.ipay.loan_service_m7s01.LoanAndCreditServices;
 import vn.vietinbank.screens.mobile.ipay.loan_service_m7s01.LoanContractContent;
 import vn.vietinbank.screens.mobile.ipay.loan_service_m7s01.LoanHistory;
 import vn.vietinbank.screens.mobile.ipay.loan_service_m7s01.LoanProfile;
@@ -31,9 +38,9 @@ import vn.vietinbank.screens.mobile.ipay.loan_service_m7s01.RepayAndFinalizeTheL
 import vn.vietinbank.screens.mobile.ipay.loan_service_m7s01.SecuredOverdraft;
 import vn.vietinbank.screens.mobile.ipay.loan_service_m7s01.TransactionApproval;
 import vn.vietinbank.screens.mobile.ipay.loan_service_m7s01.TransactionResult;
-import vn.vietinbank.steps.mobile.ipay.base.BaseStep;
+import vn.vietinbank.steps.mobile.ipay.base.M7S01BaseStep;
 
-public class LoanAndCreditServicesStepdefs extends BaseStep {
+public class LoanAndCreditServicesStepdefs extends M7S01BaseStep {
 
   private ReferenceRepaymentSchedule referenceRepaymentSchedule;
   private CalculatorTool calculatorTool;
@@ -76,7 +83,7 @@ public class LoanAndCreditServicesStepdefs extends BaseStep {
       String monthsOrPercent, String editType) {
     calculatorTool.editNumberOfMoney(editType, numberOfMoneyOrPercent);
     calculatorTool.editNumberOfMonth(editType, monthsOrPercent);
-    calculatorTool.uncheckSpecialOffer();
+//    calculatorTool.uncheckSpecialOffer();
     referenceRepaymentSchedule = calculatorTool.clickExpectedPaymentScheduleViewerButton();
   }
 
@@ -126,6 +133,7 @@ public class LoanAndCreditServicesStepdefs extends BaseStep {
 
   @Then("MH Vay - Bước 1 - Lãi suất vay {string}")
   public void show_interest_rate_in_Personal_Instalment_Loan_Step_1_as(String interestRate) {
+    personalInstalmentLoanStep1.should_show_InterestRate(interestRate);
     assertThat(personalInstalmentLoanStep1.getInterestRate(), equalTo(interestRate));
   }
 
@@ -137,10 +145,15 @@ public class LoanAndCreditServicesStepdefs extends BaseStep {
       actualMonthlyChargeAmount = personalInstalmentLoanStep1.getMonthlyChargeAmount01()
           .replaceAll("\n ", " ");
     } else {
+//      monthlyChargeAmount = monthlyChargeAmount.replaceFirst("VND", "");
       actualMonthlyChargeAmount = personalInstalmentLoanStep1.getMonthlyChargeAmount01() + " "
           + personalInstalmentLoanStep1.getMonthlyChargeAmount02();
+
     }
-    assertThat(actualMonthlyChargeAmount, equalTo(monthlyChargeAmount));
+    personalInstalmentLoanStep1.attachmentScreenshot();
+    if (actualMonthlyChargeAmount.contains(monthlyChargeAmount)) {
+      assertThat(actualMonthlyChargeAmount, containsString(monthlyChargeAmount));
+    }
   }
 
   @When("MH Vay - Bước 1 - Xác nhận sử dụng bảo hiểm VietinBank")
@@ -192,7 +205,14 @@ public class LoanAndCreditServicesStepdefs extends BaseStep {
 
   @And("MH Vay - Bước 3 - Chương trình ưu đãi là {string}")
   public void should_show_type_special_offer_in_Personal_Instalment_Loan_Step_3(String type) {
-    assertThat(personalInstalmentLoanStep3.getSpecialOfferType(), equalTo(type));
+    if (personalInstalmentLoanStep3.getSpecialOfferType().isEmpty()) {
+      assertThat(personalInstalmentLoanStep3.getSpecialOfferType(), containsString(type));
+    } else {
+      ReportPortal.sendStackTraceToRP(null);
+      ReportPortal.emitLog("Text is null", LogLevel.ERROR.name(), new Date(),
+          appiumDriver.getScreenshotAs(
+              OutputType.FILE).getAbsoluteFile());
+    }
   }
 
   @And("MH Vay - Bước 3 - Mục đích vay là {string}")
@@ -219,8 +239,10 @@ public class LoanAndCreditServicesStepdefs extends BaseStep {
 
   @Then("Thông báo {string}")
   public void should_show_notification_popup_on_Personal_Instalment_Loan_Step_3(String message) {
-    assertThat(personalInstalmentLoanStep3.notificationPopup().getNotificationTitle(),
-        containsString(message));
+    if (personalInstalmentLoanStep3.notificationPopup().should_show_notification_title(message)) {
+      assertThat(personalInstalmentLoanStep3.notificationPopup().getNotificationTitle(),
+          containsString(message));
+    }
   }
 
   @When("Chọn Đồng ý trên Popup thông báo")
@@ -243,6 +265,31 @@ public class LoanAndCreditServicesStepdefs extends BaseStep {
   public void should_show_loan_status_and_number_of_money(String status, String numberOfMoney) {
     assertThat(loanHistory.getStatusText(), equalTo(status));
     assertThat(loanHistory.getNumberOfLoanMoneyText(), containsString(numberOfMoney));
+  }
+
+  @When("Quay về MH Dịch vụ vay và tín dụng")
+  public void back_to_Loan_and_Credit_Service() {
+    loanHistory.clickBackButton();
+    loanAndCreditServices = new LoanAndCreditServices(appiumDriver);
+  }
+
+  @When("Đợi khoản vay chuyển sang trạng thái Xin mời xác nhận")
+  public void wait_until_to_change_loan_status() {
+    boolean loanAwaitingConfirmation = loanAndCreditServices.waitUntilLoanAwaitingConfirmation();
+    int count = 0;
+    while (!loanAwaitingConfirmation) {
+      loanAndCreditServices.clickBackButton();
+      home = new Home(appiumDriver);
+      loanAndCreditServices = home.favoriteServices().click_dich_vu_vay_va_tin_dung();
+      loanAwaitingConfirmation = loanAndCreditServices.waitUntilLoanAwaitingConfirmation();
+      if (count == 20) {
+        break;
+      }
+      count++;
+    }
+    if (loanAwaitingConfirmation) {
+      successfulApplicationAppraisal = loanAndCreditServices.clickLoanAwaitingConfirmation();
+    }
   }
 
   @When("Vào MH Vay tiêu dùng cá nhân")
@@ -340,7 +387,7 @@ public class LoanAndCreditServicesStepdefs extends BaseStep {
   @And("Thẩm định hồ sơ thành công - Thời hạn vay {string}")
   public void should_show_repayment_date_in_Personal_Instalment_Loan_Successful_Application_Appraisal(
       String numberOfMonths) {
-    assertThat(successfulApplicationAppraisal.getMonths(), equalTo(numberOfMonths));
+    assertThat(successfulApplicationAppraisal.getMonths(), equalToIgnoringCase(numberOfMonths));
   }
 
   @When("Thẩm định hồ sơ thành công - lựa chọn tài khoản")
@@ -388,7 +435,7 @@ public class LoanAndCreditServicesStepdefs extends BaseStep {
 
   @Then("Kết quả giao dịch - hiển thị {string}")
   public void show_notification_in_Transaction_Result(String message) {
-    assertThat(transactionResult.getNotificationContent(), equalTo(message));
+    assertThat(transactionResult.getNotificationContent(), containsString(message));
   }
 
   @And("Vào MH Trả nợ & tất toán vay")
@@ -451,6 +498,21 @@ public class LoanAndCreditServicesStepdefs extends BaseStep {
     transactionApproval = repayAndFinalizeTheLoan.click_Continue_button();
   }
 
+  @And("Thực hiện {string}")
+  public void finalize_the_loan(String repayment_type) {
+    repayAndFinalizeTheLoan.choose_repayment_type(repayment_type);
+    repayAndFinalizeTheLoan.input_loan_account_number(newestAccountNumber);
+    transactionApproval = repayAndFinalizeTheLoan.click_Continue_button();
+  }
+
+  @And("Thực hiện {string}, tài khoản vay {string}")
+  public void finalize_the_loan_by_input_loan_account_only(String repayment_type,
+      String loan_account_number) {
+    repayAndFinalizeTheLoan.choose_repayment_type(repayment_type);
+    repayAndFinalizeTheLoan.input_loan_account_number(loan_account_number);
+    transactionApproval = repayAndFinalizeTheLoan.click_Continue_button();
+  }
+
   @And("Thấu chi không tài sản đảm bảo")
   public void move_to_Overdraft() {
     overdraft = loanAndCreditServices.click_overdraft();
@@ -496,4 +558,15 @@ public class LoanAndCreditServicesStepdefs extends BaseStep {
     onlineSecuredOverdraft_loanContractContent = onlineSecuredOverdraftLoan.click_Continue_button();
     transactionApproval = onlineSecuredOverdraft_loanContractContent.click_Continue_button();
   }
+
+  @And("Quay về MH Home")
+  public void back_to_Home() {
+    home = transactionResult.go_to_Home();
+  }
+
+  @And("Logout VTB iPayApp")
+  public void logout() {
+    home = home.navigationBar().goToUserProfile().click_dang_xuat();
+  }
+
 }

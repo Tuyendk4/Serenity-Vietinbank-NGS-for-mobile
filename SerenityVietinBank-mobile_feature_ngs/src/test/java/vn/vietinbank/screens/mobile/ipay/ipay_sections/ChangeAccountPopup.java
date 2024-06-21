@@ -7,10 +7,10 @@ import vn.vietinbank.screens.mobile.ipay.ipay_common.Signup;
 
 public class ChangeAccountPopup extends BaseScreen {
 
-  private final String android_btnYes = "//android.widget.Button[@text=\"Có\"]";
+  private final String android_btnYes = "//*[@text=\"Có\"]";
   private final String ios_btnYes = "//XCUIElementTypeButton[@name=\"Có\"]";
 
-  private final String android_btnNo = "//android.widget.Button[@text=\"Không\"]";
+  private final String android_btnNo = "//*[@text=\"Không\"]";
   private final String ios_btnNo = "//XCUIElementTypeButton[@name=\"Không\"]";
 
   public ChangeAccountPopup(AppiumDriver appiumDriver) {
@@ -19,7 +19,7 @@ public class ChangeAccountPopup extends BaseScreen {
 
   public Signup clickYes() {
     if (appiumDriver instanceof AndroidDriver) {
-      click(android_btnYes);
+      tap(android_btnYes);
     } else {
       click(ios_btnYes);
     }

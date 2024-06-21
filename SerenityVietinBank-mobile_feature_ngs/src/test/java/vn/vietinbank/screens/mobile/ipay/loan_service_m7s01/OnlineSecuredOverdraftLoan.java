@@ -9,25 +9,25 @@ import vn.vietinbank.screens.mobile.base.ScrollDirection;
 
 public class OnlineSecuredOverdraftLoan extends BaseScreen {
 
-  private final String android_txtIDNumber = "";
+  private final String android_txtIDNumber = "//android.widget.TextView[@resource-id=\"com.vietinbank.ipay:id/tvTitle\" and @text=\"Số giấy tờ tùy thân\"]/following-sibling::android.widget.LinearLayout/android.widget.EditText";
   private final String ios_txtIDNumber = "//XCUIElementTypeStaticText[@name=\"Số giấy tờ tùy thân\"]/following-sibling::XCUIElementTypeTextField";
 
-  private final String android_txtEmail = "";
+  private final String android_txtEmail = "//android.widget.EditText[@text=\"Email nhận hợp đồng\" or contains(@text, \"@\")]";
   private final String ios_txtEmail = "//XCUIElementTypeTextField[@value=\"Email nhận hợp đồng\" or contains(@value, \"@\")]";
 
-  private final String android_lblOverdraftAccountNumber = "";
+  private final String android_lblOverdraftAccountNumber = "//android.widget.TextView[@resource-id=\"com.vietinbank.ipay:id/lblFromAcc\" and @text=\"Tài khoản được cấp thấu chi\"]/following-sibling:://android.widget.TextView[@resource-id=\"com.vietinbank.ipay:id/tvAccountNo\"]";
   private final String ios_lblOverdraftAccountNumber = "//XCUIElementTypeStaticText[@name=\"Tài khoản được cấp thấu chi\"]/following-sibling::XCUIElementTypeStaticText";
 
-  private final String android_btnOverdraftAccountNumberDownArrow = "";
+  private final String android_btnOverdraftAccountNumberDownArrow = "//android.widget.TextView[@resource-id=\"com.vietinbank.ipay:id/lblFromAcc\" and @text=\"Tài khoản được cấp thấu chi\"]/parent::android.widget.LinearLayout/following-sibling::android.widget.ImageView[@resource-id=\"com.vietinbank.ipay:id/ivSelect\"]";
   private final String ios_btnOverdraftAccountNumberDownArrow = "//XCUIElementTypeStaticText[@name=\"Tài khoản được cấp thấu chi\"]/parent::XCUIElementTypeOther/preceding-sibling::XCUIElementTypeButton[@name=\"ic drop down blue\"]";
 
-  private final String android_lblBankingSavingBookNumber = "";
+  private final String android_lblBankingSavingBookNumber = "//android.widget.EditText[@resource-id=\"com.vietinbank.ipay:id/edtContent\" and @text=\"Sổ tiết kiệm đảm bảo\"]";
   private final String ios_lblBankingSavingBookNumber = "//XCUIElementTypeStaticText[@name=\"Sổ tiết kiệm đảm bảo\"]";
 
-  private final String android_btnBankingSavingBookNumberDownArrow = "";
+  private final String android_btnBankingSavingBookNumberDownArrow = "//android.widget.LinearLayout[@resource-id=\"com.vietinbank.ipay:id/wToAccountWidgetNew\"]//android.widget.ImageView[@resource-id=\"com.vietinbank.ipay:id/ivSelect\"]";
   private final String ios_btnBankingSavingBookNumberDownArrow = "//XCUIElementTypeStaticText[@name=\"Sổ tiết kiệm đảm bảo\"]/parent::XCUIElementTypeOther/preceding-sibling::XCUIElementTypeButton[@name=\"ic drop down blue\"]";
 
-  private final String android_txtNumberOfMoney = "";
+  private final String android_txtNumberOfMoney = "//android.widget.LinearLayout[@resource-id=\"com.vietinbank.ipay:id/wAmountWidget\"]//android.widget.EditText[@resource-id=\"com.vietinbank.ipay:id/edtContent\"]";
   private final String ios_txtNumberOfMoney = "//XCUIElementTypeTextField[@value=\"Số tiền vay\" or @value=\"100,000,000\"]";
 
   private final String android_txtLoanDuration = "";
@@ -36,13 +36,13 @@ public class OnlineSecuredOverdraftLoan extends BaseScreen {
   private final String android_txtInterestRate = "";
   private final String ios_txtInterestRate = "//XCUIElementTypeTextField[@value=\"Lãi suất vay\"]";
 
-  private final String android_btnLoanPurpose = "//android.widget.TextView[@resource-id=\"com.vietinbank.mobile.ipay:id/edtContent\" and @text=\"Mục đích vay\"]/parent::android.widget.LinearLayout";
+  private final String android_btnLoanPurpose = "//android.widget.TextView[@resource-id=\"com.vietinbank.ipay:id/tvTitle\" and @text=\"Mục đích vay\"]/following-sibling::android.widget.LinearLayout/android.widget.ImageView[@resource-id=\"com.vietinbank.ipay:id/ivSelect\"]";
   private final String ios_btnLoanPurpose = "//XCUIElementTypeStaticText[@name=\"Mục đích vay\"]/parent::XCUIElementTypeOther/preceding-sibling::XCUIElementTypeButton[@name=\"ic drop down blue\"]";
 
-  private final String android_chkTermAgree = "";
+  private final String android_chkTermAgree = "//android.widget.CheckBox[@resource-id=\"com.vietinbank.ipay:id/cboChon_dieukhoan\"]";
   private final String ios_chkTermAgree = "//XCUIElementTypeStaticText[@name=\"Tôi cam kết tài sản đảm bảo (sổ tiết kiệm) thuộc sở hữu riêng hoặc được sự đồng ý của các đồng chủ sở hữu (nếu có.\"]/preceding-sibling::XCUIElementTypeButton[@name=\"iconChoiceCheckOff\"]";
 
-  private final String android_btnContinue = "";
+  private final String android_btnContinue = "//android.widget.Button[@resource-id=\"com.vietinbank.ipay:id/btnNext\" and @text=\"Tiếp tục\"]";
   private final String ios_btnContinue = "//XCUIElementTypeButton[@name=\"Tiếp tục\"]";
 
   public OnlineSecuredOverdraftLoan(AppiumDriver appiumDriver) {
@@ -77,7 +77,7 @@ public class OnlineSecuredOverdraftLoan extends BaseScreen {
     List<WebElement> lblAccountNumbers;
     if (appiumDriver instanceof AndroidDriver) {
       lblAccountNumbers = findElements(
-          "//android.widget.TextView[@resource-id=\"com.vietinbank.mobile.ipay:id/title_text\"]/parent::android.widget.LinearLayout[@resource-id=\"com.vietinbank.mobile.ipay:id/view_header\"]/following-sibling::android.widget.LinearLayout//android.widget.TextView");
+          "//android.widget.TextView[@resource-id=\"com.vietinbank.ipay:id/title_text\"]/parent::android.widget.LinearLayout/following-sibling::android.widget.LinearLayout/androidx.recyclerview.widget.RecyclerView[@resource-id=\"com.vietinbank.ipay:id/recycler_view\"]//android.widget.TextView[@resource-id=\"com.vietinbank.ipay:id/tvAccountNo\"]");
     } else {
       lblAccountNumbers = findElements(
           "//XCUIElementTypeStaticText[@name=\"Chọn tài khoản\"]/parent::XCUIElementTypeOther/following-sibling::XCUIElementTypeScrollView//XCUIElementTypeButton/following-sibling::XCUIElementTypeStaticText");
@@ -111,7 +111,7 @@ public class OnlineSecuredOverdraftLoan extends BaseScreen {
     List<WebElement> lblBankingSavingBookNumbers;
     if (appiumDriver instanceof AndroidDriver) {
       lblBankingSavingBookNumbers = findElements(
-          "");
+          "//android.widget.TextView[@resource-id=\"com.vietinbank.ipay:id/title_text\"]/parent::android.widget.LinearLayout/following-sibling::android.widget.LinearLayout/androidx.recyclerview.widget.RecyclerView[@resource-id=\"com.vietinbank.ipay:id/recycler_view\"]//android.widget.TextView[@resource-id=\"com.vietinbank.ipay:id/tvAccountNo\"]");
     } else {
       lblBankingSavingBookNumbers = findElements(
           "//XCUIElementTypeStaticText[@name=\"Chọn tài khoản\"]/parent::XCUIElementTypeOther/following-sibling::XCUIElementTypeScrollView//XCUIElementTypeButton/following-sibling::XCUIElementTypeStaticText");
@@ -154,7 +154,7 @@ public class OnlineSecuredOverdraftLoan extends BaseScreen {
     List<WebElement> lblLoanPurposes;
     if (appiumDriver instanceof AndroidDriver) {
       lblLoanPurposes = findElements(
-          "//android.widget.TextView[@resource-id=\"com.vietinbank.mobile.ipay:id/title_text\"]/parent::android.widget.LinearLayout[@resource-id=\"com.vietinbank.mobile.ipay:id/view_header\"]/following-sibling::android.widget.LinearLayout//android.widget.TextView");
+          "//android.widget.TextView[@resource-id=\"com.vietinbank.ipay:id/title_text\" and @text=\"Chọn mục đích vay\"]/parent::android.widget.LinearLayout/following-sibling::android.widget.LinearLayout//android.widget.TextView[@resource-id=\"com.vietinbank.ipay:id/tvLeft\"]");
     } else {
       lblLoanPurposes = findElements(
           "//XCUIElementTypeStaticText[@name=\"Chọn mục đích vay\"]/parent::XCUIElementTypeOther/following-sibling::XCUIElementTypeScrollView//XCUIElementTypeStaticText");
@@ -170,7 +170,8 @@ public class OnlineSecuredOverdraftLoan extends BaseScreen {
 
   public void choose_a_Loan_Purpose(String loanPurpose) {
     if (appiumDriver instanceof AndroidDriver) {
-      click(android_btnLoanPurpose);
+      scrollTo("Mục đích vay");
+      tap(android_btnLoanPurpose);
     } else {
       click(ios_btnLoanPurpose);
     }

@@ -15,7 +15,7 @@ public class RepaymentDateSelection extends BaseScreen {
   public void chooseADate(String date) {
     List<WebElement> btnDates;
     if(appiumDriver instanceof AndroidDriver) {
-      btnDates = findElements("//android.widget.TextView[@resource-id=\"com.vietinbank.mobile.ipay:id/titleText\"]/parent::android.widget.LinearLayout[@resource-id=\"com.vietinbank.mobile.ipay:id/liTitle\"]/following-sibling::android.widget.LinearLayout/androidx.recyclerview.widget.RecyclerView[@resource-id=\"com.vietinbank.mobile.ipay:id/rcvDaysInMonth\"]//android.widget.TextView");
+      btnDates = findElements("//android.widget.TextView[@resource-id=\"com.vietinbank.ipay:id/titleText\" and @text=\"Chọn ngày trả nợ hàng tháng\"]/parent::android.widget.LinearLayout[@resource-id=\"com.vietinbank.ipay:id/liTitle\"]/following-sibling::android.widget.LinearLayout/androidx.recyclerview.widget.RecyclerView[@resource-id=\"com.vietinbank.ipay:id/rcvDaysInMonth\"]//android.widget.TextView");
     } else {
       btnDates = findElements("//XCUIElementTypeStaticText[@name=\"Chọn ngày trả nợ hàng tháng\"]/parent::XCUIElementTypeOther/following-sibling::XCUIElementTypeOther/XCUIElementTypeButton");
     }

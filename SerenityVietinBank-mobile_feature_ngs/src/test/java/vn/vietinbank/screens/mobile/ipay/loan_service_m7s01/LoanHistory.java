@@ -6,16 +6,16 @@ import io.appium.java_client.android.AndroidDriver;
 
 public class LoanHistory extends BaseScreen {
 
-  private final String android_btnConsumerLoan = "//android.widget.TextView[@resource-id=\"com.vietinbank.mobile.ipay:id/tv_status\" and @text=\"Chờ thẩm định\"]/parent::android.widget.LinearLayout";
+  private final String android_btnConsumerLoan = "//android.widget.TextView[@resource-id=\"com.vietinbank.ipay:id/tv_status\" and @text=\"Chờ thẩm định\"]/parent::android.widget.LinearLayout";
   private final String ios_btnConsumerLoan = "(//XCUIElementTypeStaticText[@name=\"Vay tiêu dùng\"])[1]/preceding-sibling::XCUIElementTypeButton";
 
-  private final String android_lblConsumerLoan = "(//android.widget.TextView[@resource-id=\"com.vietinbank.mobile.ipay:id/tv_name\"])[1]";
+  private final String android_lblConsumerLoan = "(//android.widget.TextView[@resource-id=\"com.vietinbank.ipay:id/tv_name\"])[1]";
   private final String ios_lblConsumerLoan = "(//XCUIElementTypeStaticText[@name=\"Vay tiêu dùng\"])[1]";
 
-  private final String android_lblStatus = "//android.widget.TextView[@resource-id=\"com.vietinbank.mobile.ipay:id/tv_status\" and @text=\"Chờ thẩm định\"]";
+  private final String android_lblStatus = "//android.widget.TextView[@resource-id=\"com.vietinbank.ipay:id/tv_status\" and @text=\"Chờ thẩm định\"]";
   private final String ios_lblStatus = "(//XCUIElementTypeStaticText[@name=\"Vay tiêu dùng\"])[1]/following-sibling::XCUIElementTypeOther/XCUIElementTypeStaticText";
 
-  private final String android_lblNumberOfLoanMoney = "//android.widget.TextView[@resource-id=\"com.vietinbank.mobile.ipay:id/tv_amount\" and contains(@text,\"Số tiền vay\")]";
+  private final String android_lblNumberOfLoanMoney = "//android.widget.TextView[@resource-id=\"com.vietinbank.ipay:id/tv_amount\" and contains(@text,\"Số tiền vay\")]";
   private final String ios_lblNumberOfLoanMoney = "(//XCUIElementTypeStaticText[contains(@name,\"Số tiền vay\")])[1]";
 
   public LoanHistory(AppiumDriver appiumDriver) {
@@ -24,7 +24,7 @@ public class LoanHistory extends BaseScreen {
 
   public LoanProfile clickConsumerLoan() {
     if(appiumDriver instanceof AndroidDriver){
-      click(android_btnConsumerLoan);
+      tap(android_btnConsumerLoan);
     } else {
       click(ios_btnConsumerLoan);
     }

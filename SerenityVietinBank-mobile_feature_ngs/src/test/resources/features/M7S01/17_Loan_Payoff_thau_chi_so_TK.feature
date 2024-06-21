@@ -1,7 +1,7 @@
-  @TTTCKTSDBFlow
-Feature: M7S01 - Thấu chi không có tài sản đảm bảo - Tất toán khoản vay
+@TTTCCTSDBFlow @flow1 @loan17
+Feature: 17 - Thấu chi có sổ tiết kiệm - Tất toán khoản vay
 
-  Scenario Outline: Tất toán khoản vay thấu chi không có tài sản đảm bảo
+  Scenario Outline: Tất toán khoản vay thấu chi có sổ tiết kiệm
     Given Mở VTB iPayApp
     When Đăng nhập user "<user_name>", password "<password>", otp "<otp_code>"
     And Vào Danh sách tài khoản
@@ -15,5 +15,5 @@ Feature: M7S01 - Thấu chi không có tài sản đảm bảo - Tất toán kho
     Then Kết quả giao dịch - hiển thị "Trả nợ/tất toán khoản vay thành công!"
 
     Examples:
-      | user_name | password | otp_code | repayment_type            | source_account_number |
-      | tritu8284 | 12121212 | 888888   | Tất toán - đóng khoản vay | 105004103990108       |
+      | user_name   | password | otp_code | repayment_type            | source_account_number |
+      | dai.tranthilien | 12121212 | 888888   | Tất toán - đóng khoản vay | 105006370198          |

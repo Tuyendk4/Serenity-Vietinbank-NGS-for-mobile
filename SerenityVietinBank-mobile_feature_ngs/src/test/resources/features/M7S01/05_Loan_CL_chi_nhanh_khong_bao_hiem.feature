@@ -1,5 +1,5 @@
-@CLCNKBHFlow
-Feature: M7S01 - Vay tiêu dùng cá nhân - Chi nhánh - Không bảo hiểm
+@CLCNKBHFlow @flow1 @loan05
+Feature: 05 - Vay tiêu dùng cá nhân - Chi nhánh - Không bảo hiểm
 
   Scenario Outline: Vay tiêu dùng không bảo hiểm bằng tài khoản chi nhánh
     Given Mở VTB iPayApp
@@ -41,7 +41,7 @@ Feature: M7S01 - Vay tiêu dùng cá nhân - Chi nhánh - Không bảo hiểm
 
     Examples:
       | user_name  | password | otp_code | number_of_money | number_of_months | edit_type | interest_rate | monthly_charge_amount          | interest_payable_total | principal_and_interest_payable_total | repayment_date | loan_purpose         | receive_email             | province      | district             | full_format_number_of_money | full_format_number_of_months | borrow_full_name | loan_status   | loan_purpose_not_tone |
-      | nhungauto4 | 12121212 | 888888   | 3000000         | 12               | EditText  | 15.9%/năm     | Từ 253,313 VND đến 289,750 VND | 258,378 VND            | 3,258,378 VND                        | 15             | Mua thiết bị di động | nhungauto4@mailinator.com | TINH AN GIANG | THANH PHO LONG XUYEN | 3,000,000 VND               | 12 tháng                     | CUSTOMER NAME    | Chờ thẩm định | Mua thiet bi di dong  |
+      | lechauhung | 12121212 | 888888   | 3000000         | 12               | EditText  | 15.9%/năm     | Từ 253,313 VND đến 289,750 VND | 258,378 VND            | 3,258,378 VND                        | 15             | Mua thiết bị di động | nhungauto4@mailinator.com | TINH AN GIANG | THANH PHO LONG XUYEN | 3,000,000 VND               | 12 tháng                     | CUSTOMER NAME    | Chờ thẩm định | Mua thiet bi di dong  |
 
   Scenario Outline: Xóa khoản vay tiêu dùng không bảo hiểm bằng tài khoản chi nhánh
     Given Mở VTB iPayApp
@@ -50,10 +50,10 @@ Feature: M7S01 - Vay tiêu dùng cá nhân - Chi nhánh - Không bảo hiểm
     * Vào MH Lịch sử vay
     * Vào MH Vay tiêu dùng cá nhân của khoản vay "<loan_status>"
     * MH Vay tiêu dùng cá nhân - Hủy khoản vay
-    Then MH Vay tiêu dùng cá nhân - Thông báo "Quý khách có chắc chắc muốn hủy hồ sơ vay?"
+    Then MH Vay tiêu dùng cá nhân - Thông báo "Quý khách có chắc chắn muốn hủy hồ sơ vay?"
     When MH Vay tiêu dùng cá nhân - Xác nhận hủy
     Then MH Vay tiêu dùng cá nhân - Thông báo thành công: "Yêu cầu vay <full_format_number_of_money> để phục vụ mục đích Mua thiet bi di dong đã được hủy thành công. Xin vui lòng gửi lại yêu cầu vay mới phù hợp hơn với nhu cầu của Quý khách"
 
     Examples:
       | user_name  | password | otp_code | loan_status   | full_format_number_of_money |
-      | nhungauto4 | 12121212 | 888888   | Chờ thẩm định | 3,000,000.00 VND            |
+      | lechauhung | 12121212 | 888888   | Chờ thẩm định | 3,000,000.00 VND            |

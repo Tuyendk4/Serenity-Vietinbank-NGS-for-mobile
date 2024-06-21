@@ -7,13 +7,13 @@ import org.openqa.selenium.WebElement;
 
 public class PendingLoanPopup extends BaseScreen {
 
-  private final String android_lblPendingLoan = "//android.widget.TextView[@resource-id=\"com.vietinbank.mobile.ipay:id/tvPopupResumeTitle\" and @text=\"Có khoản vay đang chờ\"]";
+  private final String android_lblPendingLoan = "//android.widget.TextView[@resource-id=\"com.vietinbank.ipay:id/tvPopupResumeTitle\" and @text=\"Có khoản vay đang chờ\"]";
   private final String ios_lblPendingLoan = "//XCUIElementTypeStaticText[@name=\"Có khoản vay đang chờ\"]";
 
-  private final String android_btnContinue = "//android.widget.Button[@resource-id=\"com.vietinbank.mobile.ipay:id/btnPopupResumeNext\" and @text=\"Tiếp tục mở khoản vay\"]";
+  private final String android_btnContinue = "//android.widget.Button[@resource-id=\"com.vietinbank.ipay:id/btnPopupResumeNext\" and @text=\"Tiếp tục mở khoản vay\"]";
   private final String ios_btnContinue = "//XCUIElementTypeButton[@name=\"Tiếp tục mở khoản vay\"]";
 
-  private final String android_btnRetry = "//android.widget.Button[@resource-id=\"com.vietinbank.mobile.ipay:id/btnPopupResumeCancel\" and @text=\"Thực hiện lại\"]";
+  private final String android_btnRetry = "//android.widget.Button[@resource-id=\"com.vietinbank.ipay:id/btnPopupResumeCancel\" and @text=\"Thực hiện lại\"]";
   private final String ios_btnRetry = "//XCUIElementTypeButton[@name=\"Thực hiện lại\"]";
 
   public PendingLoanPopup(AppiumDriver appiumDriver) {
@@ -22,7 +22,7 @@ public class PendingLoanPopup extends BaseScreen {
 
   public void clickContinue() {
     if(appiumDriver instanceof AndroidDriver){
-      click(android_btnContinue);
+      tap(android_btnContinue);
     } else {
       click(ios_btnContinue);
     }
@@ -30,7 +30,7 @@ public class PendingLoanPopup extends BaseScreen {
 
   public void clickRetry() {
     if(appiumDriver instanceof AndroidDriver){
-      click(android_btnRetry);
+      tap(android_btnRetry);
     } else {
       click(ios_btnRetry);
     }

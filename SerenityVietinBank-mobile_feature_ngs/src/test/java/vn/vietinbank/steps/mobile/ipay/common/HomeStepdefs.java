@@ -15,7 +15,7 @@ public class HomeStepdefs extends BaseStep {
   }
 
   @And("Vào Danh sách tài khoản")
-  public void move_to_Account_Number_List() {
+  public void xmove_to_Account_Number_List() {
     accountNumberList = home.move_to_AccountNumberList();
   }
 

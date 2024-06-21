@@ -9,10 +9,10 @@ import vn.vietinbank.screens.mobile.ipay.loan_service_m7s01.RepayAndFinalizeTheL
 
 public class AccountNumberSelection extends BaseScreen {
 
-  private final String android_txtSearchAccountNumber = "//android.widget.EditText[@resource-id=\"com.vietinbank.mobile.ipay:id/edtFinter\" and @text=\"Tìm kiếm theo tên ngân hàng\"]";
+  private final String android_txtSearchAccountNumber = "//android.widget.EditText[@resource-id=\"com.vietinbank.ipay:id/edtFinter\" and @text=\"Tìm kiếm theo tên ngân hàng\"]";
   private final String ios_txtSearchAccountNumber = "//XCUIElementTypeImage[@name=\"ic_search_gray\"]/preceding-sibling::XCUIElementTypeTextField";
 
-  private final String android_lblAccount = "//androidx.recyclerview.widget.RecyclerView[@resource-id=\"com.vietinbank.mobile.ipay:id/recyclerView\"]//android.widget.TextView";
+  private final String android_lblAccount = "//androidx.recyclerview.widget.RecyclerView[@resource-id=\"com.vietinbank.ipay:id/recyclerView\"]//android.widget.TextView";
   private final String ios_lblAccount = "//XCUIElementTypeStaticText[@name=\"Chọn tài khoản vay\" or @name=\"Chọn tài khoản\"]/parent::XCUIElementTypeOther/following-sibling::*//XCUIElementTypeStaticText";
   public AccountNumberSelection(AppiumDriver appiumDriver) {
     super(appiumDriver);

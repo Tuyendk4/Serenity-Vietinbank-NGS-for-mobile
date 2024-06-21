@@ -8,10 +8,10 @@ import org.openqa.selenium.WebElement;
 
 public class RepaymentSourceAccountNumberSelection extends BaseScreen {
 
-  private final String android_txtSearchAccountNumber = "//android.widget.EditText[@resource-id=\"com.vietinbank.mobile.ipay:id/edtFinter\" and @text=\"Tìm kiếm theo tên ngân hàng\"]";
+  private final String android_txtSearchAccountNumber = "//android.widget.EditText[@resource-id=\"com.vietinbank.ipay:id/edtFinter\" and @text=\"Tìm kiếm theo tên ngân hàng\"]";
   private final String ios_txtSearchAccountNumber = "//XCUIElementTypeImage[@name=\"ic_search_gray\"]/preceding-sibling::XCUIElementTypeTextField";
 
-  private final String android_lblAccount = "//androidx.recyclerview.widget.RecyclerView[@resource-id=\"com.vietinbank.mobile.ipay:id/recyclerView\"]//android.widget.TextView";
+  private final String android_lblAccount = "//androidx.recyclerview.widget.RecyclerView[@resource-id=\"com.vietinbank.ipay:id/recyclerView\"]//android.widget.TextView";
   private final String ios_lblAccount = "//XCUIElementTypeTable//XCUIElementTypeStaticText";
 
   public RepaymentSourceAccountNumberSelection(AppiumDriver appiumDriver) {

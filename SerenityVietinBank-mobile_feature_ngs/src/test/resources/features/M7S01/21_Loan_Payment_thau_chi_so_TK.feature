@@ -1,7 +1,7 @@
-@TNDKTCKTSDBFlow
-Feature: M7S01 - Thấu chi không tài sản đảm bảo - Trả nợ định kỳ
+@TNDKTCCTSDBFlow @loan21
+Feature: 20 - Thấu chi sổ tiết kiệm - Trả nợ định kỳ
 
-  Scenario Outline: Trả nợ định kỳ thấu chi không tải sản đảm bảo
+  Scenario Outline: Trả nợ định kỳ thấu chi sổ tiết kiệm
     Given Mở VTB iPayApp
     When Đăng nhập user "<user_name>", password "<password>", otp "<otp_code>"
     And Menu Dịch vụ vay và tín dụng

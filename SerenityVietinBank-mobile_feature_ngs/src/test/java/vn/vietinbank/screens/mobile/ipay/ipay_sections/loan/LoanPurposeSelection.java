@@ -15,7 +15,7 @@ public class LoanPurposeSelection extends BaseScreen {
   public void selectALoanPurpose(String purpose) {
     List<WebElement> lblLoanPurposes;
     if(appiumDriver instanceof AndroidDriver) {
-      lblLoanPurposes = findElements("//android.widget.TextView[@resource-id=\"com.vietinbank.mobile.ipay:id/title_text\"]/parent::android.widget.LinearLayout[@resource-id=\"com.vietinbank.mobile.ipay:id/view_header\"]/following-sibling::android.widget.LinearLayout//android.widget.TextView");
+      lblLoanPurposes = findElements("//android.widget.TextView[@resource-id=\"com.vietinbank.ipay:id/title_text\"]/parent::android.widget.LinearLayout[@resource-id=\"com.vietinbank.ipay:id/view_header\"]/following-sibling::android.widget.LinearLayout//android.widget.TextView");
     } else {
       lblLoanPurposes = findElements("//XCUIElementTypeStaticText[@name=\"Chọn mục đích vay\" or @name=\"Mục đích vay\"]/parent::XCUIElementTypeOther/following-sibling::XCUIElementTypeScrollView//XCUIElementTypeStaticText");
     }
