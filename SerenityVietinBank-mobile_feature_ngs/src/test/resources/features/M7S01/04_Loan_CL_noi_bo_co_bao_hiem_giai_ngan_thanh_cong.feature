@@ -1,13 +1,13 @@
-@TTCLFlow
-Feature: M7S01 - Vay tiêu dùng cá nhân - Tất toán khoản vay
+@flow1 @loan04
+Feature: 04 - Vay tiêu dùng cá nhân - Nội bộ giải ngân thành công - Có bảo hiểm
 
-  Scenario Outline: Tất toán khoản vay tiêu dùng
+  Scenario Outline: Thực hiện tạo vay tiêu dùng có ưu đãi thông qua tính toán khoản vay thành công bằng tài khoản nội bộ
     Given Mở VTB iPayApp
     When Đăng nhập user "<user_name>", password "<password>", otp "<otp_code>"
     And Menu Dịch vụ vay và tín dụng
     And Vay tiêu dùng cá nhân
     And Công cụ tính lãi suất - Tính toán ngay
-    And Vay "<number_of_money>" VND, thời hạn "<number_of_months>" tháng không có ưu đãi đặc biệt, "<edit_type>"
+    And Vay "<number_of_money>" VND, thời hạn "<number_of_months>" tháng có ưu đãi đặc biệt, "<edit_type>"
     Then Lịch trả nợ - Lãi suất "<interest_rate>"
     * Lịch trả nợ - Số tiền phải trả hàng tháng "<monthly_charge_amount>"
     * Lịch trả nợ - Tổng lãi phải trả "<interest_payable_total>"
@@ -15,6 +15,7 @@ Feature: M7S01 - Vay tiêu dùng cá nhân - Tất toán khoản vay
     When MH Vay - Bước 1
     Then MH Vay - Bước 1 - Lãi suất vay "<interest_rate>"
     * MH Vay - Bước 1 - Số tiền phải trả hàng tháng mặc định "<monthly_charge_amount>"
+    When MH Vay - Bước 1 - Xác nhận sử dụng bảo hiểm VietinBank
     When MH Vay - Bước 2
     And MH Vay - Bước 2 - Ngày trả nợ hàng tháng "<repayment_date>", mục đích vay "<loan_purpose>", email "<receive_email>", tỉnh "<province>", huyện "<district>"
     Then MH Vay - Bước 3 - Số tiền vay "<full_format_number_of_money>"
@@ -35,16 +36,11 @@ Feature: M7S01 - Vay tiêu dùng cá nhân - Tất toán khoản vay
     And Đồng ý vay
     And Xác nhận hợp đồng - Nhập OTP "<otp_code>"
     Then Kết quả giao dịch - hiển thị "Quý khách đã xác nhận Hợp đồng vay vốn thành công. Số tiền vay sẽ được giải ngân vào tài khoản thanh toán Quý khách đã lựa chọn. Hợp đồng cho vay sẽ được gửi tới Quý khách qua email"
+    And Quay về MH Home
     And Vào Danh sách tài khoản
-    And MH Danh sách tài khoản - Lấy tài khoản vay mới nhất
-    And MH Home
-    And Menu Dịch vụ vay và tín dụng
-    And Vào MH Trả nợ & tất toán vay
-    And Thực hiện "<repayment_type>", chọn tài khoản vay "<loan_account_number>" từ address book
-    And Xác nhận hợp đồng - Nhập OTP "<otp_code>"
-    Then Kết quả giao dịch - hiển thị "Trả nợ/tất toán khoản vay thành công!"
+    And MH Danh sách tài khoản - Xem các tài khoản vay
+    Then MH Danh sách tài khoản - Hiển thị khoản vay mới nhất với số tiền "<full_format_number_of_money>"
 
     Examples:
-    Examples:
-      | user_name    | password | otp_code | number_of_money | number_of_months | edit_type | interest_rate | monthly_charge_amount          | interest_payable_total | principal_and_interest_payable_total | repayment_date | loan_purpose         | receive_email             | province      | district             | full_format_number_of_money | full_format_number_of_months | borrow_full_name | full_format_number_of_money_02 | repayment_type            |
-      | 711A57165998 | 12121212 | 888888   | 3000000         | 12               | EditText  | 5.2%/năm      | Từ 251,083 VND đến 263,000 VND | 84,500 VND             | 3,084,500 VND                        | 15             | Mua thiết bị di động | nhungauto1@mailinator.com | TINH AN GIANG | THANH PHO LONG XUYEN | 3,000,000 VND               | 12 tháng                     | CUSTOMER NAME    | 3.000.000 VNĐ                  | Tất toán - đóng khoản vay |
+      | user_name      | password | otp_code | number_of_money | number_of_months | edit_type | interest_rate | monthly_charge_amount          | interest_payable_total | principal_and_interest_payable_total | repayment_date | loan_purpose         | receive_email             | province      | district             | full_format_number_of_money | full_format_number_of_money_02 | full_format_number_of_months | borrow_full_name |
+      | ngthi.thutrang | 12121212 | 888888   | 3000000         | 12               | EditText  | 5.2%/năm      | Từ 251,083 VND đến 263,000 VND | 84,500 VND             | 3,084,500 VND                        | 15             | Mua thiết bị di động | nhungauto1@mailinator.com | TINH AN GIANG | THANH PHO LONG XUYEN | 3,000,000 VND               | 3.000.000 VND                  | 12 tháng                     | CUSTOMER NAME    |

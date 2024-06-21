@@ -9,7 +9,7 @@ import vn.vietinbank.screens.mobile.ipay.loan_service_m7s01.LoanAndCreditService
 
 public class FavoriteServices extends BaseScreen {
 
-  private final String android_iconLoanAndCreaditService = "//android.widget.TextView[@resource-id=\"com.vietinbank.mobile.ipay:id/tvProvider\" and (@text=\"Sản phẩm vay\" or @text=\"Dịch vụ vay & tín dụng\")]/preceding-sibling::android.widget.FrameLayout/android.widget.ImageView";
+  private final String android_iconLoanAndCreaditService = "//android.widget.TextView[@text=\"Sản phẩm vay\" or @text=\"Dịch vụ vay & tín dụng\"]/preceding-sibling::android.widget.FrameLayout/android.widget.ImageView";
   private final String ios_iconLoanAndCreaditService = "//XCUIElementTypeStaticText[@name=\"Dịch vụ vay & tín dụng\" or @name=\"Sản phẩm vay\"]/preceding-sibling::XCUIElementTypeOther/XCUIElementTypeImage";
   private final String transfer = "//XCUIElementTypeStaticText[@name=\"Chuyển tiền\"]";
 
@@ -20,10 +20,11 @@ public class FavoriteServices extends BaseScreen {
   @Step("Nhấn vào Dịch vụ vay và tín dụng")
   public LoanAndCreditServices click_dich_vu_vay_va_tin_dung() {
     if(appiumDriver instanceof AndroidDriver){
-      click(android_iconLoanAndCreaditService);
+      tap(android_iconLoanAndCreaditService, 30);
     } else {
-      click(ios_iconLoanAndCreaditService);
+      tap(ios_iconLoanAndCreaditService, 30);
     }
+    delay(5000);
     return new LoanAndCreditServices(appiumDriver);
   }
   @Step("Di chuyển vào Chuyển tiền")

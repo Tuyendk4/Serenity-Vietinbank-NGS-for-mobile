@@ -16,9 +16,11 @@ public class Launcher extends BaseScreen {
   @Step("Nhấn Bỏ qua")
   public Signup click_Skip() {
     if(appiumDriver instanceof AndroidDriver){
-//      click(btnSkip);
-      delay(3000);
-      tapAt(50, 2100);
+      if(waitForElementVisible(btnSkip, 20)) {
+        click(btnSkip);
+      } else {
+        tapAt(50, 2100);
+      }
     }
     return new Signup(appiumDriver);
   }

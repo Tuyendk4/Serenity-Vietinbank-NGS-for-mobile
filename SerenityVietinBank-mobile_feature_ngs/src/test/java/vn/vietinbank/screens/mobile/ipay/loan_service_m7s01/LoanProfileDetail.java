@@ -6,40 +6,40 @@ import io.appium.java_client.android.AndroidDriver;
 
 public class LoanProfileDetail extends BaseScreen {
 
-  private final String android_viewTopPopup = "//android.view.View[@resource-id=\"com.vietinbank.mobile.ipay:id/viewTopPopup\"]";
+  private final String android_viewTopPopup = "//android.view.View[@resource-id=\"com.vietinbank.ipay:id/viewTopPopup\"]";
   private final String ios_viewTopPopup = "";
 
-  private final String android_lblNumberOfMoney = "//android.widget.TextView[@resource-id=\"com.vietinbank.mobile.ipay:id/tvLeft\" and @text=\"Số tiền vay\"]/following-sibling::android.widget.TextView";
+  private final String android_lblNumberOfMoney = "//android.widget.TextView[@resource-id=\"com.vietinbank.ipay:id/tvLeft\" and @text=\"Số tiền vay\"]/following-sibling::android.widget.TextView";
   private final String ios_lblNumberOfMoney = "//XCUIElementTypeStaticText[@name=\"Số tiền vay\"]/following-sibling::XCUIElementTypeStaticText";
 
-  private final String android_lblMonths = "//android.widget.TextView[@resource-id=\"com.vietinbank.mobile.ipay:id/tvLeft\" and @text=\"Thời hạn vay\"]/following-sibling::android.widget.TextView";
+  private final String android_lblMonths = "//android.widget.TextView[@resource-id=\"com.vietinbank.ipay:id/tvLeft\" and @text=\"Thời hạn vay\"]/following-sibling::android.widget.TextView";
   private final String ios_lblMonths = "//XCUIElementTypeStaticText[@name=\"Thời hạn vay\"]/following-sibling::XCUIElementTypeStaticText";
 
-  private final String android_lblInterestRate = "//android.widget.TextView[@resource-id=\"com.vietinbank.mobile.ipay:id/tvLeft\" and @text=\"Lãi suất\"]/following-sibling::android.widget.TextView";
+  private final String android_lblInterestRate = "//android.widget.TextView[@resource-id=\"com.vietinbank.ipay:id/tvLeft\" and @text=\"Lãi suất\"]/following-sibling::android.widget.TextView";
   private final String ios_lblInterestRate = "//XCUIElementTypeStaticText[@name=\"Lãi suất\"]/following-sibling::XCUIElementTypeStaticText";
 
-  private final String android_lblRepaymentDate = "//android.widget.TextView[@resource-id=\"com.vietinbank.mobile.ipay:id/tvLeft\" and @text=\"Ngày trả nợ hàng tháng\"]/following-sibling::android.widget.TextView";
+  private final String android_lblRepaymentDate = "//android.widget.TextView[@resource-id=\"com.vietinbank.ipay:id/tvLeft\" and @text=\"Ngày trả nợ hàng tháng\"]/following-sibling::android.widget.TextView";
   private final String ios_lblRepaymentDate = "//XCUIElementTypeStaticText[@name=\"Ngày trả nợ hàng tháng\"]/following-sibling::XCUIElementTypeStaticText";
 
-  private final String android_lblLoanPurpose = "//android.widget.TextView[@resource-id=\"com.vietinbank.mobile.ipay:id/tvLeft\" and @text=\"Mục đích vay\"]/following-sibling::android.widget.TextView";
+  private final String android_lblLoanPurpose = "//android.widget.TextView[@resource-id=\"com.vietinbank.ipay:id/tvLeft\" and @text=\"Mục đích vay\"]/following-sibling::android.widget.TextView";
   private final String ios_lblLoanPurpose = "//XCUIElementTypeStaticText[@name=\"Mục đích vay\"]/following-sibling::XCUIElementTypeStaticText";
 
-  private final String android_lblBorrowName = "//android.widget.TextView[@resource-id=\"com.vietinbank.mobile.ipay:id/tvLeft\" and @text=\"Họ & tên người vay\"]/following-sibling::android.widget.TextView";
+  private final String android_lblBorrowName = "//android.widget.TextView[@resource-id=\"com.vietinbank.ipay:id/tvLeft\" and @text=\"Họ & tên người vay\"]/following-sibling::android.widget.TextView";
   private final String ios_lblBorrowName = "//XCUIElementTypeStaticText[@name=\"Họ & tên người vay\"]/following-sibling::XCUIElementTypeStaticText";
 
-  private final String android_lblEmail = "//android.widget.TextView[@resource-id=\"com.vietinbank.mobile.ipay:id/tvLeft\" and @text=\"Email nhận hợp đồng vay\"]/following-sibling::android.widget.TextView";
+  private final String android_lblEmail = "//android.widget.TextView[@resource-id=\"com.vietinbank.ipay:id/tvLeft\" and @text=\"Email nhận hợp đồng vay\"]/following-sibling::android.widget.TextView";
   private final String ios_lblEmail = "//XCUIElementTypeStaticText[@name=\"Email nhận hợp đồng vay\"]/following-sibling::XCUIElementTypeStaticText";
 
-  private final String android_lblPhone = "//android.widget.TextView[@resource-id=\"com.vietinbank.mobile.ipay:id/tvLeft\" and @text=\"Điện thoại\"]/following-sibling::android.widget.TextView";
+  private final String android_lblPhone = "//android.widget.TextView[@resource-id=\"com.vietinbank.ipay:id/tvLeft\" and @text=\"Điện thoại\"]/following-sibling::android.widget.TextView";
   private final String ios_lblPhone = "//XCUIElementTypeStaticText[@name=\"Điện thoại\"]/following-sibling::XCUIElementTypeStaticText";
 
-  private final String android_lblID = "//android.widget.TextView[@resource-id=\"com.vietinbank.mobile.ipay:id/tvLeft\" and @text=\"Số giấy tờ cá nhân\"]/following-sibling::android.widget.TextView";
+  private final String android_lblID = "//android.widget.TextView[@resource-id=\"com.vietinbank.ipay:id/tvLeft\" and @text=\"Số giấy tờ cá nhân\"]/following-sibling::android.widget.TextView";
   private final String ios_lblID = "//XCUIElementTypeStaticText[@name=\"Số giấy tờ cá nhân\"]/following-sibling::XCUIElementTypeStaticText";
 
-  private final String android_lblAddress = "//android.widget.TextView[@resource-id=\"com.vietinbank.mobile.ipay:id/tvLeft\" and @text=\"Địa chỉ thường trú\"]/following-sibling::android.widget.TextView";
+  private final String android_lblAddress = "//android.widget.TextView[@resource-id=\"com.vietinbank.ipay:id/tvLeft\" and @text=\"Địa chỉ thường trú\"]/following-sibling::android.widget.TextView";
   private final String ios_lblAddress = "//XCUIElementTypeStaticText[@name=\"Địa chỉ thường trú\"]/following-sibling::XCUIElementTypeStaticText";
 
-  private final String android_lblAddressContact = "//android.widget.TextView[@resource-id=\"com.vietinbank.mobile.ipay:id/tvLeft\" and @text=\"Địa chỉ liên hệ\"]/following-sibling::android.widget.TextView";
+  private final String android_lblAddressContact = "//android.widget.TextView[@resource-id=\"com.vietinbank.ipay:id/tvLeft\" and @text=\"Địa chỉ liên hệ\"]/following-sibling::android.widget.TextView";
   private final String ios_lblAddressContact = "//XCUIElementTypeStaticText[@name=\"Địa chỉ liên hệ\"]/following-sibling::XCUIElementTypeStaticText";
 
   public LoanProfileDetail(AppiumDriver appiumDriver) {

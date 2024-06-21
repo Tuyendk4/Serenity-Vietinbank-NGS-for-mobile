@@ -36,12 +36,12 @@ public class Overdraft_SuccessfullyAppraisal extends BaseScreen {
   @Step("Nhấn Xác nhận vay")
   public TransactionApproval confirmOverdraftLoanContract() {
     if(appiumDriver instanceof AndroidDriver) {
-      if(!waitForElementVisible(android_btnConfirm, 15)) {
+      if(waitForElementInvisible(android_btnConfirm, 15)) {
         check_Contract_Agreement();
       }
       click(android_btnConfirm);
     } else {
-      if(!waitForElementVisible(ios_btnConfirm, 15)) {
+      if(waitForElementInvisible(ios_btnConfirm, 15)) {
         check_Contract_Agreement();
       }
       click(ios_btnConfirm);

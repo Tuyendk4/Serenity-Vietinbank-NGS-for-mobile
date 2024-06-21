@@ -36,10 +36,10 @@ public class OTP extends BaseScreen {
 //  private final String android_ = "";
   private final String ios_btnKey0 = "//XCUIElementTypeKey[11]";
 
-  private final String android_btnDone = "//android.widget.TextView[@resource-id=\"com.vietinbank.mobile.ipay:id/submit\"]";
+  private final String android_btnDone = "//android.widget.TextView[@resource-id=\"com.vietinbank.ipay:id/submit\"]";
   private final String ios_btnDone = "//XCUIElementTypeButton[@name=\"Hoàn thành\"]";
 
-  private final String android_txtOTP = "//android.widget.EditText[@resource-id=\"com.vietinbank.mobile.ipay:id/otp_editText\"]";
+  private final String android_txtOTP = "//android.widget.EditText[@resource-id=\"com.vietinbank.ipay:id/otp_editText\"]";
 //  private final String ios_ = "";
 
   public OTP(AppiumDriver appiumDriver) {
@@ -56,6 +56,7 @@ public class OTP extends BaseScreen {
         inputCharacter(character);
       }
     }
+    delay(3000);
     clickDone();
     return new Home(appiumDriver);
   }
@@ -63,43 +64,43 @@ public class OTP extends BaseScreen {
   private void inputCharacter(String character) {
     switch (character) {
       case "1":
-        click(ios_btnKey1);
+        click(ios_btnKey1, 10);
         break;
       case "2":
-        click(ios_btnKey2);
+        click(ios_btnKey2, 10);
         break;
       case "3":
-        click(ios_btnKey3);
+        click(ios_btnKey3, 10);
         break;
       case "4":
-        click(ios_btnKey4);
+        click(ios_btnKey4, 10);
         break;
       case "5":
-        click(ios_btnKey5);
+        click(ios_btnKey5, 10);
         break;
       case "6":
-        click(ios_btnKey6);
+        click(ios_btnKey6, 10);
         break;
       case "7":
-        click(ios_btnKey7);
+        click(ios_btnKey7, 10);
         break;
       case "8":
-        click(ios_btnKey8);
+        click(ios_btnKey8, 10);
         break;
       case "9":
-        click(ios_btnKey9);
+        click(ios_btnKey9, 10);
         break;
       case "0":
-        click(ios_btnKey0);
+        click(ios_btnKey0, 10);
         break;
     }
   }
 
   private void clickDone() {
     if(appiumDriver instanceof AndroidDriver) {
-      click(android_btnDone);
+      tap(android_btnDone);
     } else {
-      click(ios_btnDone);
+      tap(ios_btnDone, 10);
     }
   }
 }

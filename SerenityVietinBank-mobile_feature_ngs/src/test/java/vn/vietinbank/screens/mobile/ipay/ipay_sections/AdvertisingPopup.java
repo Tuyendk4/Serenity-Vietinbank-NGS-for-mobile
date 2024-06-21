@@ -7,7 +7,8 @@ import net.serenitybdd.annotations.Step;
 
 public class AdvertisingPopup extends BaseScreen {
 
-  private final String iconClose = "//XCUIElementTypeButton[@name=\"closeWhite\"]";
+  private final String android_iconClose = "//android.widget.ImageView[@resource-id=\"com.vietinbank.ipay:id/ic_cancel\"]";
+  private final String ios_iconClose = "//XCUIElementTypeButton[@name=\"closeWhite\"]";
 
   public AdvertisingPopup(AppiumDriver appiumDriver) {
     super(appiumDriver);
@@ -16,10 +17,14 @@ public class AdvertisingPopup extends BaseScreen {
   @Step("Đóng popup Quảng cáo")
   public void close() {
     if (appiumDriver instanceof IOSDriver) {
-      if (waitForElementVisible(iconClose, 5)) {
-        click(iconClose);
+      if (waitForElementVisible(ios_iconClose, 5)) {
+        click(ios_iconClose);
+      }
+    } else {
+      if (waitForElementVisible(android_iconClose, 5)) {
+        click(android_iconClose);
       }
     }
-
+    delay(5000);
   }
 }
