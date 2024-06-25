@@ -1,7 +1,6 @@
 package vn.vietinbank.steps.mobile.ipay.common;
 
 import io.cucumber.java.en.And;
-import io.cucumber.java.vi.Và;
 import vn.vietinbank.steps.mobile.ipay.base.BaseStep;
 
 public class HomeStepdefs extends BaseStep {

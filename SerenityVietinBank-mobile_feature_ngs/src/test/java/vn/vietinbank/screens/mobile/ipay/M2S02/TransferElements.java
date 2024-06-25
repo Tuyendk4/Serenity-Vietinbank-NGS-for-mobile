@@ -1,9 +1,7 @@
 package vn.vietinbank.screens.mobile.ipay.M2S02;
 
 import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.pagefactory.iOSXCUITBy;
-import io.appium.java_client.pagefactory.iOSXCUITFindAll;
-import io.appium.java_client.pagefactory.iOSXCUITFindBy;
+import io.appium.java_client.pagefactory.*;
 import org.openqa.selenium.WebElement;
 import vn.vietinbank.screens.mobile.base.BaseScreen;
 
@@ -15,55 +13,74 @@ public class TransferElements extends BaseScreen {
     }
 
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeTable/XCUIElementTypeButton[6]")
+    @AndroidFindBy(xpath = "(//android.widget.ImageView[@resource-id=\"com.vietinbank.ipay:id/ivProvider\"])[7]")
     public WebElement btnTranferMoneyObroad;
 
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeScrollView/XCUIElementTypeOther[1]/XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeOther[1]/XCUIElementTypeButton")
+    @AndroidFindBy(xpath = "//android.widget.TextView[@resource-id=\"com.vietinbank.ipay:id/edtContent\"]")
     public WebElement txtPurpose;
 
-    public String purpose = "//XCUIElementTypeApplication[@name=\"VietinBank iPay\"]/XCUIElementTypeWindow[1]/XCUIElementTypeOther[3]/XCUIElementTypeOther/XCUIElementTypeScrollView/XCUIElementTypeOther[1]/XCUIElementTypeOther[%value]/XCUIElementTypeButton";
+    public String ios_purpose = "//XCUIElementTypeApplication[@name=\"VietinBank iPay\"]/XCUIElementTypeWindow[1]/XCUIElementTypeOther[3]/XCUIElementTypeOther/XCUIElementTypeScrollView/XCUIElementTypeOther[1]/XCUIElementTypeOther[%value]/XCUIElementTypeButton";
+    public String and_purpose = "//androidx.recyclerview.widget.RecyclerView[@resource-id=\"com.vietinbank.ipay:id/recyclerView\"]/android.widget.LinearLayout[%value]/android.widget.LinearLayout";
 
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeButton[@name=\"Tạo điện mua/chuyển ngoại tệ\"]")
+    @AndroidFindBy(xpath = "//android.widget.Button[@resource-id=\"com.vietinbank.ipay:id/btnNext\"]")
     public WebElement btnMakeNewPayment;
 
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeScrollView/XCUIElementTypeOther[1]/XCUIElementTypeButton")
+    @AndroidFindBy(xpath = "(//android.widget.ImageView[@resource-id=\"com.vietinbank.ipay:id/ivSelect\"])[1]")
     public static WebElement iconBeneficiary;
 
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeCell/XCUIElementTypeOther[1]/XCUIElementTypeOther")
+    @AndroidFindBy(xpath = "//android.widget.TextView[@resource-id=\"com.vietinbank.ipay:id/tvLeft\"]")
     public static WebElement txtBeneficiaryAccount;
 
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[@name=\"Lưu & tiếp tục\"]")
+    @AndroidFindBy(xpath = "//android.widget.Button[@resource-id=\"com.vietinbank.ipay:id/btnNext\"]")
     public static WebElement btnSaveContinue;
 
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeScrollView/XCUIElementTypeOther[1]/XCUIElementTypeOther[6]/XCUIElementTypeOther/XCUIElementTypeTextField")
+    @AndroidFindBy(xpath = "//android.widget.EditText[@resource-id=\"com.vietinbank.ipay:id/edtContent\" and @text=\"Nội dung chuyển\"]")
     public static WebElement txtPaymentNote;
 
-    public static String scrollTo = "//XCUIElementTypeScrollView/XCUIElementTypeOther[1]/XCUIElementTypeOther[6]/XCUIElementTypeOther/XCUIElementTypeOther";
-
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeScrollView/XCUIElementTypeOther[1]/XCUIElementTypeOther[2]/XCUIElementTypeTextField")
+    @AndroidFindBy(xpath = "//android.widget.EditText[@resource-id=\"com.vietinbank.ipay:id/edtAmount\"]")
     public static WebElement paymentAmount;
 
+    @AndroidFindBy(xpath = "//android.widget.TextView[@text=\"Số tiền quy đổi\"]")
+    public static WebElement txtNumberExchangedMoney
+    ;
+
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeButton[@name=\"Done\"]")
+    @AndroidFindBy(xpath = "//android.widget.TextView[@resource-id=\"com.vietinbank.ipay:id/tvTitle\" and @text=\"Nội dung chuyển\"]")
     public static WebElement done;
 
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeButton[@name=\"Xong\"]")
+    @AndroidFindBy(xpath = "//android.widget.Button[@resource-id=\"com.vietinbank.ipay:id/btnNext\"]")
     public static WebElement btn_done;
 
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[@name=\"Tổng trích nợ\"]//following-sibling::XCUIElementTypeStaticText")
+    @AndroidFindBy(xpath = "//android.widget.TextView[@resource-id=\"com.vietinbank.ipay:id/tvLeft\" and @text=\"Tổng trích nợ\"]//following-sibling::android.widget.TextView")
     public static WebElement number_total_debt_deduction;
 
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeButton[@name=\"Tiếp tục\"]")
+    @AndroidFindBy(xpath = "//android.widget.Button[@resource-id=\"com.vietinbank.ipay:id/btnNext\"]")
     public static WebElement btn_continue;
 
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeButton[@name=\"iconLineAddnew\"]")
+    @AndroidFindBy(xpath = "//android.widget.ImageView[@resource-id=\"com.vietinbank.ipay:id/iv_addImage_validate\"]")
     public static WebElement icon_add_profile;
 
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeButton[@name=\"Chọn từ thư viện\"]")
+    @AndroidFindBy(xpath = "//android.widget.TextView[@text=\"Chọn từ thư viện hình ảnh\"]")
     public static WebElement select_from_library;
 
     @iOSXCUITFindAll({@iOSXCUITBy(xpath = "//XCUIElementTypeOther[@name=\"Ảnh\"]//XCUIElementTypeOther//XCUIElementTypeScrollView//XCUIElementTypeImage")})
+    @AndroidFindAll({@AndroidBy(xpath = "//android.widget.GridView[@resource-id=\"com.google.android.providers.media.module:id/picker_tab_recyclerview\"]//android.widget.FrameLayout")})
     public static List<WebElement> image;
 
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[@name=\"Tổng trích nợ\"]")
+    @AndroidFindBy(xpath = "//android.widget.ScrollView[@resource-id=\"com.vietinbank.ipay:id/mNestedScrollView\"]")
     public static WebElement txt_total_debt_deduction;
 
     public static String txt_payment_note = "Nội dung chuyển";
@@ -72,12 +89,14 @@ public class TransferElements extends BaseScreen {
     public static WebElement confirm_done;
 
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[@name=\"Người nhận\"]//following-sibling::XCUIElementTypeStaticText")
+    @AndroidFindBy(xpath = "//android.widget.TextView[@resource-id=\"com.vietinbank.ipay:id/tvTitle\" and @text=\"Người nhận\"]//following-sibling::android.widget.LinearLayout")
     public static WebElement title_beneficiary;
 
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[@name=\"Mục đích\"]//following-sibling::XCUIElementTypeStaticText")
     public static WebElement purpose_trading_results;
 
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[@name=\"Ngân hàng nhận\"]//following-sibling::XCUIElementTypeStaticText")
+    @AndroidFindBy(xpath = "//android.widget.TextView[@resource-id=\"com.vietinbank.ipay:id/tvTitle\" and @text=\"Ngân hàng nhận\"]/following-sibling::android.widget.LinearLayout/android.widget.TextView")
     public static WebElement receiving_bank;
 
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[@name=\"Số ngoại tệ cần chuyển\"]//preceding-sibling::XCUIElementTypeStaticText")

@@ -11,8 +11,6 @@ import vn.vietinbank.screens.mobile.ipay.loan_service_m7s01.PersonalInstalmentLo
 
 public class M7S01BaseStep extends BaseStep {
 
-  protected static LoanAndCreditServices loanAndCreditServices;
-
   protected static PersonalInstalmentLoan personalInstalmentLoan;
 
 }

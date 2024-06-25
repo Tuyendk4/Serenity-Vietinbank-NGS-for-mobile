@@ -13,12 +13,12 @@ public class TransferMoneyObroadStepdefs extends BaseStep {
 
     @And("Chọn Mua Chuyển ngoại tệ")
     public void moveToTransferObroad() {
-        transferAndReceive = transferAndReceive.click_on_transfer_money_obroad();
+        transferAndReceive.click_on_transfer_money_obroad();
     }
 
     @And("Chọn mục đích chuyển tiền là {string}")
     public void studyObroadLivingExpenses(String purpose) {
-        transferAndReceive = transferAndReceive.purpose_transfer(purpose);
+        transferAndReceive.purpose_transfer(purpose);
     }
 
     @And("Chọn mục đích chuyển tiền là Trợ cấp cho thân nhân ở nước ngoài")
@@ -28,17 +28,17 @@ public class TransferMoneyObroadStepdefs extends BaseStep {
 
     @And("Chon người nhận với nội dung {string}")
     public void show_interest_rate_in_Reference_Payment_Schedule_as(String paymentNote) {
-        transferAndReceive = transferAndReceive.chooseBeneficiary(paymentNote);
+        transferAndReceive.chooseBeneficiary(paymentNote);
     }
 
     @And("Nhập số ngoại tệ cần chuyển đi là {string}")
     public void enter_payment_amount(String money) {
-        transferAndReceive = transferAndReceive.enterPaymentAmount(money);
+        transferAndReceive.enterPaymentAmount(money);
     }
 
     @And("Chọn hồ sơ cung cấp")
     public void select_provisioning_profile() {
-        transferAndReceive = transferAndReceive.provisioning_profile();
+        transferAndReceive.provisioning_profile();
     }
 
     @Then("Xác nhận giao dịch")

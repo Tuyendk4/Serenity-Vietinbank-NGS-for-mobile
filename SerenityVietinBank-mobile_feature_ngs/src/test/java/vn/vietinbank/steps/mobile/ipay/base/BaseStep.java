@@ -17,6 +17,8 @@ public class BaseStep {
   protected static Login login;
 
   protected static Home home;
+  
+  protected static LoanAndCreditServices loanAndCreditServices;
 
   protected static AccountNumberList accountNumberList;
 

@@ -30,5 +30,6 @@ public class LoginStepdefs extends BaseStep {
     OTP otp;
     otp = login.login_with_pass(password);
     home = otp.inputOTP("");
+    home.advertisingPopup().close();
   }
 }
