@@ -2,6 +2,7 @@ package vn.vietinbank.screens.mobile.ipay.M2S02;
 
 import io.appium.java_client.android.AndroidDriver;
 import net.serenitybdd.annotations.Step;
+import org.junit.Assert;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.PointerInput;
@@ -10,6 +11,7 @@ import vn.vietinbank.screens.mobile.base.ScrollDirection;
 import io.appium.java_client.AppiumDriver;
 import net.serenitybdd.core.Serenity;
 
+import javax.validation.constraints.AssertFalse;
 import java.time.Duration;
 import java.util.List;
 
@@ -141,25 +143,28 @@ public class TransferAndReceive extends TransferElements {
     }
 
     public void enterPaymentAmount(String money) {
+        tap(paymentAmount);
         sendKeys(paymentAmount, money);
         Serenity.setSessionVariable("total_transfer").to(money);
-//        if (appiumDriver instanceof AndroidDriver) {
-//            click(txtNumberExchangedMoney);
-//        }
+        if (appiumDriver instanceof AndroidDriver) {
+            click(txtNumberExchangedMoney);
+        }
         click(btn_done);
         waitForElementVisible(btn_continue, 20);
-//        if (appiumDriver instanceof AndroidDriver) {
-//            scrollUpElementAnd(txt_total_debt_deduction);
-//        }
-//        scrollToElement(txt_total_debt_deduction, ScrollDirection.DOWN, 20);
-//        String total_debt_deduction = (number_total_debt_deduction).getText();
-//        Serenity.setSessionVariable("total_debt_deduction").to(total_debt_deduction);
-//        click(btn_continue);
+        if (appiumDriver instanceof AndroidDriver) {
+            scrollDownElement(txt_total_debt_deduction);
+            scrollDownElement(txt_total_debt_deduction);
+        } else {
+            scrollToElement(txt_total_debt_deduction, ScrollDirection.DOWN, 20);
+        }
+        String total_debt_deduction = (number_total_debt_deduction).getText();
+        Serenity.setSessionVariable("total_debt_deduction").to(total_debt_deduction);
+        click(btn_continue);
     }
 
-    public void scrollUpElementAnd(WebElement elementParent) {
-        int startPointY = elementParent.getLocation().getY();
-        int endPointY = elementParent.getLocation().getY() + elementParent.getSize().getHeight() / 2;
+    public void scrollDownElement(WebElement elementParent) {
+        int startPointY = elementParent.getLocation().getY() + elementParent.getSize().getHeight() / 2;
+        int endPointY = elementParent.getLocation().getY();
         int anchorX = elementParent.getLocation().getX() + elementParent.getSize().getWidth() / 4;
         PointerInput finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
         Point start = new Point(anchorX, startPointY);
@@ -173,10 +178,19 @@ public class TransferAndReceive extends TransferElements {
     }
 
     public void provisioning_profile() {
-        for (int i = 1; i <= 2; i++) {
+        if (appiumDriver instanceof AndroidDriver) {
             click(icon_add_profile);
             click(select_from_library);
-            image.get(i).click();
+            for (int i = 1; i <= 2; i++) {
+                image.get(i).click();
+            }
+            btnAdd.click();
+        } else {
+            for (int i = 1; i <= 2; i++) {
+                click(icon_add_profile);
+                click(select_from_library);
+                image.get(i).click();
+            }
         }
         click(btn_continue);
         click(confirm_done);

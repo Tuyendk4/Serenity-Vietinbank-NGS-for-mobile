@@ -48,8 +48,7 @@ public class TransferElements extends BaseScreen {
     public static WebElement paymentAmount;
 
     @AndroidFindBy(xpath = "//android.widget.TextView[@text=\"Số tiền quy đổi\"]")
-    public static WebElement txtNumberExchangedMoney
-    ;
+    public static WebElement txtNumberExchangedMoney;
 
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeButton[@name=\"Done\"]")
     @AndroidFindBy(xpath = "//android.widget.TextView[@resource-id=\"com.vietinbank.ipay:id/tvTitle\" and @text=\"Nội dung chuyển\"]")
@@ -78,6 +77,9 @@ public class TransferElements extends BaseScreen {
     @iOSXCUITFindAll({@iOSXCUITBy(xpath = "//XCUIElementTypeOther[@name=\"Ảnh\"]//XCUIElementTypeOther//XCUIElementTypeScrollView//XCUIElementTypeImage")})
     @AndroidFindAll({@AndroidBy(xpath = "//android.widget.GridView[@resource-id=\"com.google.android.providers.media.module:id/picker_tab_recyclerview\"]//android.widget.FrameLayout")})
     public static List<WebElement> image;
+
+    @AndroidFindBy(xpath = "//android.widget.Button[@resource-id=\"com.google.android.providers.media.module:id/button_add\"]")
+    public static WebElement btnAdd;
 
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[@name=\"Tổng trích nợ\"]")
     @AndroidFindBy(xpath = "//android.widget.ScrollView[@resource-id=\"com.vietinbank.ipay:id/mNestedScrollView\"]")
