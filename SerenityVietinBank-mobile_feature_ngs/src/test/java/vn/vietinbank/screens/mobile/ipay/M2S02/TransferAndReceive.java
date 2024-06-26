@@ -1,6 +1,7 @@
 package vn.vietinbank.screens.mobile.ipay.M2S02;
 
 import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.ios.IOSDriver;
 import net.serenitybdd.annotations.Step;
 import org.junit.Assert;
 import org.openqa.selenium.Point;
@@ -196,28 +197,39 @@ public class TransferAndReceive extends TransferElements {
         click(confirm_done);
     }
 
-    public TransferAndReceive verifyTransactionConfirmation() {
+    public void verifyTransactionConfirmation() {
         String[] get_number_to_transfer_split = number_to_transfer_history.getText().split(" ");
         String get_number_to_transfer = get_number_to_transfer_split[0];
-        String get_receiving_bank_confirm = receiving_bank.getText();
-        String get_beneficiary_confirm = title_beneficiary.getText();
+        String get_receiving_bank_confirm;
+        String get_beneficiary_confirm;
+        if (appiumDriver instanceof AndroidDriver) {
+            get_receiving_bank_confirm = receiving_bank_trading_results.getText();
+            get_beneficiary_confirm = title_beneficiary_left.getText();
+        }else {
+            get_receiving_bank_confirm = receiving_bank.getText();
+            get_beneficiary_confirm = title_beneficiary.getText();
+        }
         String[] get_debt_amount_split = debt_amount.getText().split(" ");
         String get_debt_amount = get_debt_amount_split[0];
+        if (appiumDriver instanceof AndroidDriver) {
+            scrollDownElement(screenTransectionResult);
+        }
         String get_content = content.getText();
         String[] total_debt_deduction_split = Serenity.sessionVariableCalled("total_debt_deduction").toString().split(" ");
         String total_debt_deduction = total_debt_deduction_split[0];
-
+        System.out.println("aaaaaaaaaaaaa: "+get_beneficiary_confirm);
+        System.out.println("bbbbbbbbbbbbb: "+Serenity.sessionVariableCalled("get_beneficiary"));
         assert (get_number_to_transfer.equals(Serenity.sessionVariableCalled("total_transfer")));
         assert (get_receiving_bank_confirm.equals(Serenity.sessionVariableCalled("get_receiving_bank")));
         assert (get_beneficiary_confirm.equals(Serenity.sessionVariableCalled("get_beneficiary")));
         assert (get_debt_amount.equals(total_debt_deduction));
         assert (get_content.equals("Test"));
-
-        return new TransferAndReceive(this.appiumDriver);
     }
 
-    public TransferAndReceive verifyTransferAndReceive() {
-        scrollTo(view_history);
+    public void verifyTransferAndReceive() {
+        if (appiumDriver instanceof IOSDriver) {
+            scrollTo(view_history);
+        }
         click(txt_view_history);
         tap(txt_list_history);
         String[] number_to_transfer_split = number_to_transfer_history.getText().split(" ");
@@ -231,6 +243,5 @@ public class TransferAndReceive extends TransferElements {
         assert (purpose_trading_results.getText().equals(Serenity.sessionVariableCalled("purpose_transfer")));
         assert (number_to_transfer.equals(Serenity.sessionVariableCalled("total_transfer")));
         assert (debt_amount.equals(total_debt_deduction));
-        return new TransferAndReceive(this.appiumDriver);
     }
 }

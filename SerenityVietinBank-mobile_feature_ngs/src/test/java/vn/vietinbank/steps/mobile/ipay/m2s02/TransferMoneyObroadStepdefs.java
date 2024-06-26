@@ -43,12 +43,12 @@ public class TransferMoneyObroadStepdefs extends BaseStep {
 
     @Then("Xác nhận giao dịch")
     public void verify_transaction_confirmation() {
-        transferAndReceive = transferAndReceive.verifyTransactionConfirmation();
+        transferAndReceive.verifyTransactionConfirmation();
     }
 
     @Then("Kiểm tra lịch sử chuyển tiền ngoại tệ")
     public void verifyHistoryTranfers() {
-        transferAndReceive = transferAndReceive.verifyTransferAndReceive();
+        transferAndReceive.verifyTransferAndReceive();
     }
 
     @And("Điền thông tin người nhận")
