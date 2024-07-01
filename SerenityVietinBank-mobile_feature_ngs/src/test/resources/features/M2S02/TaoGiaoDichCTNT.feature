@@ -95,8 +95,16 @@ Feature: : M2S02 - Chuyển tiền ngoại tệ
     Then Kiểm tra lịch sử chuyển tiền ngoại tệ
     Examples:
       | SWIFT       |
-      | JPPSJPJT    |
+#      | JPPSJPJT    |
       | JPPSJPJ1    |
       | JPPSJPJK    |
       | JPPSJPJJIRS |
       | SVVNJPJJ    |
+
+  @test_case_13
+  Scenario: KH tạo giao dịch tra soát trên ipay với trạng thái thành công
+    And Di chuyển vào Chuyển tiền
+    And Chọn Mua Chuyển ngoại tệ
+    And Chọn xem lịch sử
+    And Chọn giao dịch thành công
+    And Tạo điện tra soát

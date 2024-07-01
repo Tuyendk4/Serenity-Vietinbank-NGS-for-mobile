@@ -60,4 +60,14 @@ public class TransferMoneyObroadStepdefs extends BaseStep {
     public void enter_receiving_bank(String swiftCode){
         transferAndReceive.choose_receiving_bank(swiftCode);
     }
+
+    @And("Chọn xem lịch sử")
+    public void view_history() {
+        transferAndReceive.viewHistory();
+    }
+
+    @And("Chọn giao dịch thành công")
+    public void choose_tranfer_success(){
+        transferAndReceive.transferSuccess();
+    }
 }

@@ -149,32 +149,75 @@ public class TransferElements extends BaseScreen {
     public static WebElement txt_other_oversear_payment;
 
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeButton[@name=\"bene icon\"]")
+    @AndroidFindBy(xpath = "//android.widget.TextView[@resource-id=\"com.vietinbank.ipay:id/edtContent\" and @text=\"Người nhận\"]")
     public static WebElement btn_beneficiary;
 
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[@name=\"Số tài khoản người nhận\"]//preceding-sibling::XCUIElementTypeApplication")
+    @AndroidFindBy(xpath = "//android.widget.EditText[@resource-id=\"com.vietinbank.ipay:id/edtContent\" and @text=\"Số tài khoản người nhận\"]")
     public static WebElement title_account_number;
 
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[@name=\"Tên người nhận\"]//preceding-sibling::XCUIElementTypeApplication")
+    @AndroidFindBy(xpath = "//android.widget.EditText[@resource-id=\"com.vietinbank.ipay:id/edtContent\" and @text=\"Tên người nhận\"]")
     public static WebElement title_recipient_name;
 
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[@name=\"Địa chỉ người nhận\"]//preceding-sibling::XCUIElementTypeApplication")
+    @AndroidFindBy(xpath = "//android.widget.EditText[@resource-id=\"com.vietinbank.ipay:id/edtContent\" and @text=\"Địa chỉ người nhận\"]")
     public static WebElement title_address;
 
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeButton[@name=\"Done\"]")
+    @AndroidFindBy(xpath = "//android.widget.TextView[@resource-id=\"com.vietinbank.ipay:id/tvTitle\" and @text=\"Địa chỉ người nhận\"]")
     public static WebElement title_done;
 
     @iOSXCUITFindBy(xpath = "(//XCUIElementTypeButton[@name=\"iconLineEditPencil\"])[1]")
+    @AndroidFindBy(xpath = "//android.widget.TextView[@resource-id=\"com.vietinbank.ipay:id/edtContent\" and @text=\"Ngân hàng nhận\"]")
     public static WebElement iconLineEditPencil;
 
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[@name=\"Mã nước ngân hàng nhận\"]//parent::XCUIElementTypeTextField//following-sibling::XCUIElementTypeButton")
+    @AndroidFindBy(xpath = "//android.widget.TextView[@resource-id=\"com.vietinbank.ipay:id/edtContent\" and @text=\"Mã nước Ngân hàng nhận\"]")
     public static WebElement icon_receiving_bank_country_code;
 
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeTextField[@value=\"Tìm kiếm\"]")
+    @AndroidFindBy(xpath = "//android.widget.EditText[@resource-id=\"com.vietinbank.ipay:id/edtFinter\"]")
     public static WebElement title_find;
 
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[@name=\"JP - JAPAN\"]")
+    @AndroidFindBy(xpath = "//android.widget.TextView[@resource-id=\"com.vietinbank.ipay:id/tvLeft\"]")
     public static WebElement title_JAPAN;
 
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[@name=\"Mã SWIFT Ngân hàng nhận\"]//parent::XCUIElementTypeTextField//following-sibling::XCUIElementTypeButton")
+    @AndroidFindBy(xpath = "//android.widget.TextView[@resource-id=\"com.vietinbank.ipay:id/edtContent\" and @text=\"Mã SWIFT Ngân hàng nhận\"]")
     public static WebElement code_swift_bank;
+
+    @AndroidFindBy(xpath = "//android.widget.EditText[@resource-id=\"com.vietinbank.ipay:id/edtFinter\"]")
+    public static WebElement txt_swift_code;
+
+    @AndroidFindBy(xpath = "//android.widget.TextView[@resource-id=\"com.vietinbank.ipay:id/tvLeft1\"]")
+    public static WebElement txt_swift_name;
+
+    @AndroidFindBy(xpath = "//android.widget.TextView[@resource-id=\"com.vietinbank.ipay:id/gotoHistory\"]")
+    public static WebElement txt_view_history_home;
+
+    @AndroidFindBy(xpath = "//android.widget.ImageButton[@resource-id=\"com.vietinbank.ipay:id/btn_right\"]")
+    public static WebElement btn_right_find;
+
+    @AndroidFindBy(xpath = "//android.widget.TextView[@resource-id=\"com.vietinbank.ipay:id/tv_purpose\" and @text=\"Học phí du học\"]")
+    public static WebElement tuition_fees_studying_abroad;
+
+    @AndroidFindBy(xpath = "//android.widget.ImageView[@resource-id=\"com.vietinbank.ipay:id/ivSelect\"]")
+    public static WebElement btn_select_date;
+
+    @AndroidFindBy(xpath = "(//android.widget.TextView[@text=\"1\"])[1]")
+    public static WebElement btn_calendar_grid_1;
+
+    @AndroidFindBy(xpath = "//android.widget.TextView[@text=\"31\"]")
+    public static WebElement btn_calendar_grid_2;
+
+    @AndroidFindBy(xpath = "//android.widget.Button[@resource-id=\"com.vietinbank.ipay:id/btnNext\"]")
+    public static WebElement btn_next_find;
+
+    @AndroidFindBy(xpath = "//android.widget.TextView[@resource-id=\"com.vietinbank.ipay:id/bt_search\"]")
+    public static WebElement btn_search;
+
+    @AndroidFindBy(xpath = "//android.widget.ListView[@resource-id=\"com.vietinbank.ipay:id/calendar_view\"]")
+    public static WebElement screen_calendar_view;
 }

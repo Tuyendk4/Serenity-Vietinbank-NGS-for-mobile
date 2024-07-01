@@ -3,6 +3,7 @@ package vn.vietinbank.screens.mobile.ipay.M2S02;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
 import net.serenitybdd.annotations.Step;
+import net.serenitybdd.screenplay.ensure.Ensure;
 import org.junit.Assert;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebElement;
@@ -18,6 +19,7 @@ import java.util.List;
 
 
 public class TransferAndReceive extends TransferElements {
+    String contentNote;
 
     public TransferAndReceive(AppiumDriver appiumDriver) {
         super(appiumDriver);
@@ -33,6 +35,9 @@ public class TransferAndReceive extends TransferElements {
         TransferElements.title_find.sendKeys("JP");
         TransferElements.title_JAPAN.click();
         TransferElements.code_swift_bank.click();
+        TransferElements.txt_swift_code.sendKeys(code_swift);
+        TransferElements.txt_swift_name.click();
+        btnMakeNewPayment.click();
     }
 
     public void enter_infomation_beneficiary() {
@@ -141,6 +146,7 @@ public class TransferAndReceive extends TransferElements {
         }
         click(done);
         click(btnSaveContinue);
+        contentNote = paymentNote;
     }
 
     public void enterPaymentAmount(String money) {
@@ -166,6 +172,21 @@ public class TransferAndReceive extends TransferElements {
     public void scrollDownElement(WebElement elementParent) {
         int startPointY = elementParent.getLocation().getY() + elementParent.getSize().getHeight() / 2;
         int endPointY = elementParent.getLocation().getY();
+        int anchorX = elementParent.getLocation().getX() + elementParent.getSize().getWidth() / 4;
+        PointerInput finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
+        Point start = new Point(anchorX, startPointY);
+        Point end = new Point(anchorX, endPointY);
+        Sequence swipe = new Sequence(finger, 1);
+        swipe.addAction(finger.createPointerMove(Duration.ofMillis(0), PointerInput.Origin.viewport(), start.getX(), start.getY()));
+        swipe.addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
+        swipe.addAction(finger.createPointerMove(Duration.ofMillis(1000), PointerInput.Origin.viewport(), end.getX(), end.getY()));
+        swipe.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
+        appiumDriver.perform(List.of(swipe));
+    }
+
+    public void scrollUpElement(WebElement elementParent) {
+        int startPointY = elementParent.getLocation().getY();
+        int endPointY = elementParent.getLocation().getY() + elementParent.getSize().getHeight() / 2;
         int anchorX = elementParent.getLocation().getX() + elementParent.getSize().getWidth() / 4;
         PointerInput finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
         Point start = new Point(anchorX, startPointY);
@@ -205,7 +226,7 @@ public class TransferAndReceive extends TransferElements {
         if (appiumDriver instanceof AndroidDriver) {
             get_receiving_bank_confirm = receiving_bank_trading_results.getText();
             get_beneficiary_confirm = title_beneficiary_left.getText();
-        }else {
+        } else {
             get_receiving_bank_confirm = receiving_bank.getText();
             get_beneficiary_confirm = title_beneficiary.getText();
         }
@@ -217,13 +238,11 @@ public class TransferAndReceive extends TransferElements {
         String get_content = content.getText();
         String[] total_debt_deduction_split = Serenity.sessionVariableCalled("total_debt_deduction").toString().split(" ");
         String total_debt_deduction = total_debt_deduction_split[0];
-        System.out.println("aaaaaaaaaaaaa: "+get_beneficiary_confirm);
-        System.out.println("bbbbbbbbbbbbb: "+Serenity.sessionVariableCalled("get_beneficiary"));
-        assert (get_number_to_transfer.equals(Serenity.sessionVariableCalled("total_transfer")));
-        assert (get_receiving_bank_confirm.equals(Serenity.sessionVariableCalled("get_receiving_bank")));
-        assert (get_beneficiary_confirm.equals(Serenity.sessionVariableCalled("get_beneficiary")));
-        assert (get_debt_amount.equals(total_debt_deduction));
-        assert (get_content.equals("Test"));
+        Assert.assertEquals(get_number_to_transfer, (Serenity.sessionVariableCalled("total_transfer")));
+        Assert.assertEquals(get_receiving_bank_confirm, (Serenity.sessionVariableCalled("get_receiving_bank")));
+        Assert.assertEquals(get_beneficiary_confirm, (Serenity.sessionVariableCalled("get_beneficiary")));
+        Assert.assertEquals(get_debt_amount, total_debt_deduction);
+        Assert.assertEquals(get_content, contentNote);
     }
 
     public void verifyTransferAndReceive() {
@@ -239,9 +258,28 @@ public class TransferAndReceive extends TransferElements {
         String[] total_debt_deduction_split = Serenity.sessionVariableCalled("total_debt_deduction").toString().split(" ");
         String total_debt_deduction = total_debt_deduction_split[0];
 
-        assert (txt_status.getText().contains("Chờ ngân hàng xử lý"));
-        assert (purpose_trading_results.getText().equals(Serenity.sessionVariableCalled("purpose_transfer")));
-        assert (number_to_transfer.equals(Serenity.sessionVariableCalled("total_transfer")));
-        assert (debt_amount.equals(total_debt_deduction));
+        Ensure.that(txt_status.getText()).isEqualTo("Chờ ngân hàng xử lý");
+        Ensure.that(purpose_trading_results.getText()).isEqualTo(Serenity.sessionVariableCalled("purpose_transfer"));
+        Ensure.that(number_to_transfer).isEqualTo(Serenity.sessionVariableCalled("total_transfer"));
+        Ensure.that(debt_amount).isEqualTo(total_debt_deduction);
+    }
+
+    @Step("Click chọn xem lịch sử")
+    public void viewHistory(){
+        txt_view_history_home.click();
+    }
+
+    @Step("Thực hiện tìm kiếm giao dịch thành công")
+    public void transferSuccess(){
+        btn_right_find.click();
+        tuition_fees_studying_abroad.click();
+        btn_select_date.click();
+        scrollUpElement(screen_calendar_view);
+        scrollUpElement(screen_calendar_view);
+        scrollUpElement(screen_calendar_view);
+        btn_calendar_grid_1.click();
+        btn_calendar_grid_2.click();
+        btn_next_find.click();
+        btn_search.click();
     }
 }
