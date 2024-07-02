@@ -107,4 +107,16 @@ Feature: : M2S02 - Chuyển tiền ngoại tệ
     And Chọn Mua Chuyển ngoại tệ
     And Chọn xem lịch sử
     And Chọn giao dịch thành công
-    And Tạo điện tra soát
+    Then Tạo điện tra soát
+    And Chọn hồ sơ cung cấp
+    Then Xác nhận giao dịch
+    Then Kiểm tra lịch sử chuyển tiền ngoại tệ
+
+  @test_case_15
+  Scenario: KH tạo giao dịch tra soát trên ipay và upload ảnh hồ sơ
+    And Di chuyển vào Chuyển tiền
+    And Chọn Mua Chuyển ngoại tệ
+    And Chọn xem lịch sử
+    And Chọn giao dịch thành công
+    Then Tạo điện tra soát
+    And Chọn hồ sơ cung cấp

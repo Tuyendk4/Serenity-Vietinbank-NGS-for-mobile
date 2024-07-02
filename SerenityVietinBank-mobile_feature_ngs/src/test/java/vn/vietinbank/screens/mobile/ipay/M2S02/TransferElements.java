@@ -220,4 +220,16 @@ public class TransferElements extends BaseScreen {
 
     @AndroidFindBy(xpath = "//android.widget.ListView[@resource-id=\"com.vietinbank.ipay:id/calendar_view\"]")
     public static WebElement screen_calendar_view;
+
+    @AndroidFindBy(xpath = "//android.widget.TextView[@resource-id=\"com.vietinbank.ipay:id/tv_status\"]")
+    public static WebElement btn_status;
+
+    @AndroidFindBy(xpath = "//android.widget.ScrollView/android.widget.RelativeLayout")
+    public static WebElement btn_status_layout;
+
+    @AndroidFindBy(xpath = "//android.widget.TextView[@resource-id=\"com.vietinbank.ipay:id/tvHistoryTransExtMoneyDetailRenew\"]")
+    public static WebElement txt_trans_ext_money_detail;
+
+    @AndroidFindBy(xpath = "//android.widget.TextView[@text=\"THÁNG 3 2024\"]")
+    public static WebElement txt_3_2024;
 }

@@ -13,7 +13,7 @@ import vn.vietinbank.screens.mobile.base.ScrollDirection;
 import io.appium.java_client.AppiumDriver;
 import net.serenitybdd.core.Serenity;
 
-import javax.validation.constraints.AssertFalse;
+import javax.validation.constraints.AssertTrue;
 import java.time.Duration;
 import java.util.List;
 
@@ -281,5 +281,15 @@ public class TransferAndReceive extends TransferElements {
         btn_calendar_grid_2.click();
         btn_next_find.click();
         btn_search.click();
+    }
+
+    @Step("Tạo điện tra soát với trạng thái thành công")
+    public void generateCheckMessageWithSuccessful(){
+        btn_status.click();
+        scrollDownElement(btn_status_layout);
+        Assert.assertTrue(txt_trans_ext_money_detail.isDisplayed());
+        txt_trans_ext_money_detail.click();
+        btn_next_find.click();
+        btnSaveContinue.click();
     }
 }
