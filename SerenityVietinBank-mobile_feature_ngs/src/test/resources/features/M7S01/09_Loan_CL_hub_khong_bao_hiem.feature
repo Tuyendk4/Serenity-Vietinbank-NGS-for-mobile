@@ -50,7 +50,7 @@ Feature: 09 - Vay tiêu dùng cá nhân - Hub - Không bảo hiểm
     * Vào MH Lịch sử vay
     * Vào MH Vay tiêu dùng cá nhân của khoản vay "<loan_status>"
     * MH Vay tiêu dùng cá nhân - Hủy khoản vay
-    Then MH Vay tiêu dùng cá nhân - Thông báo "Quý khách có chắc chắn muốn hủy hồ sơ vay?"
+    Then MH Vay tiêu dùng cá nhân - Thông báo "Quý khách có chắc chắc muốn hủy hồ sơ vay?"
     When MH Vay tiêu dùng cá nhân - Xác nhận hủy
     Then MH Vay tiêu dùng cá nhân - Thông báo thành công: "Yêu cầu vay <full_format_number_of_money> để phục vụ mục đích Mua thiet bi di dong đã được hủy thành công. Xin vui lòng gửi lại yêu cầu vay mới phù hợp hơn với nhu cầu của Quý khách"
 

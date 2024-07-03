@@ -1,4 +1,4 @@
-@flow1 @loan03
+@flow1 @loan03 @smoke
 Feature: 03 - Vay tiêu dùng cá nhân - Nội bộ giải ngân thành công - Không bảo hiểm
 
   Scenario Outline: Vay tiêu dùng cá nhân - Nội bộ - Không bảo hiểm - thành công

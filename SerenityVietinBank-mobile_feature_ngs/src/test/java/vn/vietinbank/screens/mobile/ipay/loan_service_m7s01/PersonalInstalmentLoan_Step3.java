@@ -132,6 +132,7 @@ public class PersonalInstalmentLoan_Step3 extends BaseScreen {
     } else {
       click(ios_btnSend);
     }
+    delay(10000);
   }
 
   public NotificationPopup notificationPopup() {

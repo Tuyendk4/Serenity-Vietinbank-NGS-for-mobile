@@ -2,7 +2,6 @@ package vn.vietinbank.steps.mobile.ipay.m2s02;
 
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.And;
-import io.cucumber.java.en.When;
 import vn.vietinbank.steps.mobile.ipay.base.BaseStep;
 
 
@@ -24,7 +23,7 @@ public class TransferMoneyObroadStepdefs extends BaseStep {
 
     @And("Chọn mục đích chuyển tiền là Trợ cấp cho thân nhân ở nước ngoài")
     public void otherOVerseas() {
-        transferAndReceive = transferAndReceive.other_oversear_payment();
+        transferAndReceive.other_oversear_payment();
     }
 
     @And("Chon người nhận với nội dung {string}")
@@ -43,6 +42,7 @@ public class TransferMoneyObroadStepdefs extends BaseStep {
     }
 
     @Then("Xác nhận giao dịch")
+
     public void verify_transaction_confirmation() {
         transferAndReceive.verifyTransactionConfirmation();
     }
@@ -60,20 +60,5 @@ public class TransferMoneyObroadStepdefs extends BaseStep {
     @And("Điền thông tin ngân hàng nhận {string}")
     public void enter_receiving_bank(String swiftCode){
         transferAndReceive.choose_receiving_bank(swiftCode);
-    }
-
-    @And("Chọn xem lịch sử")
-    public void view_history() {
-        transferAndReceive.viewHistory();
-    }
-
-    @And("Chọn giao dịch thành công")
-    public void choose_tranfer_success(){
-        transferAndReceive.transferSuccess();
-    }
-
-    @Then("Tạo điện tra soát")
-    public void generate_check_message_with_successful() {
-        transferAndReceive.generateCheckMessageWithSuccessful();
     }
 }

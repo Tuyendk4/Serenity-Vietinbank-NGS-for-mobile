@@ -20,6 +20,7 @@ public class Hooks extends BaseStep {
   @After
   public void after() {
     useDriver(null);
+
     mobileDriver.closeApplication();
 
     try {

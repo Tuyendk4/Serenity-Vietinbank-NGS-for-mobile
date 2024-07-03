@@ -38,9 +38,10 @@ import vn.vietinbank.screens.mobile.ipay.loan_service_m7s01.RepayAndFinalizeTheL
 import vn.vietinbank.screens.mobile.ipay.loan_service_m7s01.SecuredOverdraft;
 import vn.vietinbank.screens.mobile.ipay.loan_service_m7s01.TransactionApproval;
 import vn.vietinbank.screens.mobile.ipay.loan_service_m7s01.TransactionResult;
+import vn.vietinbank.steps.mobile.ipay.base.BaseStep;
 import vn.vietinbank.steps.mobile.ipay.base.M7S01BaseStep;
 
-public class LoanAndCreditServicesStepdefs extends M7S01BaseStep {
+public class LoanAndCreditServicesStepdefs extends BaseStep {
 
   private ReferenceRepaymentSchedule referenceRepaymentSchedule;
   private CalculatorTool calculatorTool;
@@ -248,6 +249,9 @@ public class LoanAndCreditServicesStepdefs extends M7S01BaseStep {
   @When("Chọn Đồng ý trên Popup thông báo")
   public void click_Agree_button_on_notification_popup_on_Personal_Instalment_Loan_Step_3() {
     loanAndCreditServices = personalInstalmentLoanStep3.notificationPopup().clickAgreeButton();
+    if(loanAndCreditServices.customerSurveyPopup().isShown()) {
+      loanAndCreditServices.customerSurveyPopup().clickCloseIcon();
+    }
   }
 
   @Then("hiển thị số lượng tại Lịch sử vay")
@@ -500,8 +504,8 @@ public class LoanAndCreditServicesStepdefs extends M7S01BaseStep {
 
   @And("Thực hiện {string}")
   public void finalize_the_loan(String repayment_type) {
-    repayAndFinalizeTheLoan.choose_repayment_type(repayment_type);
     repayAndFinalizeTheLoan.input_loan_account_number(newestAccountNumber);
+    repayAndFinalizeTheLoan.choose_repayment_type(repayment_type);
     transactionApproval = repayAndFinalizeTheLoan.click_Continue_button();
   }
 
