@@ -1,12 +1,11 @@
 package vn.vietinbank.steps.mobile.ipay.m2s02;
 
 import io.cucumber.java.en.Then;
-import io.cucumber.java.en.When;
 import io.cucumber.java.en.And;
-import vn.vietinbank.steps.mobile.ipay.base.BaseStep;
+import vn.vietinbank.steps.mobile.ipay.base.M7S01BaseStep;
 
 
-public class TransferMoneyObroadStepdefs extends BaseStep {
+public class TransferMoneyObroadStepdefs extends M7S01BaseStep {
 
     public TransferMoneyObroadStepdefs() {
         super();

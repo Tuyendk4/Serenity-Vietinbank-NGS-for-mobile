@@ -1,26 +1,25 @@
 package vn.vietinbank.steps.mobile.ipay;
 
-import static net.thucydides.core.webdriver.ThucydidesWebDriverSupport.useDriver;
-
+import io.appium.java_client.AppiumDriver;
+import net.serenitybdd.core.Serenity;
 import vn.vietinbank.screens.mobile.base.MobileDriver;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
-import vn.vietinbank.steps.mobile.ipay.base.BaseStep;
 
 
-public class Hooks extends BaseStep {
+public class Hooks {
+
+  private static MobileDriver mobileDriver;
 
   @Before
   public void before() {
     mobileDriver = new MobileDriver();
-    appiumDriver = mobileDriver.newDriver();
-
+    AppiumDriver appiumDriver = mobileDriver.newDriver();
+    Serenity.setSessionVariable("appiumDriver").to(appiumDriver);
   }
 
   @After
   public void after() {
-    useDriver(null);
-
     mobileDriver.closeApplication();
 
     try {

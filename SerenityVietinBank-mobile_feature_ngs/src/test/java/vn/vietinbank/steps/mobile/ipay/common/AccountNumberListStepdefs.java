@@ -4,9 +4,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
-import vn.vietinbank.steps.mobile.ipay.base.BaseStep;
+import vn.vietinbank.steps.mobile.ipay.base.M7S01BaseStep;
 
-public class AccountNumberListStepdefs extends BaseStep {
+public class AccountNumberListStepdefs extends M7S01BaseStep {
 
   @And("MH Danh sách tài khoản - Lấy tài khoản vay mới nhất")
   public String get_newest_account_number() {

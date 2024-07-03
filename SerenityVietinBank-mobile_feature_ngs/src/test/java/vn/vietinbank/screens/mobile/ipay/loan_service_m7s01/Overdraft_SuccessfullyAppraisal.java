@@ -8,16 +8,16 @@ import vn.vietinbank.screens.mobile.ipay.ipay_common.OTP;
 
 public class Overdraft_SuccessfullyAppraisal extends BaseScreen {
 
-  private final String android_lblNumberOfMoney = "";
+  private final String android_lblNumberOfMoney = "//android.widget.TextView[@text=\"Số tiền được vay\"]/following-sibling::android.widget.TextView";
   private final String ios_lblNumberOfMoney = "//XCUIElementTypeStaticText[@name=\"Số tiền vay\"]/following-sibling::XCUIElementTypeStaticText";
 
-  private final String android_chkContractAgreement = "";
+  private final String android_chkContractAgreement = "//android.widget.CheckBox[@resource-id=\"com.vietinbank.ipay:id/cb_rule_1\"]";
   private final String ios_chkContractAgreement = "//XCUIElementTypeStaticText[@name=\"Tôi xác nhận đã đọc, hiểu và đồng ý với:\"]/preceding-sibling::XCUIElementTypeButton";
 
-  private final String android_btnContractContent = "";
+  private final String android_btnContractContent = "//android.widget.TextView[@resource-id=\"com.vietinbank.ipay:id/tvNameBene\"]";
   private final String ios_btnContractContent = "//XCUIElementTypeButton[@name=\"Hợp đồng vay vốn ký kết với VietinBank\"]";
 
-  private final String android_btnConfirm = "";
+  private final String android_btnConfirm = "//android.widget.Button[@resource-id=\"com.vietinbank.ipay:id/btnConfirm\"]";
   private final String ios_btnConfirm = "//XCUIElementTypeButton[@name=\"Xác nhận vay\"]";
 
   public Overdraft_SuccessfullyAppraisal(AppiumDriver appiumDriver) {
