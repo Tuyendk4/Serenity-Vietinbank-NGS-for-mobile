@@ -1,0 +1,17 @@
+{
+  "vtbApi": {
+    "sit": "https://api-sit.vietinbank.vn/vtb-api-sit",
+    "uat": "https://api-uat.vietinbank.vn/vtb-api-uat",
+    "product": "https://api-product.vietinbank.vn/vtb-api-product"
+  },
+  "iPay": {
+    "sit": "http://10.6.144.91:8085",
+    "uat": "http://10.6.144.91:8085",
+    "product": "http://10.6.144.91:8085"
+  },
+  "iShop": {
+    "sit": "http://uat-ipay-k8sdbs.icbv.com",
+    "uat": "http://uat-ipay-k8sdbs.icbv.com",
+    "product": "http://uat-ipay-k8sdbs.icbv.com"
+  }
+}

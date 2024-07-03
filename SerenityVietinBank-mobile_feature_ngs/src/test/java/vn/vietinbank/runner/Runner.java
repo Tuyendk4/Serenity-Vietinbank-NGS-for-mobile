@@ -1,21 +1,15 @@
 package vn.vietinbank.runner;
 
-import io.cucumber.java.AfterAll;
-import io.cucumber.java.BeforeAll;
-import io.cucumber.java.bs.A;
-import io.cucumber.java.en.And;
 import io.cucumber.junit.CucumberOptions;
 import io.cucumber.junit.CucumberSerenityRunner;
-import net.serenitybdd.cucumber.CucumberWithSerenity;
-import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 
-
-@RunWith(CucumberWithSerenity.class)
+@RunWith(CucumberSerenityRunner.class)
 @CucumberOptions(
         features = "src/test/resources/features",
-        plugin = {"pretty", "com.epam.reportportal.cucumber.StepReporter"},
-        glue = {"vn.vietinbank.steps"})
+        plugin = {"pretty", "json:target/cucumber.json", "junit:target/cucumber-reports/Cucumber.xml"},
+        glue = {"vn.vietinbank.mobile.steps", "vn.vietinbank.api.steps", "vn.vietinbank.api.steps.qrSmartPOS", "vn.vietinbank.runner"})
+
 public class Runner {
 
 }

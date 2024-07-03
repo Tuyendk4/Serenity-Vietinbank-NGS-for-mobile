@@ -1,0 +1,9 @@
+{
+  "requestId": "NQR8966WPP",
+  "formAction": "confirmTransaction",
+  "otpType": "SMS",
+  "lang": "vi",
+  "sessionId": "B3G8M55CC7",
+  "authenticationActionCode": "TW02U2HVLR",
+  "enteredAuthCode": "888888"
+}

@@ -1,0 +1,19 @@
+{
+  "requestId": "20240515182003",
+  "providerId": "600",
+  "merchantId": "0124568960",
+  "merchantName": "TEST QRVNPAY POS",
+  "terminalId": "QRPOS",
+  "productId": "",
+  "orderId": "240515182003",
+  "amount": "20000",
+  "payMethod": "QR",
+  "transactionDate": "20240515182003",
+  "currencyCode": "VND",
+  "remark": "test smartpos",
+  "transTime": "20240515182003",
+  "channel": "MOBILE",
+  "version": "1.0",
+  "language": "vi",
+  "signature": "12345678910"
+}

@@ -1,0 +1,17 @@
+{
+  "sharedInfo": [
+    {
+      "sharedCif": "100000011",
+      "shareRoleId": "S03",
+      "sharedCusName": "CUSTOMER NAME",
+      "sharedPhoneNo": "0979717387",
+      "sharedVirtualAcc": "10000097QRNAMDONG0"
+    }
+  ],
+  "acctNo": "100508746868",
+  "requestId": "gCKIm4HYLtwJvoDM",
+  "formAction": "validateTransaction",
+  "sessionId": "B3G8M55CC7",
+  "shopId": "GIAU6NFYPY",
+  "lang": "vi"
+}

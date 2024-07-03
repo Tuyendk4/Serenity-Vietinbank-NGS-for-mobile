@@ -1,0 +1,37 @@
+{
+  "vtbApi": {
+    "development": {
+      "gen": "/development/qr/vietqr/gen",
+      "statusinq": "/development/virtualaccount/v2/statusinq",
+      "qrGenerator": "/development/qrcode/utilities/qrGenerator",
+      "qrTransInqSmartPos": "/development/qrcode/transaction/qrTransInqSmartPos"
+    }
+  },
+  "iPay": {
+    "ma": {
+      "signIn": "/ma/signIn",
+      "getDdaAccounts": "/ma/getDdaAccounts"
+    }
+  },
+  "iShop": {
+    "shop": {
+      "getIntro": "/qrshop-shop-api/shop/getIntro",
+      "getAreas": "/qrshop-shop-api/shop/getAreas",
+      "getIndustries": "/qrshop-shop-api/shop/getIndustries",
+      "registerShop": "/qrshop-shop-api/shop/registerShop",
+      "getShopDetails": "/qrshop-shop-api/shop/getShopDetails",
+      "updateShop": "/qrshop-shop-api/shop/updateShop",
+      "myShop": "/qrshop-shop-api/shop/myShop",
+      "getListShopName": "/qrshop-shop-api/shop/getListShopName"
+    },
+    "shareShop": {
+      "getSharedShop": "/qrshop-shareshop-api/share/shop/getSharedShop",
+      "shareShop": "/qrshop-shareshop-api/share/shop/shareShop",
+      "updateSharedShop": "/qrshop-shareshop-api/share/shop/updateSharedShop"
+    },
+    "report": {
+      "getIncome": "/qrshop-report-api/report/shop/getIncome",
+      "getHistoryTransaction": "/qrshop-report-api/report/shop/getHistoryTransaction"
+    }
+  }
+}

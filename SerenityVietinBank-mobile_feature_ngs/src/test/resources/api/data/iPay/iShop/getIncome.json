@@ -1,0 +1,16 @@
+{
+  "periodType": "M",
+  "fromDate": "2023-06-01",
+  "toDate": "2024-05-22",
+  "shopId": "",
+  "listAcct": [
+    {
+      "accountNbr": "100508746868",
+      "virtualAccountVar": "10000097QRNAMDONG0"
+    }
+  ],
+  "isDetail": "0",
+  "requestId": "KSPN9WMJ69ITBT4M",
+  "sessionId": "9LYHASPH8Z",
+  "isRootDevice": false
+}

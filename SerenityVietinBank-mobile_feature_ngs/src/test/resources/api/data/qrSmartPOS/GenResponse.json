@@ -1,0 +1,20 @@
+{
+  "data": {
+    "base64QRCode": "MDAwMjAxMDEwMjEyMzg1NjAwMTBBMDAwMDAwNzI3MDEyNjAwMDY5NzA0MTUwMTEyMTE5MDAwMTcyNzQyMDIwOFFSSUJGVFRBNTMwMzcwNDU0MDY1MDAwMDA1ODAyVk42Mjg4MDEwNTEyMzQ1MDMwOW1hY3VhaGFuZzA1MTJmYjUzY2Y5Mi1iYmMwNjExbWFraGFjaGhhbmcwNzA5bWFkaWVtYmFuMDgxOHRoYW5oIHRvYW4gaG9hIGRvbjYzMDQ0MkY2"
+  },
+  "merchantId": "Y3Test",
+  "signature": "",
+  "requestId": "20240426140516",
+  "providerId": "Y3Test",
+  "clientIP": "172.20.3.162",
+  "channel": "internal",
+  "language": "EN",
+  "version": "0.0.1",
+  "clientDt": "2024-04-26",
+  "status": {
+    "statusDesc": "Thanh Cong",
+    "errorInfo": [
+    ],
+    "statusCode": "0"
+  }
+}
