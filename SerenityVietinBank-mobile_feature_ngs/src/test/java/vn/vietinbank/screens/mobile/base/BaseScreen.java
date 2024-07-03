@@ -474,6 +474,22 @@ public class BaseScreen {
     return false;
   }
 
+  public boolean verifyElementText(String locator, String text, int timeOut) {
+    WebElement element = findElement(locator, timeOut);
+    try {
+      logger.info("Verify text {} into element located by {}", text, locator);
+      String actualText = element.getText();
+      if (actualText.equals(text)) {
+        logger.info("Text of element located by {} is {}", locator, text);
+        return true;
+      }
+    } catch (Exception e) {
+      logger.error("Cannot verify text of element located by {}. Root cause: {}", locator,
+          e.getMessage());
+    }
+    return false;
+  }
+
   public boolean verifyElementText(WebElement we, String text) {
     try {
       logger.info("Verify text {} into element located by {}", text, we);
@@ -589,10 +605,10 @@ public class BaseScreen {
   public void clickBackButton() {
     if (appiumDriver instanceof AndroidDriver) {
       String btnBack = "//android.widget.RelativeLayout[@resource-id=\"com.vietinbank.ipay:id/header_toolbar\"]/android.widget.ImageButton[@resource-id=\"com.vietinbank.ipay:id/btn_left\"]";
-      click(btnBack, 5);
+      tap(btnBack, 10);
     } else {
-      String btnBack = "//*[@name=\"ic back blue\" or @name=\"ic back white\"]";
-      click(btnBack, 5);
+      String btnBack = "//*[@name=\"ic back blue\" or @name=\"ic back white\" or @name=\"ic header back\"]";
+      tap(btnBack, 10);
     }
     delay(5000);
   }
@@ -884,4 +900,45 @@ public class BaseScreen {
     ReportPortal.emitLog("Take screenshot", LogLevel.INFO.name(), new Date(),
         appiumDriver.getScreenshotAs(OutputType.FILE).getAbsoluteFile());
   }
+
+  /**
+   * Description: elementParent là element cha chứa element muốn scroll đến
+   * Author: OS.ngs-dongov
+   * Date:
+   */
+  public void scrollUpElement(WebElement elementParent) {
+    int startPointY = elementParent.getLocation().getY();
+    int endPointY = elementParent.getLocation().getY() + elementParent.getSize().getHeight() / 2;
+    int anchorX = elementParent.getLocation().getX() + elementParent.getSize().getWidth() / 4;
+    PointerInput finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
+    Point start = new Point(anchorX, startPointY);
+    Point end = new Point(anchorX, endPointY);
+    Sequence swipe = new Sequence(finger, 1);
+    swipe.addAction(finger.createPointerMove(Duration.ofMillis(0), PointerInput.Origin.viewport(), start.getX(), start.getY()));
+    swipe.addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
+    swipe.addAction(finger.createPointerMove(Duration.ofMillis(1000), PointerInput.Origin.viewport(), end.getX(), end.getY()));
+    swipe.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
+    appiumDriver.perform(List.of(swipe));
+  }
+
+  /**
+   * Description: elementParent là element cha chứa element muốn scroll đến
+   * Author: OS.ngs-dongov
+   * Date:
+   */
+  public void scrollDownElement(WebElement elementParent) {
+    int startPointY = elementParent.getLocation().getY() + elementParent.getSize().getHeight() / 2;
+    int endPointY = elementParent.getLocation().getY();
+    int anchorX = elementParent.getLocation().getX() + elementParent.getSize().getWidth() / 4;
+    PointerInput finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
+    Point start = new Point(anchorX, startPointY);
+    Point end = new Point(anchorX, endPointY);
+    Sequence swipe = new Sequence(finger, 1);
+    swipe.addAction(finger.createPointerMove(Duration.ofMillis(0), PointerInput.Origin.viewport(), start.getX(), start.getY()));
+    swipe.addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
+    swipe.addAction(finger.createPointerMove(Duration.ofMillis(1000), PointerInput.Origin.viewport(), end.getX(), end.getY()));
+    swipe.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
+    appiumDriver.perform(List.of(swipe));
+  }
 }
+

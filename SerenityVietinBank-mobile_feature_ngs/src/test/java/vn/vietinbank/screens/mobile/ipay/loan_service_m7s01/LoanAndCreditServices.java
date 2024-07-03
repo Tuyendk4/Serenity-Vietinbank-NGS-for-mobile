@@ -4,9 +4,14 @@ import net.serenitybdd.core.Serenity;
 import vn.vietinbank.screens.mobile.base.BaseScreen;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
+import vn.vietinbank.screens.mobile.ipay.ipay_common.Home;
+import vn.vietinbank.screens.mobile.ipay.ipay_sections.CustomerSurveyPopup;
 import vn.vietinbank.screens.mobile.ipay.ipay_sections.NavigationBar;
 
 public class LoanAndCreditServices extends BaseScreen {
+
+  private final String android_lblScreenName = "//android.widget.TextView[@resource-id=\"com.vietinbank.ipay:id/title_page\"]";
+  private final String ios_lblScreenName = "//XCUIElementTypeButton[@name=\"ic back blue\" or @name=\"ic back white\" or @name=\"ic header back\"]/following-sibling::*[1]";
 
   private final String android_btnPersonalInstalmentLoan = "//android.widget.TextView[@resource-id=\"com.vietinbank.ipay:id/tvProvider\" and @text=\"Vay tiêu dùng cá nhân\"]/preceding-sibling::android.widget.FrameLayout/android.widget.ImageView";
   private final String ios_btnPersonalInstalmentLoan = "//XCUIElementTypeStaticText[@name=\"Vay tiêu dùng cá nhân\"]/preceding-sibling::XCUIElementTypeButton";
@@ -32,6 +37,20 @@ public class LoanAndCreditServices extends BaseScreen {
 
   public LoanAndCreditServices(AppiumDriver appiumDriver) {
     super(appiumDriver);
+
+    if(appiumDriver instanceof AndroidDriver) {
+      if(!verifyElementText(android_lblScreenName, "Dịch vụ vay & tín dụng", 20)) {
+        clickBackButton();
+        Home home = new Home(appiumDriver);
+        home.favoriteServices().click_dich_vu_vay_va_tin_dung();
+      }
+    } else {
+      if(!verifyElementText(ios_lblScreenName, "Dịch vụ vay & tín dụng", 20)) {
+        clickBackButton();
+        Home home = new Home(appiumDriver);
+        home.favoriteServices().click_dich_vu_vay_va_tin_dung();
+      }
+    }
   }
 
   public PersonalInstalmentLoan click_personal_instalment_loan() {
@@ -114,5 +133,9 @@ public class LoanAndCreditServices extends BaseScreen {
       click(ios_btnLoanAwaitingConfirmation);
     }
     return new PersonalInstalmentLoan_SuccessfulApplicationAppraisal(this.appiumDriver);
+  }
+
+  public CustomerSurveyPopup customerSurveyPopup() {
+    return new CustomerSurveyPopup(this.appiumDriver);
   }
 }

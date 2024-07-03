@@ -1,10 +1,9 @@
 package vn.vietinbank.steps.mobile.ipay.common;
 
 import io.cucumber.java.en.And;
-import io.cucumber.java.vi.Và;
-import vn.vietinbank.steps.mobile.ipay.base.BaseStep;
+import vn.vietinbank.steps.mobile.ipay.base.M7S01BaseStep;
 
-public class HomeStepdefs extends BaseStep {
+public class HomeStepdefs extends M7S01BaseStep {
 
   public HomeStepdefs() {
     super();
@@ -15,7 +14,7 @@ public class HomeStepdefs extends BaseStep {
   }
 
   @And("Vào Danh sách tài khoản")
-  public void xmove_to_Account_Number_List() {
+  public void move_to_Account_Number_List() {
     accountNumberList = home.move_to_AccountNumberList();
   }
 

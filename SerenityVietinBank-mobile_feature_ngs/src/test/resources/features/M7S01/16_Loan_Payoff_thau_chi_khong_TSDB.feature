@@ -16,4 +16,4 @@ Feature: 16 - Thấu chi không có tài sản đảm bảo - Tất toán khoả
 
     Examples:
       | user_name | password | otp_code | repayment_type            | source_account_number |
-      | hoaixa    | 12121212 | 888888   | Tất toán - đóng khoản vay | 105004103990108       |
+      | tritu8284 | 12121212 | 888888   | Tất toán - đóng khoản vay | 105004103990108       |

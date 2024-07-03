@@ -43,7 +43,7 @@ public class Overdraft_LoanProfileDetail extends BaseScreen {
   //  private final String android_btnDeleteEmail = "";
   private final String ios_btnDeleteEmail = "//XCUIElementTypeButton[@name=\"Xóa văn bản\"]";
 
-  private final String android_btnProvinces = "//android.widget.TextView[@resource-id=\"com.vietinbank.ipay:id/edtContent\" and @text=\"Tỉnh/thành phố\"]/parent::android.widget.LinearLayout";
+  private final String android_btnProvinces = "//android.widget.TextView[@resource-id=\"com.vietinbank.ipay:id/tvTitle\" and @text=\"Tỉnh/thành phố\"]/parent::android.widget.LinearLayout";
   private final String ios_btnProvinces = "//XCUIElementTypeStaticText[@name=\"Tỉnh/thành phố\" or @name=\"Tỉnh/Thành phố\"]/parent::XCUIElementTypeOther/preceding-sibling::XCUIElementTypeButton[@name=\"ic drop down blue\"]";
 
   private final String android_lblProvinces = "";

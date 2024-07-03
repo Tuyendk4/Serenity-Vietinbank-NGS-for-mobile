@@ -2,13 +2,14 @@ package vn.vietinbank.steps.mobile.ipay.common;
 
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
+import net.serenitybdd.core.Serenity;
 import vn.vietinbank.screens.mobile.ipay.ipay_common.Launcher;
 import vn.vietinbank.screens.mobile.ipay.ipay_common.OTP;
 import vn.vietinbank.screens.mobile.ipay.ipay_common.Signup;
-import vn.vietinbank.steps.mobile.ipay.base.BaseStep;
+import vn.vietinbank.steps.mobile.ipay.base.M7S01BaseStep;
 
 
-public class LoginStepdefs extends BaseStep {
+public class LoginStepdefs extends M7S01BaseStep {
 
   @Given("^Mở VTB iPayApp$")
   public void open_Vietinbank_iPay_app() {
