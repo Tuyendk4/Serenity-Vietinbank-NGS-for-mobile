@@ -1,0 +1,41 @@
+{
+  "iPay": {
+    "uat": {
+      "accountsLogin": {
+        "xuanthu81": {
+          "username": "xuanthu81",
+          "password": "12121212",
+          "STKMacDinh": "106003903303"
+        },
+        "hoanganh12": {
+          "username": "hoanganh12",
+          "password": "12121212",
+          "STKMacDinh": "108004346291"
+        },
+        "datlk": {
+          "username": "datlk",
+          "password": "12121212",
+          "STKMacDinh": "100606123456"
+        }
+      },
+      "accountNumberVTB": [
+        "102003847606",
+        "100839736789",
+        "hatit81",
+        "hoant83"
+      ],
+      "accountsOutSide": [
+        {
+          "accountNumber": "10101121212",
+          "accountHolder": "Ha Thu Bich",
+          "bankName": "Vietcombank"
+        },
+        {
+          "accountNumber": "0246813579",
+          "accountHolder": "Nguyen Ngoc Minh",
+          "bankName": "ABBANK"
+        }
+      ]
+    }
+  }
+}

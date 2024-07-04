@@ -1,0 +1,18 @@
+{
+  "taind4": {
+    "nodePath": "/usr/local/bin/node",
+    "appiumPath": "/Users/tainguyen/node_modules/appium"
+  },
+  "dongov": {
+    "nodePath": "/usr/local/bin/node",
+    "appiumPath": "/usr/local/lib/node_modules/appium"
+  },
+  "tuyenlm": {
+    "nodePath": "/usr/local/bin/node",
+    "appiumPath": "/Users/kengzone/node_modules/appium"
+  },
+  "hoangkm": {
+    "nodePath": "/usr/local/bin/node",
+    "appiumPath": "/usr/local/bin/appium"
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "Android": {
+    "R5CW13MWR1R": {
+      "platformVersion": "14",
+      "deviceName": "Android",
+      "udid": "R5CW13MWR1RE"
+    },
+    "RFCX30DPHAA": {
+      "platformVersion": "12",
+      "deviceName": "Galaxy A35 5G",
+      "udid": "RFCX30DPHAA"
+    }
+  },
+  "iOS": {
+    "00008120-001241260A03C01E": {
+      "platformVersion": "17.4.1",
+      "deviceName": "14 Pro Max",
+      "udid": "00008120-001241260A03C01E"
+    },
+    "00008030-000A31643A87802E": {
+      "platformVersion": "14.8.1",
+      "deviceName": "iPhone 11 Pro Max",
+      "udid": "00008030-000A31643A87802E"
+    },
+    "00008101-001A70290250001E": {
+      "platformVersion": "17.5.1",
+      "deviceName": "iPhone 12 Pro Max",
+      "udid": "00008101-001A70290250001E"
+    },
+    "d7ad0223e16d29a3587a96cf0cc45e4cbd9b9994": {
+      "platformVersion": "16.7.7",
+      "deviceName": "iPhone X",
+      "udid": "d7ad0223e16d29a3587a96cf0cc45e4cbd9b9994"
+    }
+  }
+}

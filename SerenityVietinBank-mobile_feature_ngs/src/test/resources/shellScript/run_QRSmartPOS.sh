@@ -1,0 +1,1 @@
+mvn clean verify -Denv=${1} -DplatformName=${2} -Dudid=${3} -Dtags=@${4} -Dusername=${5} -DproviderId=${6} -DmerchantId=${7}
