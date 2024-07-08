@@ -14,8 +14,6 @@ public class HomeSteps {
     AppiumDriver appiumDriver = Serenity.sessionVariableCalled("appiumDriver");
     LoginScreen loginScreen = new LoginScreen(appiumDriver);
     HomeScreen homeScreen = new HomeScreen(appiumDriver);
-    LoanAndCreditServices loanAndCreditServices = new LoanAndCreditServices(appiumDriver);
-    ListAccountsScreen listAccountsScreen = new ListAccountsScreen(appiumDriver);
 
     @And("kiểm tra xem đã đăng nhập chưa")
     public void kiem_tra_da_dang_nhap_hay_chua() {
@@ -64,12 +62,12 @@ public class HomeSteps {
 
     @And("Menu Dịch vụ vay và tín dụng")
     public void moveToLoanAndCreditServices() {
-        loanAndCreditServices = homeScreen.favoriteServices().click_dich_vu_vay_va_tin_dung();
+        homeScreen.favoriteServices().click_dich_vu_vay_va_tin_dung();
     }
 
     @And("Vào Danh sách tài khoản")
     public void move_to_Account_Number_List() {
-        listAccountsScreen = homeScreen.move_to_AccountNumberList();
+        homeScreen.move_to_AccountNumberList();
     }
 
     @And("Di chuyển vào Chuyển tiền")

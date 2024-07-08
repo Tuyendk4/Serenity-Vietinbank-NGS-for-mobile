@@ -14,7 +14,7 @@ public class CommonSteps {
     }
 
     @Given("mở ứng dụng {string}")
-    public void mo_ung_dung(String nameApp) {
+    public void mo_ung_dung(String nameApp) throws InterruptedException {
         AppiumDriver appiumDriver = mobileDriver.newDriver(nameApp);
         Serenity.setSessionVariable("nameApp").to(nameApp);
         Serenity.setSessionVariable("appiumDriver").to(appiumDriver);

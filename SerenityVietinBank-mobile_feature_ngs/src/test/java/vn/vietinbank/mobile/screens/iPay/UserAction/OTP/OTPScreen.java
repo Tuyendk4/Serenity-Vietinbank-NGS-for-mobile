@@ -11,43 +11,43 @@ import vn.vietinbank.mobile.screens.iPay.Home.HomeScreen;
 public class OTPScreen extends BaseScreen {
 
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeKey[1]")
-    @AndroidFindBy(xpath = "")
+    @AndroidFindBy(xpath = "//android.widget.TextView[@resource-id=\"com.vietinbank.ipay:id/submit\"]")
     private WebElement btnKey1;
 
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeKey[2]")
-    @AndroidFindBy(xpath = "")
+    @AndroidFindBy(xpath = "//android.widget.TextView[@resource-id=\"com.vietinbank.ipay:id/submit\"]")
     private WebElement btnKey2;
 
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeKey[3]")
-    @AndroidFindBy(xpath = "")
+    @AndroidFindBy(xpath = "//android.widget.TextView[@resource-id=\"com.vietinbank.ipay:id/submit\"]")
     private WebElement btnKey3;
 
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeKey[4]")
-    @AndroidFindBy(xpath = "")
+    @AndroidFindBy(xpath = "//android.widget.TextView[@resource-id=\"com.vietinbank.ipay:id/submit\"]")
     private WebElement btnKey4;
 
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeKey[5]")
-    @AndroidFindBy(xpath = "")
+    @AndroidFindBy(xpath = "//android.widget.TextView[@resource-id=\"com.vietinbank.ipay:id/submit\"]")
     private WebElement btnKey5;
 
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeKey[6]")
-    @AndroidFindBy(xpath = "")
+    @AndroidFindBy(xpath = "//android.widget.TextView[@resource-id=\"com.vietinbank.ipay:id/submit\"]")
     private WebElement btnKey6;
 
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeKey[7]")
-    @AndroidFindBy(xpath = "")
+    @AndroidFindBy(xpath = "//android.widget.TextView[@resource-id=\"com.vietinbank.ipay:id/submit\"]")
     private WebElement btnKey7;
 
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeKey[8]")
-    @AndroidFindBy(xpath = "")
+    @AndroidFindBy(xpath = "//android.widget.TextView[@resource-id=\"com.vietinbank.ipay:id/submit\"]")
     private WebElement btnKey8;
 
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeKey[9]")
-    @AndroidFindBy(xpath = "")
+    @AndroidFindBy(xpath = "//android.widget.TextView[@resource-id=\"com.vietinbank.ipay:id/submit\"]")
     private WebElement btnKey9;
 
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeKey[11]")
-    @AndroidFindBy(xpath = "")
+    @AndroidFindBy(xpath = "//android.widget.TextView[@resource-id=\"com.vietinbank.ipay:id/submit\"]")
     private WebElement btnKey0;
 
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther")

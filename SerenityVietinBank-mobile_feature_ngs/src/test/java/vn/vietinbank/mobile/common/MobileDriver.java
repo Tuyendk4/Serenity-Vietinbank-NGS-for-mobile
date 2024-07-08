@@ -2,6 +2,7 @@ package vn.vietinbank.mobile.common;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.InteractsWithApps;
+import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.service.local.AppiumServiceBuilder;
@@ -64,20 +65,21 @@ public class MobileDriver {
             dc.setCapability("appium:platformVersion", platformVersion);
             dc.setCapability("appium:udid", udid);
             dc.setCapability("appium:deviceName", deviceName);
+            dc.setCapability("noReset", "true");
             String appConfigsPath = pathMobileConfigs + "AppConfigs.json";
             if (PLATFORM.equals(IOS)) {
                 String bundleId = new GetData().getValueFromJson(appConfigsPath, String.format(JSONPATH_BEGIN + "%s.%s.bundleId", nameApp, PLATFORM));
                 dc.setCapability("appium:bundleId", bundleId);
                 dc.setCapability("appium:automationName", "XCUITest");
+                driver = new IOSDriver(getUrl(), dc);
             } else {
                 String appPackage = new GetData().getValueFromJson(appConfigsPath, String.format(JSONPATH_BEGIN + "%s.%s.appPackage", nameApp, PLATFORM));
                 String appActivity = new GetData().getValueFromJson(appConfigsPath, String.format(JSONPATH_BEGIN + "%s.%s.appActivity", nameApp, PLATFORM));
                 dc.setCapability("appium:appPackage", appPackage);
                 dc.setCapability("appium:appActivity", appActivity);
                 dc.setCapability("appium:automationName", "UIAutomator2");
+                driver = new AndroidDriver(getUrl(), dc);
             }
-            dc.setCapability("noReset", "true");
-            driver = new IOSDriver(getUrl(), dc);
             appiumDriver = driver;
             useDriver(driver);
         } catch (Exception e) {

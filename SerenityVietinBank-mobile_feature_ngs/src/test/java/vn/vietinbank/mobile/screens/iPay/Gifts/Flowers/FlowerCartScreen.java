@@ -9,23 +9,18 @@ import vn.vietinbank.mobile.common.BaseScreen;
 public class FlowerCartScreen extends BaseScreen {
 
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[@name=\"Tất cả\"]")
-    @AndroidFindBy(xpath = "")
     private WebElement allTxt;
 
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeButton[@name=\"Đặt mua hoa\"]")
-    @AndroidFindBy(xpath = "")
     private WebElement orderFlowerBtn;
 
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeButton[@name=\"ic header trash\"]")
-    @AndroidFindBy(xpath = "")
     private WebElement trashBtn;
 
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeButton[@name=\"Đồng ý\"]")
-    @AndroidFindBy(xpath = "")
     private WebElement agreePopupBtn;
 
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeButton[@name=\"ic header back\"]")
-    @AndroidFindBy(xpath = "")
     private WebElement backBtn;
 
     public FlowerCartScreen(AppiumDriver appiumDriver) {

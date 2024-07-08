@@ -50,7 +50,10 @@ public class BaseScreen {
 
     public BaseScreen(AppiumDriver appiumDriver) {
         this.appiumDriver = appiumDriver;
-        PageFactory.initElements(new AppiumFieldDecorator(appiumDriver, Duration.ofSeconds(Long.parseLong(new GetData().getValueOf("appiumTimeOut")))), this);
+
+        System.out.println("+++++++++"+this.appiumDriver.getCapabilities().toString());
+
+        PageFactory.initElements(new AppiumFieldDecorator(appiumDriver, Duration.ofSeconds(60)), this);
     }
 
     public void delay(int time) {
