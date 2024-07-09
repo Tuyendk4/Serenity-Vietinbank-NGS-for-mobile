@@ -24,7 +24,7 @@ public class LoginSteps {
     @And("Đăng nhập với mật khẩu {string}")
     public void dang_nhap_voi_mat_khau(String password) {
         loginScreen.loginWithPassword(password);
-        homeScreen.closeAdsPopup();
+//        homeScreen.closeAdsPopup();
     }
 
     @And("đăng nhập với tên đăng nhập {string} và mật khẩu {string}")

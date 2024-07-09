@@ -212,7 +212,9 @@ public class TransferObroadScreen extends TransferObroadElements {
                 image.get(i).click();
             }
         }
+        waitForElementInvisible(btn_continue,10);
         click(btn_continue);
+        waitForElementInvisible(confirm_done,10);
         click(confirm_done);
     }
 

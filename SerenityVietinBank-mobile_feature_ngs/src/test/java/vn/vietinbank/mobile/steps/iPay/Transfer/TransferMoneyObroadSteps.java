@@ -41,7 +41,6 @@ public class TransferMoneyObroadSteps {
     }
 
     @Then("Xác nhận giao dịch")
-
     public void verify_transaction_confirmation() {
         transferObroadScreen.verifyTransactionConfirmation();
     }
@@ -52,12 +51,27 @@ public class TransferMoneyObroadSteps {
     }
 
     @And("Điền thông tin người nhận")
-    public void enter_beneficiary(){
+    public void enter_beneficiary() {
         transferObroadScreen.enter_infomation_beneficiary();
     }
 
     @And("Điền thông tin ngân hàng nhận {string}")
-    public void enter_receiving_bank(String swiftCode){
+    public void enter_receiving_bank(String swiftCode) {
         transferObroadScreen.choose_receiving_bank(swiftCode);
+    }
+
+    @And("Chọn xem lịch sử")
+    public void view_history() {
+        transferObroadScreen.viewHistory();
+    }
+
+    @And("Chọn giao dịch thành công")
+    public void choose_tranfer_success() {
+        transferObroadScreen.transferSuccess();
+    }
+
+    @Then("Tạo điện tra soát")
+    public void transfer_success() {
+        transferObroadScreen.generateCheckMessageWithSuccessful();
     }
 }
